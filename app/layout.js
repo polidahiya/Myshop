@@ -1,14 +1,20 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Mulish, Tenor_Sans } from "next/font/google";
+import { Appwrapper } from "./Context";
+import Message from "./_globalcomps/Message";
+import { Googleadsid } from "@/lib/data";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const mulish = Mulish({
+  variable: "--font-mulish",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const tenor = Tenor_Sans({
+  variable: "--font-tenor",
+  weight: "400", // Tenor Sans has only one weight
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -19,10 +25,23 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* google adsense */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${Googleadsid}`}
+          crossOrigin="anonymous"
+        ></script>
+        <meta name="google-adsense-account" content={Googleadsid} />
+      </head>
+      {/* ✅ Mulish applied globally, Tenor available via class */}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${mulish.variable} ${tenor.variable} font-mulish antialiased`}
       >
-        {children}
+        <Appwrapper>
+          {children}
+          <Message />
+        </Appwrapper>
       </body>
     </html>
   );
