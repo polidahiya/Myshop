@@ -84,7 +84,7 @@ function Pincodecomp({ pincode, setpincode, pincodemsg, setpincodemsg }) {
         <input
           type="submit"
           value="Check"
-          className="px-4 py-2 text-sm  text-theme border-b cursor-pointer"
+          className="px-4 py-2 text-sm  text-[var(--theme)] border-b cursor-pointer"
         />
       </form>
       {pincodemsg && (

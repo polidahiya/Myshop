@@ -54,7 +54,7 @@ const Reviewsoverview = ({ Comments, showwritereview, setshowwritereview,token }
                   <RatingStars rating={5 - i} />
                   <div className="relative h-4 w-32 bg-slate-100">
                     <div
-                      className="absolute top-0 left-0 h-full bg-theme"
+                      className="absolute top-0 left-0 h-full bg-[var(--theme)]"
                       style={{ width: value + "%" }}
                     ></div>
                   </div>

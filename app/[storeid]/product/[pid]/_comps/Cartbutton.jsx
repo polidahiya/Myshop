@@ -97,7 +97,7 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
       </div>
       {/* add to cart button */}
       <button
-        className="h-14 w-full text-white bg-theme text-sm mt-2"
+        className="h-14 w-full text-white bg-[var(--theme)] text-sm mt-2"
         onClick={handleAddToCart}
       >
         {product?.available ? (

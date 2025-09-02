@@ -11,7 +11,7 @@ const ProductDetailsTable = ({ data }) => {
                 key={index}
                 className={`flex items-center gap-2 py-2 text-sm  text-gray-700`}
               >
-                <span className="font-semibold text-theme min-w-32">
+                <span className="font-semibold text-[var(--theme)] min-w-32">
                   {row?.label}
                 </span>
                 <span>:</span> <span>{row?.value}</span>

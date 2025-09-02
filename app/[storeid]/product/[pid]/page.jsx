@@ -135,7 +135,7 @@ async function page({ params, searchParams }) {
             userdata?.permission.includes("Products_permission")) && (
             <Link
               href={`/admin/products/add?edit=${product?._id}`}
-              className="fixed top-24 right-5  bg-theme text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
+              className="fixed top-24 right-5  bg-[var(--theme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
             >
               <MdModeEditOutline />
             </Link>

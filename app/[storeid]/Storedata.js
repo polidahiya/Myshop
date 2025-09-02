@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
-const storedata = {
+import { getcollection } from "@/lib/db";
+const prestoredata = {
   storename: "",
   storetype: "",
   logo: "",
@@ -34,11 +35,15 @@ const storedata = {
   },
 };
 
-export function getStoreData(storeId = "test1") {
-  return storedata;
+export function getStoreData(storeId) {
   return unstable_cache(
     async () => {
-      return storedata;
+      const { storescollection, ObjectId } = await getcollection();
+      const query = ObjectId.isValid(storeId)
+        ? { _id: new ObjectId(storeId) }
+        : { slug: storeId };
+      const storedata = await storescollection.findOne(query);
+      return storedata || prestoredata;
     },
     [`store-${storeId}`],
     {

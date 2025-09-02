@@ -27,7 +27,9 @@ const storeSchema = z.object({
 
 export async function saveStore(formData) {
   try {
-    const tokenres = await Verification();
+    const tokenres = await Verification("public");
+    console.log(tokenres);
+
     if (!tokenres.verified || tokenres.storeid) {
       return { status: 400, message: "Invalid user" };
     }
@@ -36,21 +38,35 @@ export async function saveStore(formData) {
 
     const finaldata = {
       ...data,
-      owner: tokenres?.email,
+      email: tokenres?.email,
       createdat: new Date(),
     };
 
     // Get your collections
-    const { storescollection } = await getcollection();
+    const { storescollection, userscollection } = await getcollection();
+
+    const store = await storescollection.findOne({ email: tokenres?.email });
+    if (store) return { status: 400, message: "Store already exists" };
+
     const result = await storescollection.insertOne(finaldata);
+    const storeid = result?.insertedId.toString();
+    await userscollection.updateOne(
+      { email: tokenres?.email },
+      { $set: { storeid } }
+    );
+
     // update token here
     await generateToken({
       email: tokenres?.email,
       usertype: tokenres?.usertype,
-      storeid: result?._id,
+      storeid,
     });
 
-    return { status: 200, message: "Store created successfully" };
+    return {
+      status: 200,
+      message: "Store created successfully",
+      storeid,
+    };
   } catch (err) {
     if (err instanceof z.ZodError) {
       console.log(err.errors);

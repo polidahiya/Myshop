@@ -1,17 +1,30 @@
 @import "tailwindcss";
-
-/* Connect Next.js font variables to Tailwind utilities */
 @theme {
   --font-mulish: var(--font-mulish), sans-serif;
   --font-tenor: var(--font-tenor), sans-serif;
 }
 
-/* Removes mobile tap highlight */
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* (Optional) If you want Mulish everywhere by default */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--theme);
+}
+
+.hidescroll::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+.hidescroll::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
 body {
   @apply font-mulish;
 }

@@ -10,10 +10,10 @@ const RatingStars = ({ rating }) => {
       <span className="flex">
         {fullStars > 0 &&
           [...Array(fullStars)].map((_, i) => (
-            <IoMdStar key={i} className="text-xl text-theme" />
+            <IoMdStar key={i} className="text-xl text-[var(--theme)]" />
           ))}
       </span>
-      {halfStar && <IoMdStarHalf className="text-xl text-theme" />}
+      {halfStar && <IoMdStarHalf className="text-xl text-[var(--theme)]" />}
       <span className="flex">
         {emptyStars > 0 &&
           [...Array(emptyStars)].map((_, i) => (

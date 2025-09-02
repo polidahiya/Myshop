@@ -285,7 +285,7 @@ const Optionform = ({
                     alt=""
                     className="w-full h-full lg:group-hover:opacity-30"
                   />
-                  <MdModeEditOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-theme text-white text-2xl box-content p-2 lg:hidden lg:group-hover:block" />
+                  <MdModeEditOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--theme)] text-white text-2xl box-content p-2 lg:hidden lg:group-hover:block" />
                 </div>
               ) : (
                 <>

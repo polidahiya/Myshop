@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import Productcard from "../collection/[...category]/_comps/Productcard/Productcard";
+import Productcard from "../collections/_comps/Productcard/Productcard";
 
 export default function Productsslide({ heading, data }) {
   const containerref = useRef(null);

@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
       </head>
       {/* ✅ Mulish applied globally, Tenor available via class */}
       <body
-        className={`${mulish.variable} ${tenor.variable} font-mulish antialiased`}
+        className={`${mulish.variable} ${tenor.variable} antialiased max-w-[1900px] mx-auto text-[#525252]`}
       >
         <Appwrapper>
           {children}

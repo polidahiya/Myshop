@@ -7,6 +7,9 @@ const AppContext = createContext({});
 export function Appwrapper({ children, token, userdata, parsedCart }) {
   const [cart, setcart] = useState(parsedCart || {});
   const [messagearray, setmessagearray] = useState([]);
+  const [showsidemenu, setshowsidemenu] = useState(false);
+  const [openfilter, setopenfilter] = useState(false);
+
   const showdialoginitialvalues = {
     show: false,
     title: "",
@@ -33,11 +36,22 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
     }
   }, [cart]);
 
+  const isoverlay = showsidemenu || showdialog.show || openfilter;
   return (
     <AppContext.Provider
-      value={{ messagearray, setmessagearray, setmessagefn }}
+      value={{
+        messagearray,
+        setmessagearray,
+        setmessagefn,
+        showsidemenu,
+        setshowsidemenu,
+        openfilter,
+        setopenfilter,
+      }}
     >
-      {children}
+      <div className={`${isoverlay && "overflow-hidden h-dvh"}`}>
+        {children}
+      </div>
     </AppContext.Provider>
   );
 }

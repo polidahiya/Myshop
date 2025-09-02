@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { AppContextfn } from "@/app/Context";
 import { saveStore } from "./Serveraction";
+import { useRouter } from "next/navigation";
 
 export default function Createstore() {
+  const router = useRouter();
   const { setmessagefn } = AppContextfn();
   const [step, setStep] = useState(1);
 
@@ -17,7 +19,7 @@ export default function Createstore() {
     },
     color: {
       theme: "#ffac1b",
-      secondary: "",
+      secondary: "#0091ff",
       text: "#525252",
     },
     social: {
@@ -67,36 +69,38 @@ export default function Createstore() {
     e.preventDefault();
 
     if (validateStep()) {
-      const result = await saveStore(formData);
-
-      if (result.status === 200) {
-        setmessagefn("Store Created successfully!");
+      const res = await saveStore(formData);
+      setmessagefn(res.message);
+      if (res.status === 200) {
+        router.replace(`/${res?.storeid}`);
       }
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md"
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg"
       >
-        <h2 className="text-xl font-semibold mb-4">Step {step} of 4</h2>
+        <h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">
+          Step {step} of 4
+        </h2>
 
         {/* Step 1 */}
         {step === 1 && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             <input
               type="text"
               placeholder="Store Name *"
               value={formData.storename}
               onChange={(e) => handleChange(e, null, "storename")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
             <select
               value={formData.storetype}
               onChange={(e) => handleChange(e, null, "storetype")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             >
               <option value="">Select Store Type *</option>
               <option value="furniture">Furniture</option>
@@ -108,56 +112,59 @@ export default function Createstore() {
 
         {/* Step 2 */}
         {step === 2 && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             <input
               type="text"
               placeholder="Phone *"
               value={formData.contact.phone}
               onChange={(e) => handleChange(e, "contact", "phone")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
             <input
               type="text"
               placeholder="WhatsApp *"
               value={formData.contact.whatsapp}
               onChange={(e) => handleChange(e, "contact", "whatsapp")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
             <input
               type="text"
               placeholder="Location *"
               value={formData.contact.location}
               onChange={(e) => handleChange(e, "contact", "location")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
           </div>
         )}
 
         {/* Step 3 */}
         {step === 3 && (
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <label>Theme:</label>
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <label className="text-gray-600 font-medium">Theme:</label>
               <input
                 type="color"
                 value={formData.color.theme}
                 onChange={(e) => handleChange(e, "color", "theme")}
+                className="w-12 h-12 rounded cursor-pointer"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <label>Secondary:</label>
+            <div className="flex items-center justify-between">
+              <label className="text-gray-600 font-medium">Secondary:</label>
               <input
                 type="color"
                 value={formData.color.secondary}
                 onChange={(e) => handleChange(e, "color", "secondary")}
+                className="w-12 h-12 rounded cursor-pointer"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <label>Text:</label>
+            <div className="flex items-center justify-between">
+              <label className="text-gray-600 font-medium">Text:</label>
               <input
                 type="color"
                 value={formData.color.text}
                 onChange={(e) => handleChange(e, "color", "text")}
+                className="w-12 h-12 rounded cursor-pointer"
               />
             </div>
           </div>
@@ -165,56 +172,57 @@ export default function Createstore() {
 
         {/* Step 4 */}
         {step === 4 && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             <input
               type="text"
               placeholder="Facebook"
               value={formData.social.facebook}
               onChange={(e) => handleChange(e, "social", "facebook")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
             <input
               type="text"
               placeholder="Instagram"
               value={formData.social.instagram}
               onChange={(e) => handleChange(e, "social", "instagram")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
             <input
               type="text"
               placeholder="Twitter"
               value={formData.social.twitter}
               onChange={(e) => handleChange(e, "social", "twitter")}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
             />
           </div>
         )}
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between mt-6">
+        <div className="flex justify-between mt-8">
           {step > 1 && (
             <button
               type="button"
               onClick={prevStep}
-              className="px-4 py-2 bg-gray-300 rounded"
+              className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition cursor-pointer"
             >
               Back
             </button>
           )}
-          {step < 4 ? (
+          {step == 4 && (
+            <button
+              type="submit"
+              className="ml-auto px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition cursor-pointer"
+            >
+              Submit
+            </button>
+          )}
+          {step < 4 && (
             <button
               type="button"
               onClick={nextStep}
-              className="px-4 py-2 bg-blue-500 text-white rounded"
+              className="ml-auto px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition cursor-pointer"
             >
               Next
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="px-4 py-2 bg-green-500 text-white rounded"
-            >
-              Submit
             </button>
           )}
         </div>

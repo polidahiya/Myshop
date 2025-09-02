@@ -1,0 +1,155 @@
+"use client";
+import React from "react";
+import Link from "next/link";
+import { AppContextfn } from "@/app/Context";
+import {
+  FaUser,
+  FaSignOutAlt,
+  FaBookmark,
+  FaCog,
+  FaStore,
+  FaSearch,
+} from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { motion, AnimatePresence } from "framer-motion";
+
+function Sidemenu({ auth }) {
+  const { verified } = auth;
+  const { showsidemenu, setshowsidemenu } = AppContextfn();
+
+  return (
+    <AnimatePresence>
+      {showsidemenu && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed top-0 left-0 w-full h-dvh bg-black/10 dark:bg-black/40 z-40 backdrop-blur-xs"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.3 }}
+            className={`absolute top-0 left-0 w-72 h-full flex flex-col 
+              bg-white text-gray-900 
+              dark:bg-zinc-900 dark:text-white 
+              z-10`}
+          >
+            {/* User Info */}
+            <div className="flex flex-col items-center gap-3 py-8 border-b border-gray-200 dark:border-zinc-700">
+              <div
+                className="w-20 h-20 rounded-full 
+                bg-gray-200 dark:bg-zinc-700 
+                flex items-center justify-center text-xl font-semibold"
+              >
+                <FaUser size={40} />
+              </div>
+              <p className="font-medium">Username</p>
+              <p className="text-sm text-gray-500 dark:text-zinc-400">
+                polidahiys830@gmail.com
+              </p>
+            </div>
+
+            {/* Menu */}
+            <div className="flex flex-col py-4">
+              <button
+                className="flex items-center gap-3 px-6 py-3 
+                hover:bg-gray-100 dark:hover:bg-zinc-800 
+                transition rounded-md"
+              >
+                <FaSearch size={18} />
+                <span>Search a Store</span>
+              </button>
+              <Link
+                href={"/"}
+                className="flex items-center gap-3 px-6 py-3 
+                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+              >
+                <FaStore size={18} />
+                <span>+ Create your Store</span>
+              </Link>
+            </div>
+
+            <hr className="border-gray-200 dark:border-zinc-700" />
+
+            <div className="flex flex-col py-4">
+              <Link
+                href={"/"}
+                className="flex items-center gap-3 px-6 py-3 
+                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+              >
+                <FaCog size={18} />
+                <span>Update Store Details</span>
+              </Link>
+              <Link
+                href={"/"}
+                className="flex items-center gap-3 px-6 py-3 
+                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+              >
+                <FaCog size={18} />
+                <span>Update Personal Details</span>
+              </Link>
+              <Link
+                href={"/"}
+                className="flex items-center gap-3 px-6 py-3 
+                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+              >
+                <FaBookmark size={18} />
+                <span>Bookmarked Stores</span>
+              </Link>
+              <Link
+                href={"/"}
+                className="flex items-center gap-3 px-6 py-3 
+                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+              >
+                <FaBookmark size={18} />
+                <span>Saved Items</span>
+              </Link>
+            </div>
+
+            <hr className="border-gray-200 dark:border-zinc-700" />
+
+            {/* Logout / Login */}
+            <div className="py-4 px-6 mt-auto">
+              <Link
+                href={verified ? "/" : "/"}
+                className={`flex items-center justify-center gap-3 py-3 rounded-md transition font-medium
+                  ${
+                    verified
+                      ? "bg-red-600 hover:bg-red-500 text-white"
+                      : "bg-blue-600 hover:bg-blue-500 text-white"
+                  }`}
+              >
+                <FaSignOutAlt size={18} />
+                <span>{verified ? "Logout" : "Login"}</span>
+              </Link>
+            </div>
+
+            {/* Close button */}
+            <button
+              className="absolute top-4 right-4 text-2xl w-10 aspect-square flex items-center justify-center"
+              onClick={() => setshowsidemenu(false)}
+            >
+              <RxCross2 />
+            </button>
+          </motion.div>
+
+          {/* Overlay click to close */}
+          <button
+            className="absolute top-0 left-0 h-full w-full"
+            onClick={() => setshowsidemenu(false)}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export default Sidemenu;

@@ -4,7 +4,7 @@ const Reviewbutton = ({ showwritereview, setshowwritereview, token }) => {
   const { setmessagefn } = AppContextfn();
   return (
     <button
-      className="bg-theme text-white px-10 py-2 lg:hover:opacity-75"
+      className="bg-[var(--theme)] text-white px-10 py-2 lg:hover:opacity-75"
       onClick={() => {
         if (!token) {
           setmessagefn("Please login first!");

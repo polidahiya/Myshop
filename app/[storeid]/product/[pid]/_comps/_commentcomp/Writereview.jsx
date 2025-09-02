@@ -83,14 +83,14 @@ const WriteReview = ({ setshowwritereview, productid, userdata }) => {
         <div className="w-full md:w-fit flex items-center flex-col-reverse md:flex-row justify-center gap-2 mt-5">
           <button
             type="button"
-            className="w-full h-10 px-10 border border-theme text-theme lg:hover:opacity-75 whitespace-nowrap"
+            className="w-full h-10 px-10 border border-theme text-[var(--theme)] lg:hover:opacity-75 whitespace-nowrap"
             onClick={() => setshowwritereview(false)}
           >
             Cancel Review
           </button>
           <button
             type="submit"
-            className="w-full h-10 px-10 bg-theme text-white lg:hover:opacity-75 whitespace-nowrap"
+            className="w-full h-10 px-10 bg-[var(--theme)] text-white lg:hover:opacity-75 whitespace-nowrap"
           >
             Submit Review
           </button>

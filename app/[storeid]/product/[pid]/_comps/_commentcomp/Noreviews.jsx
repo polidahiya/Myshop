@@ -5,7 +5,7 @@ const Noreviews = ({ showwritereview, setshowwritereview,token }) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-5 mt-5">
       <div>
-        <div className="flex justify-center md:justify-start gap-1 text-theme">
+        <div className="flex justify-center md:justify-start gap-1 text-[var(--theme)]">
           <RatingStars rating={5} />
         </div>
         <p>Be the first to write a review</p>

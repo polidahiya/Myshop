@@ -28,7 +28,7 @@ export const generateToken = async (userdata) => {
     {
       email: userdata?.email,
       usertype: userdata?.usertype,
-      storeid: userdata?.userdata || null,
+      storeid: userdata?.storeid || null,
     },
     JWT_SECRET,
     { expiresIn: logintime }
@@ -41,12 +41,6 @@ export const generateToken = async (userdata) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
-  });
-
-  cookieStore.set("userdata", JSON.stringify(userdata), {
-    maxAge: logintime,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
   });
 };
 

@@ -15,7 +15,7 @@ const StarRating = ({ data, setdata }) => {
           className="cursor-pointer text-3xl"
         >
           {star <= (hoveredStar || data.star) ? (
-            <IoMdStar className="text-theme " />
+            <IoMdStar className="text-[var(--theme)] " />
           ) : (
             <IoMdStarOutline className="text-gray-400" />
           )}
