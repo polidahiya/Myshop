@@ -49,9 +49,9 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
         setopenfilter,
       }}
     >
-      <div className={`${isoverlay && "overflow-hidden h-dvh"}`}>
+      {/* <div className={`${isoverlay && "overflow-hidden h-dvh lg:overflow-auto lg:h-auto"}`}> */}
         {children}
-      </div>
+      {/* </div> */}
     </AppContext.Provider>
   );
 }

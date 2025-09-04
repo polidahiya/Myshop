@@ -16,7 +16,7 @@ function FIxedbuttons({ whatsapp }) {
 
 const Whatsappbutton = ({ whatsapp }) => (
   <Link
-    href={`https://wa.me/${whatsapp.replace(
+    href={`https://wa.me/${whatsapp?.replace(
       / /g,
       ""
     )}?text=${encodeURIComponent(

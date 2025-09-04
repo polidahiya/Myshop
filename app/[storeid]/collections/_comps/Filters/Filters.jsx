@@ -8,7 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const filter = {
   Gender: {
-    Mens: {},
+    Mens: {
+      img: "",
+    },
     Womens: {},
     Kids: {},
   },
@@ -76,7 +78,9 @@ function Sidemenu({ allsearchparams }) {
           >
             <div className="flex items-center py-2 lg:hidden h-16 shadow-md z-10">
               <div className="flex-1"></div>
-              <div className="flex-1 text-2xl text-center font-tenor">Filters</div>
+              <div className="flex-1 text-2xl text-center font-tenor">
+                Filters
+              </div>
               <div className="flex-1 flex justify-end">
                 <button
                   className="text-3xl h-10 aspect-square flex items-center justify-center"

@@ -12,7 +12,7 @@ export const metadata = {
   //   openGraph: {
   //     images: `/logo&ui/minlogo.png`,
   //   },
-  manifest: "/manifest.json",
+  // manifest: "/manifest.json",
   robots: "index, follow",
 };
 
@@ -34,7 +34,7 @@ async function layout({ children, params }) {
         <Navbar logo={storedata?.logo} storename={storedata?.storename} />
         <Sidemenu auth={auth} />
         {children}
-        <FIxedbuttons whatsapp={storedata?.contact?.whatsapp}/>
+        <FIxedbuttons whatsapp={storedata?.contact?.whatsapp} />
       </div>
     </>
   );
