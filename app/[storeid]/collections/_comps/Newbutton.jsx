@@ -5,8 +5,8 @@ import { TbNewSection } from "react-icons/tb";
 function Newbutton({ storeid }) {
   return (
     <Link
-      href={`/${storeid}/addproduct`}
-      className="w-full  flex flex-col items-center justify-center"
+      href={`/${storeid}/product/add`}
+      className="w-full aspect-square flex flex-col items-center justify-center"
     >
       <div className="w-1/2 aspect-square bg-gray-100 flex items-center justify-center rounded-3xl shadow-md">
         <TbNewSection className="text-5xl" />

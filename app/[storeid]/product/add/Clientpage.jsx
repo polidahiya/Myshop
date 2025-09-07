@@ -7,7 +7,8 @@ import Togglebuttons from "@/app/_globalcomps/inputfields/Togglebuttons";
 import Multiselectmenu from "@/app/_globalcomps/inputfields/Multiselectmenu";
 import Options from "@/app/_globalcomps/inputfields/Options";
 import Link from "next/link";
-import { Addproduct, Deleteimages } from "./Serveraction";
+import { Addproduct } from "./Serveraction";
+import { Deleteimages } from "@/lib/Addordeleteimages";
 import { useRouter } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
 
@@ -30,9 +31,10 @@ const initialState = {
   seodescription: "",
   seokeywords: "",
   available: true,
+  trash: false,
 };
 
-function Clientpage({ productdata }) {
+function Clientpage({ productdata, collections }) {
   const router = useRouter();
 
   const { setmessagefn } = AppContextfn();
@@ -46,10 +48,6 @@ function Clientpage({ productdata }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //
-    console.log(data);
-    return;
-    //
     setloading(true);
     try {
       const res = await Addproduct(data, deletedimages);
@@ -74,7 +72,7 @@ function Clientpage({ productdata }) {
           e.preventDefault();
           if (newadded.length > 0) {
             setmessagefn("Cleaning up...");
-            await Deleteimages(newadded);
+            await Deleteimages(newadded, "Mystore/Products");
           }
           router.push("/admin/products");
         }}
@@ -140,7 +138,7 @@ function Clientpage({ productdata }) {
           statename="collections"
           setState={setdata}
           title={"Collections"}
-          options={["clothes", "furniture", "beautyparlour", "shoes"]}
+          options={collections}
         />
         {/* stocks */}
         <Standardinputfield
@@ -221,6 +219,15 @@ function Clientpage({ productdata }) {
           positiveText="Yes"
           negativeText="No"
         />
+        {/* Trash */}
+        <Togglebuttons
+          titlename="Move to Trash?"
+          value={data?.trash}
+          positive={() => setdata((prev) => ({ ...prev, trash: true }))}
+          negative={() => setdata((prev) => ({ ...prev, trash: false }))}
+          positiveText="Yes"
+          negativeText="No"
+        />
 
         <div className="flex items-center justify-center gap-5 sticky bottom-5">
           <button
@@ -240,7 +247,7 @@ function Clientpage({ productdata }) {
             onClick={async () => {
               if (newadded.length > 0) {
                 setmessagefn("Cleaning up...");
-                await Deleteimages(newadded);
+                await Deleteimages(newadded, "Mystore/Products");
               }
               setdata(initialState);
               setdeletedimages([]);
@@ -255,7 +262,7 @@ function Clientpage({ productdata }) {
                 e.preventDefault();
                 if (newadded.length > 0) {
                   setmessagefn("Cleaning up...");
-                  await Deleteimages(newadded);
+                  await Deleteimages(newadded, "Mystore/Products");
                 }
                 router.push("/admin/products");
               }}

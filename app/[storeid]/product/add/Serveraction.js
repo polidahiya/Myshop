@@ -1,13 +1,13 @@
 "use server";
-import { Deleteiamgefromurl, uploadImage } from "@/lib/Cloudinary";
+import { Deleteiamgefromurl } from "@/lib/Cloudinary";
 import Verification from "@/lib/verification";
 import { getcollection } from "@/lib/db";
 import { revalidateTag } from "next/cache";
 
 export const Addproduct = async (data, deletedimages) => {
   try {
-    const res = await Verification("Products_permission");
-    if (!res?.verified) {
+    const tokenres = await Verification("public");
+    if (!tokenres?.verified) {
       return { status: 400, message: "Invalid user" };
     }
 
@@ -15,25 +15,31 @@ export const Addproduct = async (data, deletedimages) => {
 
     // delete previous images
     deletedimages.forEach(async (image) => {
-      await Deleteiamgefromurl(image, "Altorganizer/products");
+      await Deleteiamgefromurl(image, "Mystore/Products");
     });
 
     const date = new Date().getTime();
+    const storeid = tokenres.storeid;
 
     // Add to MongoDB
     if (data._id) {
       // to update a product
       const { _id, ...updateFields } = data;
       await Productscollection.updateOne(
-        { _id: new ObjectId(data._id) },
+        { _id: new ObjectId(data._id), storeid },
         { $set: { ...updateFields, lastupdated: date } }
       );
-      await revalidateTag();
+      revalidateTag(`products-${storeid}`);
       return { status: 200, message: "Updated successfully" };
     } else {
       // to add a product
-      await Productscollection.insertOne({ ...data, lastupdated: date });
-      await revalidateTag();
+      await Productscollection.insertOne({
+        ...data,
+        storeid,
+        lastupdated: date,
+        createdat: date,
+      });
+      revalidateTag(`products-${storeid}`);
       return { status: 200, message: "Added successfully" };
     }
   } catch (error) {
@@ -44,8 +50,8 @@ export const Addproduct = async (data, deletedimages) => {
 
 export const Deleteproduct = async (variants, id) => {
   try {
-    const res = await Verification("Products_permission");
-    if (!res?.verified) {
+    const tokenres = await Verification("Products_permission");
+    if (!tokenres?.verified) {
       return { status: 400, message: "Invalid user" };
     }
     const { Productscollection, ObjectId } = await getcollection();
@@ -63,38 +69,6 @@ export const Deleteproduct = async (variants, id) => {
     await Productscollection.findOneAndDelete({ _id: new ObjectId(id) });
     await revalidateTag();
     return { status: 200, message: "Deleted successfully" };
-  } catch (error) {
-    console.log(error);
-    return { status: 500, message: "Server Error" };
-  }
-};
-
-export const Addimages = async (
-  formdata,
-  foldername = "Altorganizer/products"
-) => {
-  try {
-    const arrayBuffer = await formdata.get("image").arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    const cloudinaryres = await uploadImage(buffer, foldername);
-    const imageurl = cloudinaryres.secure_url;
-
-    return { status: 200, message: "successfully", imageurl };
-  } catch (error) {
-    console.log(error);
-    return { status: 500, message: "Server Error" };
-  }
-};
-
-export const Deleteimages = async (
-  images,
-  foldername = "Altorganizer/products"
-) => {
-  try {
-    images.forEach(async (image) => {
-      await Deleteiamgefromurl(image, foldername);
-    });
-    return { status: 200, message: "Cleanup successfully" };
   } catch (error) {
     console.log(error);
     return { status: 500, message: "Server Error" };

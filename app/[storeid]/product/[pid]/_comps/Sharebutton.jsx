@@ -50,9 +50,10 @@ function Sharebutton({ sku, description, image }) {
       <GoShareAndroid className="text-2xl" />
       <p className="relative">Share</p>
       <div className="absolute top-0 right-0 w-full hidden group-hover:block">
-        <div className="w-44 mt-10 float-left px-5 py-4 bg-white text-[var(--theme)] text-sm border border-theme">
+        <div className="w-44 mt-10 float-left px-5 py-4 bg-white text-[var(--theme)] text-sm border border-[var(--theme)]">
           {list.map((item, i) => (
             <Link
+              key={i}
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"

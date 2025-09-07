@@ -60,7 +60,7 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   return (
     <div className="sticky bottom-0 bg-white py-1">
       <div className="flex items-center justify-between">
-        <div className="h-14 flex items-stretch  w-fit border border-theme lg:hover:border-black bg-white">
+        <div className="h-14 flex items-stretch  w-fit border border-gray-200 lg:hover:border-black bg-white">
           {/* Decrement Button */}
           <button
             onClick={handleDecrement}

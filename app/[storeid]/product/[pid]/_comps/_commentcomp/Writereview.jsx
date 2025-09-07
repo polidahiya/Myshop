@@ -83,7 +83,7 @@ const WriteReview = ({ setshowwritereview, productid, userdata }) => {
         <div className="w-full md:w-fit flex items-center flex-col-reverse md:flex-row justify-center gap-2 mt-5">
           <button
             type="button"
-            className="w-full h-10 px-10 border border-theme text-[var(--theme)] lg:hover:opacity-75 whitespace-nowrap"
+            className="w-full h-10 px-10 border border-[var(--theme)] text-[var(--theme)] lg:hover:opacity-75 whitespace-nowrap"
             onClick={() => setshowwritereview(false)}
           >
             Cancel Review

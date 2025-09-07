@@ -1,7 +1,7 @@
 "use server";
 import { unstable_cache } from "next/cache";
 import { getcollection } from "@/lib/db";
-
+import { CACHE_TIME } from "@/lib/data";
 
 export async function getStoreData(storeId) {
   return unstable_cache(
@@ -17,7 +17,7 @@ export async function getStoreData(storeId) {
     },
     [`store-${storeId}`],
     {
-      revalidate: 7 * 24 * 60 * 60,
+      revalidate: CACHE_TIME,
       tags: [`store-${storeId}`],
     }
   )();

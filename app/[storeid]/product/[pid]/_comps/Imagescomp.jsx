@@ -6,12 +6,10 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
-import { AppContextfn } from "@/app/Context";
 import { Productctxfn } from "../Productcontext";
 import "swiper/css";
 
 function Imagescomp({ images, name }) {
-  const { setquickviewclosebutton } = AppContextfn();
   const { selectedImageIndex } = Productctxfn();
   images.length == 0 ? (images = ["/uiimages/404.jpg"]) : images;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -24,10 +22,6 @@ function Imagescomp({ images, name }) {
       setActiveIndex(selectedImageIndex);
     }
   }, [selectedImageIndex]);
-
-  useEffect(() => {
-    setquickviewclosebutton(!showfullimage.show);
-  }, [showfullimage.show]);
 
   return (
     <>
@@ -104,7 +98,7 @@ function Imagescomp({ images, name }) {
             height={100}
             width={100}
             className={`w-full aspect-square object-cover border cursor-pointer ${
-              activeIndex === i && "border-theme"
+              activeIndex === i && "border-[var(--theme)]"
             }`}
             onClick={() => swiperRef.current.swiper.slideToLoop(i)}
           />

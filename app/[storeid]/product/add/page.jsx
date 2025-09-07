@@ -1,7 +1,10 @@
 import React from "react";
 import Clientpage from "./Clientpage";
+import { getStoreData } from "../../Storedata";
 
-async function page({ searchParams }) {
+async function page({ params, searchParams }) {
+  const { storeid } = await params;
+  const storedata = await getStoreData(storeid);
   const { edit, copy } = await searchParams;
   let productdata = null;
   if (edit || copy) {
@@ -25,20 +28,14 @@ async function page({ searchParams }) {
     }
   }
 
-  {
-    /* 
-    clothes furniture beautyparlour shoes
-    product name
-    price
-    mrp
-    category
-    images
-    description
-    options
-     */
-  }
-
-  return <Clientpage productdata={productdata} />;
+  return (
+    <Clientpage
+      productdata={productdata}
+      collections={storedata?.collections.flatMap((cat) =>
+        cat.subcat.map((subcat) => subcat.name)
+      )}
+    />
+  );
 }
 
 export default page;

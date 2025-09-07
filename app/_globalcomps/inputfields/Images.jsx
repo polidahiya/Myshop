@@ -3,7 +3,8 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AppContextfn } from "@/app/Context";
-import { Addimages } from "@/app/[storeid]/addproduct/Serveraction";
+import { Addimages } from "@/lib/Addordeleteimages";
+import imageCompression from "browser-image-compression";
 
 const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
   const { setmessagefn } = AppContextfn();
@@ -24,21 +25,25 @@ const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
     });
   };
 
-  const MAX_FILE_SIZE = 1 * 1024 * 1024;
-  const handleaddimage = async (file, imgIndex) => {
+  const handleaddimage = async (rawfile, imgIndex) => {
     try {
       setimageloading(true);
-      if (!file) {
+      if (!rawfile) {
         setmessagefn(`Please select an image`);
         return;
       }
-      if (file.size > MAX_FILE_SIZE) {
-        setmessagefn(`Image exceeds 1 MB of size`);
-        return;
-      }
+      //
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+
+      const file = await imageCompression(rawfile, options);
+
       const formdata = new FormData();
       formdata.append("image", file);
-      const res = await Addimages(formdata);
+      const res = await Addimages(formdata, "Mystore/Products");
       if (res.status == 200) {
         const imageurl = res?.imageurl;
         const updateddata = { ...data };
@@ -84,7 +89,7 @@ const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
           <div key={imgIndex} className="flex gap-2 flex-col items-center">
             <img
               src={image instanceof File ? URL.createObjectURL(image) : image}
-              alt={`Variant ${index} Image ${imgIndex}`}
+              alt={`Image-${imgIndex}`}
               className="w-32 aspect-square object-cover border"
             />
             <div className="flex h-8 w-full">
@@ -137,7 +142,7 @@ const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
             multiple
             onChange={(e) => {
               Array.from(e.target.files).forEach((file) => {
-                handleaddimage(index, file);
+                handleaddimage(file);
               });
               e.target.value = null;
             }}

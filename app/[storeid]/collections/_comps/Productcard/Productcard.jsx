@@ -1,17 +1,27 @@
 import React from "react";
 import Link from "next/link";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
-function Productcard({ storeid }) {
+function Productcard({ storeid, product }) {
   return (
-    <Link href={`/${storeid}/product/productid`} className="w-full">
-      <img
-        src="https://dukaan.b-cdn.net/700x700/webp/upload_file_service/8af1411a-676f-42f9-802f-4098241f19be/b6bfaffb241a4dcfb9604794baf44011.webp"
-        alt=""
+    <Link href={`/${storeid}/product/${product?._id}`} className="w-full">
+      <Nextimage
+        src={product?.images[0]}
+        alt={product?.name}
+        height={500}
+        width={500}
+        loading="lazy"
         className="w-full aspect-square object-cover"
       />
-      <div>
-        <p className=" font-tenor">
-          this is the name of the product this is the name of the product
+      <div className="px-4 pt-4">
+        <p className="text-sm text-[var(--theme)] mt-[6px] hidden lg:block">
+          {product?.theme}
+        </p>
+        <p className="flex items-center justify-between flex-wrap mt-[6px]">
+          <span className="line-clamp-2">{product?.name}</span>
+          <span className="">
+            Rs {parseInt(product?.price, 10).toLocaleString("en-IN")}
+          </span>
         </p>
       </div>
     </Link>

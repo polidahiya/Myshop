@@ -3,9 +3,9 @@ import Details from "./_comps/Details";
 import Imagescomp from "./_comps/Imagescomp";
 import Productsslide from "../../_globalcomps/Productsslide";
 import Link from "next/link";
-import { Cachedproducts } from "@/lib/Cachedproducts";
+import { Cachedproducts } from "@/app/[storeid]/Cachedproducts";
 import Commentcomp from "./_comps/_commentcomp/Commentcomp";
-import { Cachedreviews } from "@/lib/Cachedreviews";
+import { Cachedreviews } from "@/app/[storeid]/Cachedreviews";
 import { cookies } from "next/headers";
 import Faqs from "../../_globalcomps/Faqs";
 import { notFound } from "next/navigation";
@@ -15,8 +15,9 @@ import { Productctxwrapper } from "./Productcontext";
 const faqlist = [
   {
     question: "Can I return or exchange my order?",
-    answer:
+    answer: [
       "Yes, you can return or exchange your order within 7 days of receipt. Please contact our customer support team for instructions on how to initiate a return or exchange.",
+    ],
   },
 ];
 
@@ -26,18 +27,18 @@ async function page({ params, searchParams }) {
   const parseduserdata = allcookies.get("userdata")?.value;
   const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
 
-  const { pid: productid } = await params;
+  const { storeid, pid: productid } = await params;
   const allsearchparams = await searchParams;
   const color = allsearchparams.vcolor || 0;
 
-  const products = await Cachedproducts();
+  const products = await Cachedproducts(storeid);
 
-  const product = products.find((product) => product?._id === productid);
+  const product = products.find((product) => product?._id == productid);
   if (!product) notFound();
 
   //
   const cartproductname =
-    `_id:${product?._id}|vcolor:${color}|` +
+    `_id:${product?._id}` +
     (product?.moreoptions || [])
       .sort()
       .map(
@@ -71,10 +72,7 @@ async function page({ params, searchParams }) {
       <div className="min-h-screen">
         <div className="md:mt-8 flex flex-col lg:flex-row gap-10 md:px-10">
           <div className="w-full lg:w-1/2">
-            <Imagescomp
-              images={product?.variants[color]?.images}
-              name={product?.productName}
-            />
+            <Imagescomp images={product?.images} name={product?.name} />
             {/* routes */}
             <div className="text-sm mt-10 px-5">
               <Link href="/">Home</Link>
@@ -90,7 +88,7 @@ async function page({ params, searchParams }) {
               </Link>
               <span className="select-none pointer-events-none">/ </span>
               <span className="capitalize text-[#a7a5a2]">
-                {product?.productName.replace(/-/g, " ")}
+                {product?.name.replace(/-/g, " ")}
               </span>
             </div>
           </div>
@@ -130,16 +128,14 @@ async function page({ params, searchParams }) {
           <Faqs faqlist={faqlist} />
         </div>
         {/* edit button */}
-        {token &&
-          (userdata?.usertype == "admin" ||
-            userdata?.permission.includes("Products_permission")) && (
-            <Link
-              href={`/admin/products/add?edit=${product?._id}`}
-              className="fixed top-24 right-5  bg-[var(--theme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
-            >
-              <MdModeEditOutline />
-            </Link>
-          )}
+        {false && (
+          <Link
+            href={`/admin/products/add?edit=${product?._id}`}
+            className="fixed top-24 right-5  bg-[var(--theme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
+          >
+            <MdModeEditOutline />
+          </Link>
+        )}
       </div>
     </Productctxwrapper>
   );

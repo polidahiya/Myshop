@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useRef, useEffect } from "react";
 
 const AppContext = createContext({});
 
-export function Appwrapper({ children, token, userdata, parsedCart }) {
+export function Appwrapper({ children, parsedCart }) {
   const [cart, setcart] = useState(parsedCart || {});
   const [messagearray, setmessagearray] = useState([]);
   const [showsidemenu, setshowsidemenu] = useState(false);
@@ -40,6 +40,8 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
   return (
     <AppContext.Provider
       value={{
+        cart,
+        setcart,
         messagearray,
         setmessagearray,
         setmessagefn,
@@ -50,7 +52,7 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
       }}
     >
       {/* <div className={`${isoverlay && "overflow-hidden h-dvh lg:overflow-auto lg:h-auto"}`}> */}
-        {children}
+      {children}
       {/* </div> */}
     </AppContext.Provider>
   );

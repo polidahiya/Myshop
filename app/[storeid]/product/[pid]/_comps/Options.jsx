@@ -2,13 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { AppContextfn } from "@/app/Context";
 import { Productctxfn } from "../Productcontext";
 
-function Options({ moreoptions, allsearchparams, productid, quickview }) {
+function Options({ options, allsearchparams, productid, quickview }) {
   const { setSelectedImageIndex } = Productctxfn();
   const searchParams = useSearchParams();
-  const { setquickview } = AppContextfn();
 
   function getLink(newParams) {
     const params = new URLSearchParams(searchParams.toString());
@@ -24,9 +22,9 @@ function Options({ moreoptions, allsearchparams, productid, quickview }) {
     return `/product/${productid}?${params.toString()}`;
   }
 
-  return moreoptions?.length > 0 ? (
+  return options?.length > 0 ? (
     <div className="mt-5 space-y-5">
-      {moreoptions.map((moreoption, i) => (
+      {options.map((moreoption, i) => (
         <div key={i}>
           <p>{moreoption?.name} : </p>
           <div className="flex gap-2 mt-1.5 overflow-x-scroll hidescroll">
@@ -34,7 +32,7 @@ function Options({ moreoptions, allsearchparams, productid, quickview }) {
               <Link
                 href={getLink({ [moreoption?.name]: j })}
                 key={j}
-                className={`flex items-center gap-2 flex-shrink-0 rounded-full  border whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-2 flex-shrink-0 rounded-full  border border-gray-200 whitespace-nowrap cursor-pointer ${
                   option?.image[0] ? "py-2 pl-[10px] pr-6" : "py-4 px-10"
                 } ${
                   (allsearchparams?.[moreoption?.name] || 0) == j &&
@@ -42,7 +40,6 @@ function Options({ moreoptions, allsearchparams, productid, quickview }) {
                 }`}
                 scroll={false}
                 onClick={() => {
-                  setquickview({ show: false, data: {} });
                   if (!quickview) setSelectedImageIndex(option?.imageindex);
                 }}
               >

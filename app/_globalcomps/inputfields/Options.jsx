@@ -6,7 +6,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
 import { LuCloudUpload } from "react-icons/lu";
 import { AppContextfn } from "@/app/Context";
-import { Addimages } from "@/app/[storeid]/addproduct/Serveraction";
+import { Addimages } from "@/lib/Addordeleteimages";
 
 function Options({ data, setdata, setdeletedimages, setnewadded }) {
   const [showform, setshowform] = useState(false);
@@ -276,7 +276,7 @@ const Optionform = ({
           <div className="flex justify-center">
             <label
               htmlFor="imageUpload"
-              className="flex flex-col items-center justify-center w-36 aspect-square border border-dashed border-theme cursor-pointer rounded-lg overflow-hidden"
+              className="flex flex-col items-center justify-center w-36 aspect-square border border-dashed border-[var(--theme)] cursor-pointer rounded-lg overflow-hidden"
             >
               {option?.image && option.image.length > 0 ? (
                 <div className="relative w-full h-full group hover:bg-black">
