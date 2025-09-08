@@ -49,6 +49,9 @@ export function Appwrapper({ children, parsedCart }) {
         setshowsidemenu,
         openfilter,
         setopenfilter,
+        showdialog,
+        setshowdialog,
+        showdialoginitialvalues,
       }}
     >
       {/* <div className={`${isoverlay && "overflow-hidden h-dvh lg:overflow-auto lg:h-auto"}`}> */}

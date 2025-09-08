@@ -3,6 +3,7 @@ import { Mulish, Tenor_Sans } from "next/font/google";
 import { Appwrapper } from "./Context";
 import Message from "./_globalcomps/Message";
 import { Googleadsid } from "@/lib/data";
+import Dialoguebox from "./_globalcomps/Dialoguebox";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
         <Appwrapper>
           {children}
           <Message />
+          <Dialoguebox />
         </Appwrapper>
       </body>
     </html>

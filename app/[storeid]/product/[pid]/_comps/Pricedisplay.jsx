@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
+import { Productctxfn } from "../Productcontext";
 
-function Pricedisplay({ finalprice, finalmrp }) {
+function Pricedisplay() {
+  const { finalprice, finalmrp } = Productctxfn();
   return (
     <p className="mt-5 text-xl">
       {finalmrp != finalprice && (
-        <span className="text-[var(--theme)] text-base line-through mr-3">
+        <span className="text-[var(--secondary)] text-base line-through mr-3">
           ₹{parseInt(finalmrp, 10).toLocaleString("en-IN")}
         </span>
       )}

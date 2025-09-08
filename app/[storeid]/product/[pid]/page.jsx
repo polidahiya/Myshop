@@ -4,13 +4,12 @@ import Imagescomp from "./_comps/Imagescomp";
 import Productsslide from "../../_globalcomps/Productsslide";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/[storeid]/Cachedproducts";
-import Commentcomp from "./_comps/_commentcomp/Commentcomp";
-import { Cachedreviews } from "@/app/[storeid]/Cachedreviews";
-import { cookies } from "next/headers";
 import Faqs from "../../_globalcomps/Faqs";
 import { notFound } from "next/navigation";
 import { MdModeEditOutline } from "react-icons/md";
 import { Productctxwrapper } from "./Productcontext";
+import { Authfn } from "@/lib/auth";
+import { getStoreData } from "../../Storedata";
 
 const faqlist = [
   {
@@ -21,106 +20,49 @@ const faqlist = [
   },
 ];
 
-async function page({ params, searchParams }) {
-  const allcookies = await cookies();
-  const token = allcookies.get("token")?.value;
-  const parseduserdata = allcookies.get("userdata")?.value;
-  const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
-
+async function page({ params }) {
   const { storeid, pid: productid } = await params;
-  const allsearchparams = await searchParams;
-  const color = allsearchparams.vcolor || 0;
+  const { isadmin } = await Authfn(storeid);
+  const storedata = await getStoreData(storeid);
 
   const products = await Cachedproducts(storeid);
-
   const product = products.find((product) => product?._id == productid);
   if (!product) notFound();
 
-  //
-  const cartproductname =
-    `_id:${product?._id}` +
-    (product?.moreoptions || [])
-      .sort()
-      .map(
-        (moreoption) =>
-          `${moreoption?.name}:${allsearchparams[moreoption?.name] || 0}`
-      )
-      .join("|");
-
-  // prices
-  let rawprice = Number(product?.sellingprice);
-  let rawmrp = Number(product?.mrp);
-  product?.moreoptions?.forEach((moreoption) => {
-    const selectedoption =
-      moreoption?.options[allsearchparams[moreoption?.name] || 0];
-    rawprice += Number(selectedoption?.price);
-    rawmrp += Number(selectedoption?.mrp);
-  });
-
-  //
   const similarproducts = products
     .filter(
       (item) => item?.category === product?.category && item?._id !== productid
     )
     .slice(0, 15);
 
-  //
-  const filteredreviews = await Cachedreviews(productid);
-
   return (
-    <Productctxwrapper>
+    <Productctxwrapper product={product}>
       <div className="min-h-screen">
         <div className="md:mt-8 flex flex-col lg:flex-row gap-10 md:px-10">
           <div className="w-full lg:w-1/2">
             <Imagescomp images={product?.images} name={product?.name} />
             {/* routes */}
             <div className="text-sm mt-10 px-5">
-              <Link href="/">Home</Link>
-              <span className="select-none pointer-events-none">/ </span>
-              <Link href={`/collections/${product?.category}`}>
-                product name
-              </Link>
-              <span className="select-none pointer-events-none">/ </span>
-              <Link
-                href={`/collections/${product?.category}/${product?.subcat}`}
-              >
-                ssdsd
-              </Link>
-              <span className="select-none pointer-events-none">/ </span>
-              <span className="capitalize text-[#a7a5a2]">
-                {product?.name.replace(/-/g, " ")}
+              <Link href={`/${storeid}`}>Home</Link>
+              <span className="select-none pointer-events-none"> / </span>
+              <Link href={`/${storeid}/collections`}>Collections</Link>
+              <span className="select-none pointer-events-none"> / </span>
+              <span className="capitalize text-[var(--secondary)]">
+                {product?.name}
               </span>
             </div>
           </div>
           <div className="w-full lg:w-1/2">
             <Details
               product={product}
-              color={color}
-              productid={productid}
-              token={token}
-              cartproductname={cartproductname}
-              allsearchparams={allsearchparams}
-              rawprice={rawprice}
-              rawmrp={rawmrp}
+              whatsappnum={storedata?.contact?.whatsapp}
             />
           </div>
-        </div>
-        {/* comments */}
-        <div>
-          <Commentcomp
-            productid={productid}
-            Comments={filteredreviews}
-            token={token}
-            userdata={userdata}
-          />
         </div>
         {/* similar products */}
         <div>
           {similarproducts.length != 0 && (
-            <Productsslide
-              heading="Customers also loved"
-              data={similarproducts}
-            />
+            <Productsslide heading="Related Products" data={similarproducts} />
           )}
         </div>
         {/* faq */}
@@ -128,9 +70,9 @@ async function page({ params, searchParams }) {
           <Faqs faqlist={faqlist} />
         </div>
         {/* edit button */}
-        {false && (
+        {isadmin && (
           <Link
-            href={`/admin/products/add?edit=${product?._id}`}
+            href={`/${storeid}/product/add?edit=${product?._id}`}
             className="fixed top-24 right-5  bg-[var(--theme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
           >
             <MdModeEditOutline />

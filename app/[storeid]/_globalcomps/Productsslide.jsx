@@ -17,7 +17,7 @@ export default function Productsslide({ heading, data }) {
               containerref.current.scrollBy({ left: -300, behavior: "smooth" });
             }}
           >
-            <IoIosArrowBack className="text-[#b0a099] text-3xl" />
+            <IoIosArrowBack className="text-[var(--theme)] text-3xl" />
           </button>
           <button
             className="lg:hover:translate-x-1 duration-300"
@@ -25,7 +25,7 @@ export default function Productsslide({ heading, data }) {
               containerref.current.scrollBy({ left: 300, behavior: "smooth" });
             }}
           >
-            <IoIosArrowBack className="text-[#b0a099] text-3xl rotate-180" />
+            <IoIosArrowBack className="text-[var(--theme)] text-3xl rotate-180" />
           </button>
         </div>
       </div>
@@ -35,7 +35,10 @@ export default function Productsslide({ heading, data }) {
           ref={containerref}
         >
           {data.map((item, i) => (
-            <div key={i} className="min-w-full md:min-w-72 snap-start">
+            <div
+              key={i}
+              className="min-w-full md:min-w-72 md:max-w-72 snap-start grow-0"
+            >
               <Productcard product={item} />
             </div>
           ))}
@@ -44,4 +47,3 @@ export default function Productsslide({ heading, data }) {
     </div>
   );
 }
-

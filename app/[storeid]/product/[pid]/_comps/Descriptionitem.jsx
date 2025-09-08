@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-const Descriptionitem = ({ heading, details, firstisdesc = false }) => {
-  const [open, setopen] = useState(false);
+const Descriptionitem = ({
+  heading,
+  details,
+  firstisdesc = false,
+  preopen = false,
+}) => {
+  const [open, setopen] = useState(preopen);
   return (
     <div
       className={`pt-5 cursor-pointer border-t border-gray-200 px-2`}

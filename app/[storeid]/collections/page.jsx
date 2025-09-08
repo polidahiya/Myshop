@@ -6,9 +6,11 @@ import Filters from "./_comps/Filters/Filters";
 import Heading from "./_comps/Heading/Heading";
 import { getStoreData } from "../Storedata";
 import { Cachedproducts } from "../Cachedproducts";
+import { Authfn } from "@/lib/auth";
 
 async function page({ params, searchParams }) {
   const { storeid } = await params;
+  const { isadmin } = await Authfn(storeid);
   const allsearchparams = await searchParams;
   const storedata = await getStoreData(storeid);
   const rawproducts = await Cachedproducts(storeid);
@@ -42,7 +44,11 @@ async function page({ params, searchParams }) {
           <Newbutton storeid={storeid} />
           {products.map((product, i) => (
             <React.Fragment key={i}>
-              <Productcard storeid={storeid} product={product} />
+              <Productcard
+                storeid={storeid}
+                product={product}
+                isadmin={isadmin}
+              />
               <Ads i={i} />
             </React.Fragment>
           ))}
