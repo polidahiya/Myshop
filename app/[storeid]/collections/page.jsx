@@ -15,7 +15,6 @@ async function page({ params, searchParams }) {
   const storedata = await getStoreData(storeid);
   const rawproducts = await Cachedproducts(storeid);
   //
-
   const allfilternames = storedata?.collections.map((item) => item?.name);
 
   // filters that are actually present in searchParams
@@ -41,7 +40,7 @@ async function page({ params, searchParams }) {
           collections={storedata?.collections}
         />
         <div className="h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10">
-          <Newbutton storeid={storeid} />
+          {isadmin && <Newbutton storeid={storeid} />}
           {products.map((product, i) => (
             <React.Fragment key={i}>
               <Productcard

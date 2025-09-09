@@ -3,9 +3,11 @@ import Link from "next/link";
 import React from "react";
 import { AppContextfn } from "@/app/Context";
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
+import { Deleteproduct } from "@/app/[storeid]/product/add/Serveraction";
+import Revalidatepathfn from "@/app/_globalcomps/Revalidatepathfn";
 
 function Editbuttons({ storeid, product }) {
-  const { setshowdialog } = AppContextfn();
+  const { setshowdialog, setmessagefn } = AppContextfn();
 
   return (
     <div className="absolute top-2 left-2 flex flex-col gap-2">
@@ -25,7 +27,11 @@ function Editbuttons({ storeid, product }) {
             title: "Delete?",
             type: false,
             continue: async () => {
-              // await deleteproduct(product._id);
+              const res = await Deleteproduct(product?._id);
+              setmessagefn(res?.message);
+              if (res?.status == 200) {
+                Revalidatepathfn(`/${storeid}/collections`);
+              }
             },
           });
         }}

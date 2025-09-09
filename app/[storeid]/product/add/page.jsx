@@ -1,17 +1,23 @@
 import React from "react";
 import Clientpage from "./Clientpage";
 import { getStoreData } from "../../Storedata";
+import { Getproduct } from "./Serveraction";
+import { Authfn } from "@/lib/auth";
+import { notFound } from "next/navigation";
 
 async function page({ params, searchParams }) {
   const { storeid } = await params;
   const storedata = await getStoreData(storeid);
+  const { isadmin } = await Authfn(storeid);
   const { edit, copy } = await searchParams;
+  if (!isadmin) notFound();
   let productdata = null;
+  
   if (edit || copy) {
-    const res = await Roomsearchproducts("pid", edit || copy);
+    const res = await Getproduct(edit || copy);
     if (res?.status == 200) {
       if (edit) {
-        productdata = res?.data[0];
+        productdata = res?.data;
       }
       if (copy) {
         const data = res?.data[0];
@@ -27,7 +33,6 @@ async function page({ params, searchParams }) {
       }
     }
   }
-
   return (
     <Clientpage
       productdata={productdata}
