@@ -1,64 +1,142 @@
 import React from "react";
 import { getStoreData } from "./Storedata";
 import { Authfn } from "@/lib/auth";
-import CategoriesGrid from "./_comps/Category/Category1";
-import Hero from "./_comps/Hero/Hero";
+import Category1 from "./_comps/Category/Category1";
+import Hero1 from "./_comps/Hero/Hero1";
 
-const category = {
-  Navbar: CategoriesGrid,
-  Hero: Hero,
-  Collections: CategoriesGrid,
-  Features: CategoriesGrid,
-  About: CategoriesGrid,
-  Showcase: CategoriesGrid,
-  Reviews: CategoriesGrid,
-  Banner: CategoriesGrid,
-  Articles: CategoriesGrid,
-  FAQ: CategoriesGrid,
-  Contact: CategoriesGrid,
-  Footer: CategoriesGrid,
+const Compdata = {
+  Navbar: [
+    {
+      id: 1,
+      comp: Hero1,
+      paid: false,
+    },
+  ],
+  Hero: [
+    {
+      id: 1,
+      comp: Hero1,
+      paid: false,
+    },
+  ],
+  Collections: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Features: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  About: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Showcase: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Reviews: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Banner: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Articles: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  FAQ: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Contact: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
+  Footer: [
+    {
+      id: 1,
+      comp: Category1,
+      paid: false,
+    },
+  ],
 };
 
-const comps = [
+const data = [
   {
     type: 1,
     category: "Hero",
-    items: [
-      {
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0s6oSQhf6FFBJRQPa4_J2hZRaMDylYhn0A&s",
-        title: "Rentbean",
-        desc: "",
-        link: "/rentbean",
-      },
-      {
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0s6oSQhf6FFBJRQPa4_J2hZRaMDylYhn0A&s",
-        title: "Rentbean",
-        desc: "",
-        link: "/rentbean",
-      },
-      {
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0s6oSQhf6FFBJRQPa4_J2hZRaMDylYhn0A&s",
-        title: "Rentbean",
-        desc: "",
-        link: "/rentbean",
-      },
-    ],
+    props: {
+      items: [
+        {
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0s6oSQhf6FFBJRQPa4_J2hZRaMDylYhn0A&s",
+          title: "Rentbean",
+          desc: "",
+          link: "/rentbean",
+        },
+        {
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0s6oSQhf6FFBJRQPa4_J2hZRaMDylYhn0A&s",
+          title: "Rentbean",
+          desc: "",
+          link: "/rentbean",
+        },
+        {
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0s6oSQhf6FFBJRQPa4_J2hZRaMDylYhn0A&s",
+          title: "Rentbean",
+          desc: "",
+          link: "/rentbean",
+        },
+      ],
+    },
   },
 ];
 
-async function page({ params }) {
+export default async function page({ params }) {
   const { storeid } = await params;
   const storedata = await getStoreData(storeid);
 
   return (
     <div className="space-y-5 md:space-y-10">
-      {comps.map((comp, i) => {
-        const Component = category[comp.category];
-        return <Component key={i} storeid={storeid} comp={comp} />;
+      {data.map((comp, i) => {
+        const selectedcomp = Compdata[comp.category].find(
+          (item) => item.id == comp.type
+        );
+        const Render = selectedcomp?.comp;
+        return (
+          <div key={i}>
+            <Render storedata={storedata} {...comp.props} />
+          </div>
+        );
       })}
-      <CategoriesGrid storeid={storeid} />
     </div>
   );
 }
-
-export default page;
