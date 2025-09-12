@@ -4,6 +4,7 @@ import { getStoreData } from "./Storedata";
 import FIxedbuttons from "./_globalcomps/Fixedbuttons";
 import Sidemenu from "./_globalcomps/Sidemenu/Sidemenu";
 import { Authfn } from "@/lib/auth";
+import { Storehomectxwrapper } from "./Storecontext";
 
 export const metadata = {
   title: "",
@@ -22,7 +23,7 @@ async function layout({ children, params }) {
   const storedata = await getStoreData(storeid);
 
   return (
-    <>
+    <Storehomectxwrapper>
       <div
         style={{
           "--theme": storedata?.color?.theme,
@@ -36,7 +37,7 @@ async function layout({ children, params }) {
         {children}
         <FIxedbuttons whatsapp={storedata?.contact?.whatsapp} />
       </div>
-    </>
+    </Storehomectxwrapper>
   );
 }
 

@@ -70,18 +70,19 @@ export default function AboutUs() {
           Join thousands of creators and entrepreneurs who are already selling
           on A2Z.
         </p>
-        <Link
-          href={"/Store"}
-          className="block mt-6 px-8 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-md hover:bg-gray-100 transition mx-auto"
-        >
-          Create Your Store
-        </Link>
+        <div className="flex justify-center">
+          <Link
+            href={"/Store"}
+            className="block mt-6 px-8 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-md hover:bg-gray-100 transition mx-auto"
+          >
+            Create Your Store
+          </Link>
+        </div>
       </section>
-
-      {/* Footer */}
+      {/* 
       <footer className="bg-gray-900 text-gray-400 py-8 text-center">
         <p>© {new Date().getFullYear()} A2Z. All rights reserved.</p>
-      </footer>
+      </footer> */}
     </div>
   );
 }

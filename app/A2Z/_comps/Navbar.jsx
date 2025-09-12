@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-30">
       <div className="px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <Link href="/A2Z" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-md flex items-center justify-center text-white font-bold">
             A2Z
           </div>
@@ -17,7 +17,7 @@ function Navbar() {
               Create your online store — fast
             </p>
           </div>
-        </div>
+        </Link>
 
         <nav
           className={`fixed md:static top-0 left-0 w-full md:w-auto h-screen md:h-auto bg-white flex flex-col md:flex-row md:items-center py-20 md:py-0 gap-2 md:gap-6 text-sm px-2 ${
@@ -30,16 +30,28 @@ function Navbar() {
           >
             X
           </button>
-          <Link href="#features" className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0">
+          <Link
+            href="#features"
+            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+          >
             Features
           </Link>
-          <Link href="#templates" className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0">
+          <Link
+            href="#templates"
+            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+          >
             Templates
           </Link>
-          <Link href="#pricing" className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0">
+          <Link
+            href="#pricing"
+            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+          >
             Pricing
           </Link>
-          <Link href="#contact" className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0">
+          <Link
+            href="#contact"
+            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+          >
             Contact
           </Link>
           <Link

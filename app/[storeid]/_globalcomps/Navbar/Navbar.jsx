@@ -1,10 +1,11 @@
 import React from "react";
 import Menubutton from "./_comps/Menubutton";
 import { IoIosSearch } from "react-icons/io";
+import Editbutton from "./Editbutton";
 
 function Navbar({ logo, storename }) {
   return (
-    <nav className="sticky top-0 z-20 shadow-md h-16 bg-white px-2 md:px-10 flex items-center">
+    <nav className="sticky top-0 z-20 shadow-sm h-16 bg-white px-2 md:px-10 flex items-center">
       <Menubutton />
       {logo ? (
         <img
@@ -17,9 +18,12 @@ function Navbar({ logo, storename }) {
           {storename}
         </span>
       )}
-      <button className="w-10 aspect-square flex items-center justify-center text-3xl ml-auto mr-2">
-        <IoIosSearch />
-      </button>
+      <div className="ml-auto  mr-2 flex items-center gap-2">
+        <button className="w-10 aspect-square flex items-center justify-center text-3xl">
+          <IoIosSearch />
+        </button>
+        <Editbutton />
+      </div>
     </nav>
   );
 }
