@@ -7,7 +7,10 @@ function Dropdownmenu({ title, state, onchange, options }) {
       <div className="mt-1 block w-full px-2 border rounded-md">
         <select
           value={state}
-          onChange={(e) => onchange(e.target.value)}
+          onChange={(e) => {
+            onchange(e.target.value);
+            e.target.value = "";
+          }}
           className="block w-full py-2 outline-none"
         >
           {options.map((item, i) => (

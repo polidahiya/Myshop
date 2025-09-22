@@ -150,7 +150,7 @@ function Clientpage({ productdata, collections }) {
           }
           clear={() => setdata((pre) => ({ ...pre, stocks: "" }))}
         />
-        {/* variants */}
+        {/* images */}
         <Images
           data={data}
           setdata={setdata}

@@ -7,188 +7,125 @@ import Showcase1 from "./_comps/Showcase/Showcase1";
 import About1 from "./_comps/About/About1";
 import { testimage } from "@/lib/data";
 import Compwrapper from "./_comps/Compwrapper";
+import Addcompmenu from "./_comps/Addcompmenu/Addcompmenu";
+import { Addnewbutton } from "./_comps/Compwrapper";
 
-const Compdata = {
+export const Compdata = {
   Navbar: [
     {
-      id: 1,
+      type: 1,
       comp: Hero1,
       paid: false,
+      img: testimage,
     },
   ],
-  Hero: [
+  Slider: [
     {
-      id: 1,
+      type: 1,
       comp: Hero1,
       paid: false,
+      img: testimage,
+    },
+    {
+      type: 1,
+      comp: Hero1,
+      paid: false,
+      img: testimage,
     },
   ],
   Collections: [
     {
-      id: 1,
+      type: 1,
       comp: Category1,
       paid: false,
-    },
-  ],
-  Features: [
-    {
-      id: 1,
-      comp: Category1,
-      paid: false,
+      img: testimage,
     },
   ],
   About: [
     {
-      id: 1,
+      type: 1,
       comp: About1,
       paid: false,
+      img: testimage,
     },
   ],
   Showcase: [
     {
-      id: 1,
+      type: 1,
       comp: Showcase1,
       paid: false,
-    },
-  ],
-  Reviews: [
-    {
-      id: 1,
-      comp: Category1,
-      paid: false,
+      img: testimage,
     },
   ],
   Banner: [
     {
-      id: 1,
+      type: 1,
       comp: Category1,
       paid: false,
+      img: testimage,
     },
   ],
-  Articles: [
+  Faq: [
     {
-      id: 1,
+      type: 1,
       comp: Category1,
       paid: false,
-    },
-  ],
-  FAQ: [
-    {
-      id: 1,
-      comp: Category1,
-      paid: false,
-    },
-  ],
-  Contact: [
-    {
-      id: 1,
-      comp: Category1,
-      paid: false,
+      img: testimage,
     },
   ],
   Footer: [
     {
-      id: 1,
+      type: 1,
       comp: Category1,
       paid: false,
+      img: testimage,
     },
   ],
 };
 
-const data = [
-  {
-    type: 1,
-    category: "Hero",
-    props: {
-      items: [
-        {
-          img: testimage,
-          title: "Rentbean",
-          desc: "",
-          link: "/rentbean",
-        },
-        {
-          img: testimage,
-          title: "Rentbean",
-          desc: "",
-          link: "/rentbean",
-        },
-        {
-          img: testimage,
-          title: "Rentbean",
-          desc: "",
-          link: "/rentbean",
-        },
-      ],
-    },
-  },
-  {
-    type: 1,
-    category: "Collections",
-    props: {
-      collection: "Types",
-      showheader: true,
-    },
-  },
-  {
-    type: 1,
-    category: "Showcase",
-    props: {
-      items: [
-        {
-          img: testimage,
-          cover: true,
-        },
-        {
-          img: testimage,
-          cover: true,
-        },
-        {
-          img: testimage,
-          cover: true,
-        },
-        {
-          img: testimage,
-          cover: true,
-        },
-      ],
-    },
-  },
-  {
-    type: 1,
-    category: "About",
-    props: {
-      heading: "About A2Z Stores",
-      para: [
-        `A2Z is your one-stop platform to create and grow your online store. We
-        empower entrepreneurs and businesses of all sizes to showcase their
-        products, reach customers, and scale effortlessly. With simple tools,
-        seamless design, and flexible features, we make sure your ideas turn
-        into reality — from A to Z.`,
-      ],
-    },
-  },
-];
-
 export default async function page({ params }) {
   const { storeid } = await params;
+  const { isadmin } = await Authfn(storeid);
+
   const storedata = await getStoreData(storeid);
+  const data = storedata?.home || [];
 
   return (
-    <div className="space-y-5 md:space-y-10 mb-10">
+    <div className="space-y-5 md:space-y-10 py-2 md:py-5 mb-10">
+      {data.length == 0 && isadmin && <Addnewbutton i={0} />}
       {data.map((comp, i) => {
         const selectedcomp = Compdata[comp.category]?.find(
-          (item) => item?.id == comp?.type
+          (item) => item?.type == comp?.type
         );
         const Render = selectedcomp?.comp;
+        const content = <Render storeid={storeid} {...comp?.props} />;
         return (
           <div key={i}>
-            <Compwrapper storeid={storeid} i={i}>
-              <Render storeid={storeid} {...comp?.props} />
-            </Compwrapper>
+            {isadmin ? (
+              <Compwrapper storeid={storeid} i={i}>
+                {content}
+              </Compwrapper>
+            ) : (
+              content
+            )}
           </div>
         );
       })}
+      {isadmin && (
+        <Addcompmenu Compdata={stripComp(Compdata)} storeid={storeid} />
+      )}
     </div>
   );
+}
+
+function stripComp(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(stripComp);
+  } else if (typeof obj === "object" && obj !== null) {
+    const { comp, ...rest } = obj; // remove comp
+    return Object.fromEntries(
+      Object.entries(rest).map(([key, value]) => [key, stripComp(value)])
+    );
+  }
+  return obj;
 }

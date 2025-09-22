@@ -49,7 +49,7 @@ function Sidemenu({ allsearchparams, collections }) {
         </div>
         <div className="h-full space-y-2 overflow-y-scroll hidescroll lg:overflow-y-visible p-2 lg:p-0">
           {collections.map(({ name, image, subcat }, i) => (
-            <div key={i} className="text-sm bg-white rounded-2xl shadow-md p-2">
+            <div key={i} className="text-sm bg-white rounded-2xl shadow-sm p-2">
               <div className="relative px-5 py-2 font-semibold rounded-xl bg-gray-100 z-10">
                 {name}
               </div>
