@@ -6,8 +6,9 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
+import Linkgenerator from "./Linkgenerator";
 
-export default function Hero1({ items }) {
+export default function Slider1({ items, storeid }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
   return (
@@ -23,27 +24,31 @@ export default function Hero1({ items }) {
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         className="h-full w-full"
       >
-        {items.map((item, i) => (
-          <SwiperSlide key={i}>
-            <Link
-              href={item?.link}
-              prefetch={false}
-              className="relative h-full w-full block"
-            >
-              <img
-                //   <Nextimage
-                className="h-full w-full object-contain"
-                src={item?.img}
-                alt={item?.title}
-                // fill
-                // sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 70vw"
-                // priority={i == 0 ? true : false}
-                // quality={100}
-                loading={i != 0 ? "lazy" : "eager"}
-              />
-            </Link>
-          </SwiperSlide>
-        ))}
+        {items.map((item, i) => {
+          const link = Linkgenerator(item, storeid);
+          return (
+            <SwiperSlide key={i}>
+              <Link
+                href={link}
+                prefetch={false}
+                className="relative h-full w-full block"
+              >
+                <Nextimage
+                  className={`h-full w-full ${
+                    item?.cover ? "object-cover" : "object-contain"
+                  }`}
+                  src={item?.img}
+                  alt={item?.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 70vw"
+                  priority={i == 0 ? true : false}
+                  quality={100}
+                  loading={i != 0 ? "lazy" : "eager"}
+                />
+              </Link>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
 
       {/* Custom Navigation Buttons */}

@@ -6,10 +6,12 @@ import { IoIosColorPalette } from "react-icons/io";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { AppContextfn } from "@/app/Context";
+import { Deletehomecomp } from "../Edithome/Serveraction";
+import Revalidatepathfn from "@/app/_globalcomps/Revalidatepathfn";
 
-export default function Compwrapper({ children, storeid, i }) {
-  const { setshowdialog } = AppContextfn();
-  const { edit } = Storehomectxfn();
+export default function Compwrapper({ children, storeid, i, comp }) {
+  const { setshowdialog, setmessagefn } = AppContextfn();
+  const { edit, setthememenu } = Storehomectxfn();
   return (
     <>
       {i == 0 && edit && (
@@ -26,7 +28,12 @@ export default function Compwrapper({ children, storeid, i }) {
             >
               <MdModeEditOutline />
             </Link>
-            <button className="flex items-center justify-center bg-white text-green-500 w-10 aspect-square z-10 rounded-full">
+            <button
+              className="flex items-center justify-center bg-white text-green-500 w-10 aspect-square z-10 rounded-full"
+              onClick={() => {
+                setthememenu(() => ({ show: true, data: comp, at: i }));
+              }}
+            >
               <IoIosColorPalette />
             </button>
             <button
@@ -37,7 +44,9 @@ export default function Compwrapper({ children, storeid, i }) {
                   title: "Delete?",
                   type: false,
                   continue: async () => {
-                    console.log("deleted");
+                    const res = await Deletehomecomp(i);
+                    setmessagefn(res?.message);
+                    if (res?.status == 200) Revalidatepathfn(`/${storeid}`);
                   },
                 })
               }

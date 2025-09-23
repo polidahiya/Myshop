@@ -2,19 +2,22 @@ import React from "react";
 import { getStoreData } from "./Storedata";
 import { Authfn } from "@/lib/auth";
 import Category1 from "./_comps/Category/Category1";
-import Hero1 from "./_comps/Hero/Hero1";
+import Slider1 from "./_comps/Slider/Slider1";
+import Slider2 from "./_comps/Slider/Slider2";
 import Showcase1 from "./_comps/Showcase/Showcase1";
 import About1 from "./_comps/About/About1";
 import { testimage } from "@/lib/data";
 import Compwrapper from "./_comps/Compwrapper";
 import Addcompmenu from "./_comps/Addcompmenu/Addcompmenu";
 import { Addnewbutton } from "./_comps/Compwrapper";
+import Thememenucomp from "./_comps/Thememenucomp/Thememenucomp";
+import DeviceDetector from "../_globalcomps/Devicedetector";
 
 export const Compdata = {
   Navbar: [
     {
       type: 1,
-      comp: Hero1,
+      comp: Slider1,
       paid: false,
       img: testimage,
     },
@@ -22,13 +25,13 @@ export const Compdata = {
   Slider: [
     {
       type: 1,
-      comp: Hero1,
+      comp: Slider1,
       paid: false,
       img: testimage,
     },
     {
-      type: 1,
-      comp: Hero1,
+      type: 2,
+      comp: Slider2,
       paid: false,
       img: testimage,
     },
@@ -89,6 +92,7 @@ export default async function page({ params }) {
 
   const storedata = await getStoreData(storeid);
   const data = storedata?.home || [];
+  const device = await DeviceDetector();
 
   return (
     <div className="space-y-5 md:space-y-10 py-2 md:py-5 mb-10">
@@ -98,11 +102,13 @@ export default async function page({ params }) {
           (item) => item?.type == comp?.type
         );
         const Render = selectedcomp?.comp;
-        const content = <Render storeid={storeid} {...comp?.props} />;
+        const content = (
+          <Render storeid={storeid} device={device} {...comp?.props} />
+        );
         return (
           <div key={i}>
             {isadmin ? (
-              <Compwrapper storeid={storeid} i={i}>
+              <Compwrapper storeid={storeid} i={i} comp={comp}>
                 {content}
               </Compwrapper>
             ) : (
@@ -112,7 +118,10 @@ export default async function page({ params }) {
         );
       })}
       {isadmin && (
-        <Addcompmenu Compdata={stripComp(Compdata)} storeid={storeid} />
+        <>
+          <Addcompmenu Compdata={stripComp(Compdata)} storeid={storeid} />
+          <Thememenucomp Compdata={stripComp(Compdata)} storeid={storeid} />
+        </>
       )}
     </div>
   );

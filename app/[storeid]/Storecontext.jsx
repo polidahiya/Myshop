@@ -9,8 +9,15 @@ export function Storehomectxwrapper({ children }) {
     show: false,
     addat: 0,
   });
+  const [thememenu, setthememenu] = useState({
+    show: false,
+    data: {},
+    at: 0,
+  });
   return (
-    <Storehomectx.Provider value={{ edit, setedit, addmenu, setaddmenu }}>
+    <Storehomectx.Provider
+      value={{ edit, setedit, addmenu, setaddmenu, thememenu, setthememenu }}
+    >
       {children}
     </Storehomectx.Provider>
   );

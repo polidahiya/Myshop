@@ -56,11 +56,24 @@ export const Deletehomecomp = async (id) => {
     }
 
     const storeid = tokenres.storeid;
-
     const { storescollection, ObjectId } = await getcollection();
 
     const storedata = await getStoreData(storeid);
     const homedata = storedata?.home || [];
+
+    // delete images
+    const selectedcomp = homedata[id];
+    if (
+      selectedcomp.category == "Slider" ||
+      selectedcomp.category == "Banner"
+    ) {
+      const images = [];
+      selectedcomp.props.items.forEach((item) => {
+        images.push(item.img);
+      });
+
+      await Deleteimages(images, "Mystore/home");
+    }
 
     homedata.splice(id, 1);
     await storescollection.updateOne(
@@ -72,12 +85,12 @@ export const Deletehomecomp = async (id) => {
         },
       }
     );
-    
+
     revalidateTag(`store-${storeid}`);
 
     return {
       status: 200,
-      message: "Update successfully",
+      message: "Delete successfully",
     };
   } catch (error) {
     console.log(error);
