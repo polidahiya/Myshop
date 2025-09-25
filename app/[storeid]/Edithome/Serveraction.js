@@ -64,8 +64,8 @@ export const Deletehomecomp = async (id) => {
     // delete images
     const selectedcomp = homedata[id];
     if (
-      selectedcomp.category == "Slider" ||
-      selectedcomp.category == "Banner"
+      selectedcomp &&
+      (selectedcomp.category == "Slider" || selectedcomp.category == "Banner")
     ) {
       const images = [];
       selectedcomp.props.items.forEach((item) => {

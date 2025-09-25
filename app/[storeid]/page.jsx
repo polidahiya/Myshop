@@ -1,89 +1,25 @@
 import React from "react";
 import { getStoreData } from "./Storedata";
 import { Authfn } from "@/lib/auth";
-import Category1 from "./_comps/Category/Category1";
-import Slider1 from "./_comps/Slider/Slider1";
-import Slider2 from "./_comps/Slider/Slider2";
-import Showcase1 from "./_comps/Showcase/Showcase1";
-import About1 from "./_comps/About/About1";
-import { testimage } from "@/lib/data";
-import Compwrapper from "./_comps/Compwrapper";
-import Addcompmenu from "./_comps/Addcompmenu/Addcompmenu";
 import { Addnewbutton } from "./_comps/Compwrapper";
-import Thememenucomp from "./_comps/Thememenucomp/Thememenucomp";
 import DeviceDetector from "../_globalcomps/Devicedetector";
+import { Compdatawithoutcompsfn } from "./_comps/Homedata/Compdata";
+import { Compdata } from "./_comps/Homedata/Compdata";
+import dynamic from "next/dynamic";
 
-export const Compdata = {
-  Navbar: [
-    {
-      type: 1,
-      comp: Slider1,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  Slider: [
-    {
-      type: 1,
-      comp: Slider1,
-      paid: false,
-      img: testimage,
-    },
-    {
-      type: 2,
-      comp: Slider2,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  Collections: [
-    {
-      type: 1,
-      comp: Category1,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  About: [
-    {
-      type: 1,
-      comp: About1,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  Showcase: [
-    {
-      type: 1,
-      comp: Showcase1,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  Banner: [
-    {
-      type: 1,
-      comp: Category1,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  Faq: [
-    {
-      type: 1,
-      comp: Category1,
-      paid: false,
-      img: testimage,
-    },
-  ],
-  Footer: [
-    {
-      type: 1,
-      comp: Category1,
-      paid: false,
-      img: testimage,
-    },
-  ],
+const Compwrapper = dynamic(() => import("./_comps/Compwrapper"));
+const Thememenucomp = dynamic(() =>
+  import("./_comps/Thememenucomp/Thememenucomp")
+);
+const Addcompmenu = dynamic(() => import("./_comps/Addcompmenu/Addcompmenu"));
+
+const Compmap = {
+  Slider: dynamic(() => import("./_comps/Slider/Slider")),
+  About: dynamic(() => import("./_comps/About/About")),
+  Collections: dynamic(() => import("./_comps/Collections/Collections")),
+  Banner: dynamic(() => import("./_comps/Banner/Banner")),
+  Faq: dynamic(() => import("./_comps/Faq/Faq")),
+  Showcase: dynamic(() => import("./_comps/Showcase/Showcase")),
 };
 
 export default async function page({ params }) {
@@ -94,33 +30,44 @@ export default async function page({ params }) {
   const data = storedata?.home || [];
   const device = await DeviceDetector();
 
+  const Compdatawithoutcomps = Compdatawithoutcompsfn();
+
   return (
     <div className="space-y-5 md:space-y-10 py-2 md:py-5 mb-10">
       {data.length == 0 && isadmin && <Addnewbutton i={0} />}
       {data.map((comp, i) => {
-        const selectedcomp = Compdata[comp.category]?.find(
+        const definition = Compdata[comp?.category].find(
           (item) => item?.type == comp?.type
         );
-        const Render = selectedcomp?.comp;
-        const content = (
-          <Render storeid={storeid} device={device} {...comp?.props} />
+
+        const Component = definition?.comp;
+        //
+        const Wrapper = Compmap[comp.category];
+        const element = (
+          <Wrapper
+            storeid={storeid}
+            device={device}
+            Component={Component}
+            compProps={comp?.props}
+          />
         );
+
         return (
           <div key={i}>
             {isadmin ? (
               <Compwrapper storeid={storeid} i={i} comp={comp}>
-                {content}
+                {element}
               </Compwrapper>
             ) : (
-              content
+              element
             )}
           </div>
         );
       })}
       {isadmin && (
         <>
-          <Addcompmenu Compdata={stripComp(Compdata)} storeid={storeid} />
-          <Thememenucomp Compdata={stripComp(Compdata)} storeid={storeid} />
+          <Addcompmenu Compdata={Compdatawithoutcomps} storeid={storeid} />
+          <Thememenucomp Compdata={Compdatawithoutcomps} storeid={storeid} />
         </>
       )}
     </div>

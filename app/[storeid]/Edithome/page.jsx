@@ -1,5 +1,4 @@
 import React from "react";
-import { Compdata } from "../page";
 import Slider from "./_Forms/Slider/Slider";
 import About from "./_Forms/About/About";
 import Banner from "./_Forms/Banner/Banner";
@@ -19,7 +18,12 @@ async function page({ searchParams, params }) {
 
   const storedata = await getStoreData(storeid);
   const rawproducts = await Cachedproducts(storeid);
-  let { add, at, category, type } = await searchParams;
+  let {
+    add = "true",
+    at = 0,
+    category = "Slider",
+    type = 1,
+  } = await searchParams;
   add = add == "true";
 
   const filteredproducts = rawproducts.map((item) => ({

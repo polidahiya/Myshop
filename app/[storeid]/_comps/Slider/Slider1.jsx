@@ -27,7 +27,7 @@ export default function Slider1({ items, storeid }) {
         {items.map((item, i) => {
           const link = Linkgenerator(item, storeid);
           return (
-            <SwiperSlide key={i}>
+            <SwiperSlide key={i} className="w-full h-full"  >
               <Link
                 href={link}
                 prefetch={false}

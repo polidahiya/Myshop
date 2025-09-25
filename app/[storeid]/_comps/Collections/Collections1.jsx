@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { getStoreData } from "../../Storedata";
 
-async function Category1({ storeid, collection, showheader = true }) {
-  const storedata = await getStoreData(storeid);
-  const collectiondata = storedata?.collections.find(
-    (item) => item?.name == collection
-  );
+async function Category1({
+  storeid,
+  collection,
+  showheader = true,
+  Selectedcollection,
+}) {
 
   return (
     <div className="">
@@ -23,7 +23,7 @@ async function Category1({ storeid, collection, showheader = true }) {
       )}
 
       <div className="flex items-center gap-2 overflow-x-scroll hidescroll mt-2 px-2 md:px-10">
-        {collectiondata?.subcat?.map((item, i) => (
+        {Selectedcollection?.subcat?.map((item, i) => (
           <Link
             key={i}
             href={`/${storeid}/collections?${collection}=${item?.name}`}
