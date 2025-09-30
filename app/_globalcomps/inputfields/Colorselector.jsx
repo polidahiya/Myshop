@@ -10,19 +10,12 @@ const predefinedColors = [
   { theme: "#1abc9c", secondary: "#16a085", text: "#2c3e50" },
   { theme: "#3498db", secondary: "#2ecc71", text: "#2c3e50" },
   { theme: "#9b59b6", secondary: "#e67e22", text: "#2c3e50" },
-  { theme: "#34495e", secondary: "#1abc9c", text: "#ecf0f1" },
 
   // Pastel & Friendly
   { theme: "#ffb6b9", secondary: "#fae3d9", text: "#6d6875" },
   { theme: "#a0e7e5", secondary: "#b4f8c8", text: "#4a4e69" },
   { theme: "#fcd5ce", secondary: "#ffc8dd", text: "#3a3a3a" },
   { theme: "#cdb4db", secondary: "#ffc8dd", text: "#4a4a4a" },
-
-  // Dark & Elegant
-  { theme: "#2d3436", secondary: "#d63031", text: "#dfe6e9" },
-  { theme: "#1e272e", secondary: "#34ace0", text: "#f5f6fa" },
-  { theme: "#0f2027", secondary: "#2c5364", text: "#ffffff" },
-  { theme: "#2c3e50", secondary: "#8e44ad", text: "#ecf0f1" },
 
   // Vibrant & Playful
   { theme: "#ff6b6b", secondary: "#feca57", text: "#222f3e" },

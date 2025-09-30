@@ -20,8 +20,15 @@ function LoginPage({ redirectLink = "/" }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="relative w-full max-w-md bg-white shadow-md rounded-lg p-6">
+        <button
+          className="absolute top-4 right-4 rounded-full w-10 aspect-square bg-gray-100"
+          onClick={() => router.back()}
+        >
+          X
+        </button>
+        {/*  */}
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email */}
@@ -49,7 +56,7 @@ function LoginPage({ redirectLink = "/" }) {
               />
               <button
                 type="button"
-                className="absolute right-2 top-2 text-sm text-gray-600"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-600"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? "Hide" : "Show"}
@@ -65,7 +72,6 @@ function LoginPage({ redirectLink = "/" }) {
             Login
           </button>
         </form>
-
         {/* Already registered */}
         <p className="text-sm text-center mt-4">
           Don’t have an account?{" "}

@@ -27,8 +27,15 @@ function Signuppage({ redirectLink = "/" }) {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-2xl shadow-md">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="relative w-full max-w-md p-6 bg-white rounded-2xl shadow-md">
+        <button
+          className="absolute top-4 right-4 rounded-full w-10 aspect-square bg-gray-100"
+          onClick={() => router.back()}
+        >
+          X
+        </button>
+        {/*  */}
         <h2 className="text-2xl font-bold text-center mb-4">Create Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}

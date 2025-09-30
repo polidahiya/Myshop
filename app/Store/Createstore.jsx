@@ -7,11 +7,11 @@ import { useRouter } from "next/navigation";
 export default function Createstore() {
   const router = useRouter();
   const { setmessagefn } = AppContextfn();
-  const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState({
     storename: "",
     storetype: "",
+    Pincode: "",
     contact: {
       phone: "",
       whatsapp: "",
@@ -22,11 +22,7 @@ export default function Createstore() {
       secondary: "#0091ff",
       text: "#525252",
     },
-    social: {
-      facebook: "",
-      instagram: "",
-      twitter: "",
-    },
+    social: {},
   });
 
   const handleChange = (e, section, field) => {
@@ -40,35 +36,26 @@ export default function Createstore() {
     }
   };
 
-  const validateStep = () => {
-    if (step === 1) {
-      if (!formData.storename || !formData.storetype) {
-        setmessagefn("Please fill all fields in this step.");
-        return false;
-      }
+  const validateForm = () => {
+    if (!formData.storename || !formData.storetype) {
+      setmessagefn("Please fill store name and store type.");
+      return false;
     }
-    if (step === 2) {
-      if (
-        !formData.contact.phone ||
-        !formData.contact.whatsapp ||
-        !formData.contact.location
-      ) {
-        setmessagefn("Please complete all contact details.");
-        return false;
-      }
+    if (
+      !formData.contact.phone ||
+      !formData.contact.whatsapp ||
+      !formData.contact.location ||
+      !formData.Pincode
+    ) {
+      setmessagefn("Please complete all contact details.");
+      return false;
     }
     return true;
   };
 
-  const nextStep = () => {
-    if (validateStep()) setStep((prev) => prev + 1);
-  };
-  const prevStep = () => setStep((prev) => prev - 1);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (validateStep()) {
+    if (validateForm()) {
       const res = await saveStore(formData);
       setmessagefn(res.message);
       if (res.status === 200) {
@@ -78,153 +65,84 @@ export default function Createstore() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 px-4">
+    <div className="relative flex justify-center items-center min-h-screen px-4 z-10">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg"
+        className="relative bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg"
       >
+        {/* Back button */}
+        <button
+          type="button"
+          className="absolute top-4 right-4 rounded-full w-10 aspect-square bg-gray-100"
+          onClick={() => router.back()}
+        >
+          X
+        </button>
+
         <h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">
-          Step {step} of 4
+          Create Store
         </h2>
 
-        {/* Step 1 */}
-        {step === 1 && (
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Store Name *"
-              value={formData.storename}
-              onChange={(e) => handleChange(e, null, "storename")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-            <select
-              value={formData.storetype}
-              onChange={(e) => handleChange(e, null, "storetype")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            >
-              <option value="">Select Store Type *</option>
-              <option value="furniture">Furniture</option>
-              <option value="electronics">Electronics</option>
-              <option value="fashion">Fashion</option>
-            </select>
-          </div>
-        )}
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Store Name *"
+            value={formData.storename}
+            onChange={(e) => handleChange(e, null, "storename")}
+            className="w-full p-3 border border-gray-300 rounded-lg outline-none"
+          />
+          <select
+            value={formData.storetype}
+            onChange={(e) => handleChange(e, null, "storetype")}
+            className="w-full p-3 border border-gray-300 rounded-lg outline-none"
+          >
+            <option value="">Select Store Type *</option>
+            <option value="furniture">Furniture</option>
+            <option value="electronics">Electronics</option>
+            <option value="Laptops">Laptops</option>
+            <option value="Mobiles">Mobiles</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Food">Food</option>
+            <option value="Glasses">Glasses</option>
+            <option value="Others">Others</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Phone *"
+            value={formData.contact.phone}
+            onChange={(e) => handleChange(e, "contact", "phone")}
+            className="w-full p-3 border border-gray-300 rounded-lg outline-none"
+          />
+          <input
+            type="text"
+            placeholder="WhatsApp *"
+            value={formData.contact.whatsapp}
+            onChange={(e) => handleChange(e, "contact", "whatsapp")}
+            className="w-full p-3 border border-gray-300 rounded-lg outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Location *"
+            value={formData.contact.location}
+            onChange={(e) => handleChange(e, "contact", "location")}
+            className="w-full p-3 border border-gray-300 rounded-lg outline-none"
+          />
+          <input
+            type="number"
+            placeholder="Pincode *"
+            value={formData.Pincode}
+            onChange={(e) => handleChange(e, null, "Pincode")}
+            className="w-full p-3 border border-gray-300 rounded-lg outline-none"
+          />
+        </div>
 
-        {/* Step 2 */}
-        {step === 2 && (
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Phone *"
-              value={formData.contact.phone}
-              onChange={(e) => handleChange(e, "contact", "phone")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-            <input
-              type="text"
-              placeholder="WhatsApp *"
-              value={formData.contact.whatsapp}
-              onChange={(e) => handleChange(e, "contact", "whatsapp")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-            <input
-              type="text"
-              placeholder="Location *"
-              value={formData.contact.location}
-              onChange={(e) => handleChange(e, "contact", "location")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-          </div>
-        )}
-
-        {/* Step 3 */}
-        {step === 3 && (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <label className="text-gray-600 font-medium">Theme:</label>
-              <input
-                type="color"
-                value={formData.color.theme}
-                onChange={(e) => handleChange(e, "color", "theme")}
-                className="w-12 h-12 rounded cursor-pointer"
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <label className="text-gray-600 font-medium">Secondary:</label>
-              <input
-                type="color"
-                value={formData.color.secondary}
-                onChange={(e) => handleChange(e, "color", "secondary")}
-                className="w-12 h-12 rounded cursor-pointer"
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <label className="text-gray-600 font-medium">Text:</label>
-              <input
-                type="color"
-                value={formData.color.text}
-                onChange={(e) => handleChange(e, "color", "text")}
-                className="w-12 h-12 rounded cursor-pointer"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Step 4 */}
-        {step === 4 && (
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Facebook"
-              value={formData.social.facebook}
-              onChange={(e) => handleChange(e, "social", "facebook")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-            <input
-              type="text"
-              placeholder="Instagram"
-              value={formData.social.instagram}
-              onChange={(e) => handleChange(e, "social", "instagram")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-            <input
-              type="text"
-              placeholder="Twitter"
-              value={formData.social.twitter}
-              onChange={(e) => handleChange(e, "social", "twitter")}
-              className="w-full p-3 border border-gray-300 rounded-lg outline-none"
-            />
-          </div>
-        )}
-
-        {/* Navigation Buttons */}
-        <div className="flex justify-between mt-8">
-          {step > 1 && (
-            <button
-              type="button"
-              onClick={prevStep}
-              className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition cursor-pointer"
-            >
-              Back
-            </button>
-          )}
-          {step == 4 && (
-            <button
-              type="submit"
-              className="ml-auto px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition cursor-pointer"
-            >
-              Submit
-            </button>
-          )}
-          {step < 4 && (
-            <button
-              type="button"
-              onClick={nextStep}
-              className="ml-auto px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition cursor-pointer"
-            >
-              Next
-            </button>
-          )}
+        <div className="flex justify-end mt-8">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition cursor-pointer"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

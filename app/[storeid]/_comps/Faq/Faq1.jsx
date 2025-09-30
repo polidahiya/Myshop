@@ -8,7 +8,7 @@ function Faq1({ items }) {
   return (
     <div>
       <div className="px-5">
-        <h2 className="font-tenor text-4xl md:text-6xl text-center">
+        <h2 className="font-tenor text-2xl md:text-4xl text-center">
           Frequently asked Questions
         </h2>
         <div className="mt-5">

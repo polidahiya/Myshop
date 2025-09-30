@@ -35,7 +35,7 @@ function Rentbeannotif({ item }) {
       await text.start({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.3 },
+        transition: { duration: 0.2 },
       });
     };
     Openanimation();
@@ -84,7 +84,7 @@ function Rentbeannotif({ item }) {
         </motion.div>
         <div className="absolute top-1/2 -translate-y-1/2 right-0 h-full aspect-square rounded-full overflow-hidden p-0.5 bg-white">
           <button
-            className="h-full w-full rounded-full bg-[var(--theme)] text-white"
+            className="h-full w-full rounded-full bg-blue-600 text-white"
             onClick={() => Closeanimtion()}
           >
             X

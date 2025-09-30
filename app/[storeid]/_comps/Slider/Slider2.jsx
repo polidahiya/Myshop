@@ -50,7 +50,7 @@ export default function Slider2({ device = "desktop", storeid, items }) {
                 alt={item?.title}
                 priority={i == 0 ? true : false}
                 loading={i == 0 ? "eager" : "lazy"}
-                className={`h-full aspect-[2/1] ${
+                className={`w-full h-full aspect-[2/1] object-center ${
                   item?.cover ? "object-cover" : "object-contain"
                 }`}
               ></Nextimage>

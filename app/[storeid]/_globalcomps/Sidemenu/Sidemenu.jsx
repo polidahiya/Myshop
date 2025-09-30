@@ -13,7 +13,7 @@ import {
 import { RxCross2 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Sidemenu({ auth }) {
+function Sidemenu({ auth, storedata, storeid, personaldata }) {
   const { verified } = auth;
   const { showsidemenu, setshowsidemenu } = AppContextfn();
 
@@ -48,7 +48,7 @@ function Sidemenu({ auth }) {
               </div>
               <p className="font-medium">Username</p>
               <p className="text-sm text-gray-500 dark:text-zinc-400">
-                polidahiys830@gmail.com
+                {personaldata?.email}
               </p>
             </div>
 
@@ -62,37 +62,40 @@ function Sidemenu({ auth }) {
                 <FaSearch size={18} />
                 <span>Search a Store</span>
               </button>
-              <Link
-                href={"/"}
-                className="flex items-center gap-3 px-6 py-3 
+              {personaldata?.storeid ? (
+                <Link
+                  href={`/${personaldata?.storeid}`}
+                  className="flex items-center gap-3 px-6 py-3 
+                    hover:bg-gray-100 dark:hover:bg-zinc-800 
+                    transition rounded-md"
+                >
+                  <FaStore size={18} />
+                  <span>My Store</span>
+                </Link>
+              ) : (
+                <Link
+                  href={"/Store/Create"}
+                  className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
-              >
-                <FaStore size={18} />
-                <span>+ Create your Store</span>
-              </Link>
+                >
+                  <FaStore size={18} />
+                  <span>+ Create your Store</span>
+                </Link>
+              )}
             </div>
 
             <hr className="border-gray-200 dark:border-zinc-700" />
 
             <div className="flex flex-col py-4">
               <Link
-                href={"/"}
+                href={"/Store/Update"}
                 className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
               >
                 <FaCog size={18} />
                 <span>Update Store Details</span>
-              </Link>
-              <Link
-                href={"/"}
-                className="flex items-center gap-3 px-6 py-3 
-                  hover:bg-gray-100 dark:hover:bg-zinc-800 
-                  transition rounded-md"
-              >
-                <FaCog size={18} />
-                <span>Update Personal Details</span>
               </Link>
               <Link
                 href={"/"}

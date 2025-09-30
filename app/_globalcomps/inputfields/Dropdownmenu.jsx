@@ -13,6 +13,9 @@ function Dropdownmenu({ title, state, onchange, options }) {
           }}
           className="block w-full py-2 outline-none"
         >
+          <option value={""} disabled>
+            select
+          </option>
           {options.map((item, i) => (
             <option key={i} value={item}>
               {item}

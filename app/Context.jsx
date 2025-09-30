@@ -10,6 +10,15 @@ export function Appwrapper({ children, parsedCart }) {
   const [showsidemenu, setshowsidemenu] = useState(false);
   const [openfilter, setopenfilter] = useState(false);
 
+  const [newaddedimg, setnewaddedimg] = useState([]);
+  useEffect(() => {
+    const storedNewAddedImg = localStorage.getItem("newaddedimg");
+    if (storedNewAddedImg) setnewaddedimg(JSON.parse(storedNewAddedImg));
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("newaddedimg", JSON.stringify(newaddedimg));
+  }, [newaddedimg]);
+
   const showdialoginitialvalues = {
     show: false,
     title: "",
@@ -51,6 +60,8 @@ export function Appwrapper({ children, parsedCart }) {
         showdialog,
         setshowdialog,
         showdialoginitialvalues,
+        newaddedimg,
+        setnewaddedimg,
       }}
     >
       {/* <div className={`${isoverlay && "overflow-hidden h-dvh lg:overflow-auto lg:h-auto"}`}> */}

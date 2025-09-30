@@ -6,6 +6,7 @@ import DeviceDetector from "../_globalcomps/Devicedetector";
 import { Compdatawithoutcompsfn } from "./_comps/Homedata/Compdata";
 import { Compdata } from "./_comps/Homedata/Compdata";
 import dynamic from "next/dynamic";
+import Footer from "./_comps/Footer/Footer";
 
 const Compwrapper = dynamic(() => import("./_comps/Compwrapper"));
 const Thememenucomp = dynamic(() =>
@@ -29,11 +30,10 @@ export default async function page({ params }) {
   const storedata = await getStoreData(storeid);
   const data = storedata?.home || [];
   const device = await DeviceDetector();
-
   const Compdatawithoutcomps = Compdatawithoutcompsfn();
 
   return (
-    <div className="space-y-5 md:space-y-10 py-2 md:py-5 mb-10">
+    <div className="space-y-5 md:space-y-10">
       {data.length == 0 && isadmin && <Addnewbutton i={0} />}
       {data.map((comp, i) => {
         const definition = Compdata[comp?.category].find(
@@ -64,6 +64,10 @@ export default async function page({ params }) {
           </div>
         );
       })}
+      {/* footer */}
+      {Object.keys(storedata?.social || {}).length > 0 && (
+        <Footer social={storedata?.social} />
+      )}
       {isadmin && (
         <>
           <Addcompmenu Compdata={Compdatawithoutcomps} storeid={storeid} />
@@ -72,16 +76,4 @@ export default async function page({ params }) {
       )}
     </div>
   );
-}
-
-function stripComp(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(stripComp);
-  } else if (typeof obj === "object" && obj !== null) {
-    const { comp, ...rest } = obj; // remove comp
-    return Object.fromEntries(
-      Object.entries(rest).map(([key, value]) => [key, stripComp(value)])
-    );
-  }
-  return obj;
 }

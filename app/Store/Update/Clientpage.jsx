@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Standardinputfield from "@/app/_globalcomps/inputfields/Standardinputfield";
 import Togglebuttons from "@/app/_globalcomps/inputfields/Togglebuttons";
 import Link from "next/link";
@@ -12,10 +12,12 @@ import { saveStore } from "../Serveraction";
 import { Deleteimages } from "@/lib/Addordeleteimages";
 import { FaEdit, FaFolderOpen } from "react-icons/fa";
 import { IoArrowBack } from "react-icons/io5";
+import Imageuploader from "@/app/_globalcomps/inputfields/Imageuploader";
 
 const initialState = {
   storename: "",
   Pincode: "",
+  logo: "",
   contact: {
     phone: "",
     whatsapp: "",
@@ -34,11 +36,11 @@ const initialState = {
   collections: [
     {
       name: "Category",
-      image: [],
+      image: "",
       subcat: [
         {
           name: "Subcategory",
-          image: [],
+          image: "",
         },
       ],
     },
@@ -48,13 +50,16 @@ const initialState = {
 function Clientpage({ storedata }) {
   const router = useRouter();
   const { setmessagefn } = AppContextfn();
-  const [data, setdata] = useState(
-    storedata ? { ...initialState, ...storedata } : initialState
-  );
+  const mergedstate = storedata
+    ? { ...initialState, ...storedata }
+    : initialState;
+  const initialstateref = useRef(JSON.parse(JSON.stringify(mergedstate)));
+
+  const [data, setdata] = useState(mergedstate);
   const [formtype, setformtype] = useState(0);
 
   const [deletedimages, setdeletedimages] = useState([]);
-  const [newadded, setnewadded] = useState([]);
+  const [newaddedimg, setnewaddedimg] = useState([]);
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -67,7 +72,7 @@ function Clientpage({ storedata }) {
       setmessagefn(res?.message);
       setloading(false);
       setdeletedimages([]);
-      setnewadded([]);
+      setnewaddedimg([]);
     } catch (error) {
       setdata(initialState);
       setloading(false);
@@ -78,20 +83,18 @@ function Clientpage({ storedata }) {
 
   return (
     <>
-      <Link
-        href={"/admin/products"}
+      <button
         onClick={async (e) => {
-          e.preventDefault();
-          if (newadded.length > 0) {
+          if (newaddedimg.length > 0) {
             setmessagefn("Cleaning up...");
-            await Deleteimages(newadded);
+            await Deleteimages(newaddedimg);
           }
-          router.push("/admin/products");
+          window.history.back();
         }}
         className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300 z-10"
       >
         X
-      </Link>
+      </button>
       {/* Navigations */}
       {formtype == 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 px-4 py-20">
@@ -140,6 +143,20 @@ function Clientpage({ storedata }) {
         {formtype == 1 && (
           <>
             <Group>
+              <div className="w-44 aspect-square mx-auto text-gray-500 ">
+                <Imageuploader
+                  img={data?.logo}
+                  callback={(img) => {
+                    setdata((pre) => ({ ...pre, logo: img }));
+                  }}
+                  cover={false}
+                  size={0.2}
+                  dimension={100}
+                  folder={"Mystore/others"}
+                  setdeletedimages={setdeletedimages}
+                  setnewadded={setnewaddedimg}
+                />
+              </div>
               {/* store Name */}
               <Standardinputfield
                 titlename="Store Name"
@@ -243,7 +260,7 @@ function Clientpage({ storedata }) {
             data={data}
             setdata={setdata}
             setdeletedimages={setdeletedimages}
-            setnewadded={setnewadded}
+            setnewadded={setnewaddedimg}
           />
         )}
         {formtype != 0 && (
@@ -263,11 +280,11 @@ function Clientpage({ storedata }) {
               className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
               type="button"
               onClick={async () => {
-                if (newadded.length > 0) {
+                if (newaddedimg.length > 0) {
                   setmessagefn("Cleaning up...");
-                  await Deleteimages(newadded);
+                  await Deleteimages(newaddedimg);
                 }
-                setdata(initialState);
+                setdata(initialstateref.current);
                 setdeletedimages([]);
               }}
             >
@@ -278,9 +295,9 @@ function Clientpage({ storedata }) {
                 href={"/admin/products"}
                 onClick={async (e) => {
                   e.preventDefault();
-                  if (newadded.length > 0) {
+                  if (newaddedimg.length > 0) {
                     setmessagefn("Cleaning up...");
-                    await Deleteimages(newadded);
+                    await Deleteimages(newaddedimg);
                   }
                   router.push("/admin/products");
                 }}
