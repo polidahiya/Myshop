@@ -13,8 +13,10 @@ import {
 import { RxCross2 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoQrCodeOutline } from "react-icons/io5";
+import { usePathname } from "next/navigation";
 
 function Sidemenu({ auth, storedata, storeid }) {
+  const path = usePathname();
   const { verified } = auth;
   const { showsidemenu, setshowsidemenu, setshowqr } = AppContextfn();
 
@@ -138,7 +140,7 @@ function Sidemenu({ auth, storedata, storeid }) {
             {/* Logout / Login */}
             <div className="py-4 px-6 mt-auto">
               <Link
-                href={verified ? "/" : "/"}
+                href={verified ? "/" : `/account/login?redirect=${path}`}
                 className={`flex items-center justify-center gap-3 py-3 rounded-md transition font-medium
                   ${
                     verified

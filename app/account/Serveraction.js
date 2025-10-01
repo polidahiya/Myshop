@@ -6,7 +6,7 @@ import { z } from "zod";
 import { logintime } from "@/lib/data";
 import { getcollection } from "@/lib/db";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.jwt_secret;
 if (!JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined in environment variables");
 }
