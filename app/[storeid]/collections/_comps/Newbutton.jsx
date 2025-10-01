@@ -6,7 +6,7 @@ function Newbutton({ storeid }) {
   return (
     <Link
       href={`/${storeid}/product/add`}
-      className="w-full aspect-square flex flex-col items-center justify-center shrink-0"
+      className="w-full min-w-48 aspect-square flex flex-col items-center justify-center shrink-0"
     >
       <div className="w-1/2 aspect-square bg-gray-100 flex items-center justify-center rounded-3xl shadow-md">
         <TbNewSection className="text-5xl" />

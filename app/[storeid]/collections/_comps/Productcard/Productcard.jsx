@@ -3,10 +3,13 @@ import Link from "next/link";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Editbuttons from "./Editbuttons";
 
-function Productcard({ storeid, product, isadmin }) {
+function Productcard({ storeid = null, product, isadmin = false }) {
   return (
     <div className="relative">
-      <Link href={`/${storeid}/product/${product?._id}`} className="w-full">
+      <Link
+        href={`/${storeid || product?.storeid}/product/${product?._id}`}
+        className="w-full"
+      >
         <Nextimage
           src={product?.images[0]}
           alt={product?.name}

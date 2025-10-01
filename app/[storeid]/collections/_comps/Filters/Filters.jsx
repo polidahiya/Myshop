@@ -29,7 +29,7 @@ function Sidemenu({ allsearchparams, collections }) {
       } duration-300`}
     >
       <div
-        className={`relative h-full w-72 min-w-72 max-w-72 z-10 bg-white lg:bg-transparent flex flex-col ${
+        className={`relative h-full w-80 lg:w-72 z-10 bg-white lg:bg-transparent flex flex-col ${
           openfilter
             ? "translate-x-0 lg:-translate-x-full"
             : "-translate-x-full lg:translate-x-0"

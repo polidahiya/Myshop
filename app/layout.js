@@ -4,6 +4,7 @@ import { Appwrapper } from "./Context";
 import Message from "./_globalcomps/Message";
 import { Googleadsid } from "@/lib/data";
 import Dialoguebox from "./_globalcomps/Dialoguebox";
+import Showqrcode from "./_globalcomps/Qr/Createqrcode";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
           {children}
           <Message />
           <Dialoguebox />
+          <Showqrcode />
         </Appwrapper>
       </body>
     </html>

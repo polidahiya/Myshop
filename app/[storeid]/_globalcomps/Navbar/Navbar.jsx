@@ -5,7 +5,7 @@ import Editbutton from "./Editbutton";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Link from "next/link";
 
-function Navbar({ logo, storename, storeid }) {
+function Navbar({ auth, logo, storename, storeid }) {
   const shortName =
     storename.length > 20 ? storename.slice(0, 15) + "..." : storename;
 
@@ -27,10 +27,14 @@ function Navbar({ logo, storename, storeid }) {
         </span>
       </Link>
       <div className="ml-auto  mr-2 flex items-center gap-2">
-        <button className="w-10 aspect-square flex items-center justify-center text-3xl">
-          <IoIosSearch />
-        </button>
-        <Editbutton />
+        <Link
+          href={`/${storeid}/Search`}
+          className="w-10 md:w-auto md:h-10 aspect-square md:aspect-auto flex items-center justify-center md:bg-gray-100 md:rounded-full md:cursor-text"
+        >
+          <span className="hidden md:inline-block pr-40 pl-6">Search...</span>
+          <IoIosSearch className="text-3xl md:text-2xl w-auto md:w-10 aspect-auto md:aspect-square md:mr-1" />
+        </Link>
+        {auth?.isadmin && <Editbutton />}
       </div>
     </nav>
   );

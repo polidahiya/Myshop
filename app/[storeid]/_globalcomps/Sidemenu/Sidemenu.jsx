@@ -12,10 +12,11 @@ import {
 } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
+import { IoQrCodeOutline } from "react-icons/io5";
 
-function Sidemenu({ auth, storedata, storeid, personaldata }) {
+function Sidemenu({ auth, storedata, storeid }) {
   const { verified } = auth;
-  const { showsidemenu, setshowsidemenu } = AppContextfn();
+  const { showsidemenu, setshowsidemenu, setshowqr } = AppContextfn();
 
   return (
     <AnimatePresence>
@@ -48,33 +49,48 @@ function Sidemenu({ auth, storedata, storeid, personaldata }) {
               </div>
               <p className="font-medium">Username</p>
               <p className="text-sm text-gray-500 dark:text-zinc-400">
-                {personaldata?.email}
+                {auth?.email}
               </p>
             </div>
 
             {/* Menu */}
             <div className="flex flex-col py-4">
-              <button
+              <Link
+                href={"/Search"}
                 className="flex items-center gap-3 px-6 py-3 
                 hover:bg-gray-100 dark:hover:bg-zinc-800 
                 transition rounded-md"
               >
                 <FaSearch size={18} />
                 <span>Search a Store</span>
-              </button>
-              {personaldata?.storeid ? (
-                <Link
-                  href={`/${personaldata?.storeid}`}
-                  className="flex items-center gap-3 px-6 py-3 
-                    hover:bg-gray-100 dark:hover:bg-zinc-800 
-                    transition rounded-md"
-                >
-                  <FaStore size={18} />
-                  <span>My Store</span>
-                </Link>
+              </Link>
+              {auth?.storeid ? (
+                <div className="relative">
+                  <Link
+                    href={`/${auth?.storeid}`}
+                    className="flex items-center gap-3 px-6 py-3 
+                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+                  >
+                    <FaStore size={18} />
+                    <span>My Store</span>
+                  </Link>
+                  <button
+                    className="absolute right-6 top-0 h-full aspect-square flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 
+                  transition rounded-md"
+                    onClick={() => {
+                      setshowqr({
+                        show: true,
+                        link: `${window.location.origin}/${auth?.storeid}`,
+                      });
+                    }}
+                  >
+                    <IoQrCodeOutline />
+                  </button>
+                </div>
               ) : (
                 <Link
-                  href={"/Store/Create"}
+                  href={"/Store"}
                   className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"

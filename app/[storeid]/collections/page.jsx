@@ -7,6 +7,7 @@ import Heading from "./_comps/Heading/Heading";
 import { getStoreData } from "../Storedata";
 import { Cachedproducts } from "../Cachedproducts";
 import { Authfn } from "@/lib/auth";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 async function page({ params, searchParams }) {
   const { storeid } = await params;
@@ -32,26 +33,38 @@ async function page({ params, searchParams }) {
 
   //
   return (
-    <div className="px-2 md:px-10">
+    <div className="px-2 md:px-10 pb-10">
       <Heading />
       <div className="flex gap-5">
         <Filters
           allsearchparams={allsearchparams}
           collections={storedata?.collections}
         />
-        <div className="h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10">
-          {isadmin && <Newbutton storeid={storeid} />}
-          {products.map((product, i) => (
-            <React.Fragment key={i}>
-              <Productcard
-                storeid={storeid}
-                product={product}
-                isadmin={isadmin}
-              />
-              <Ads i={i} />
-            </React.Fragment>
-          ))}
-        </div>
+        {isadmin || products.length > 0 ? (
+          <div className="sticky top-20 h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10">
+            {isadmin && <Newbutton storeid={storeid} />}
+            {products.map((product, i) => (
+              <React.Fragment key={i}>
+                <Productcard
+                  storeid={storeid}
+                  product={product}
+                  isadmin={isadmin}
+                />
+                <Ads i={i} />
+              </React.Fragment>
+            ))}
+          </div>
+        ) : (
+          <div className="sticky top-20 flex justify-center mt-5 h-fit w-full">
+            <Nextimage
+              src="/productnotfound.png"
+              alt="noresult"
+              width={500}
+              height={500}
+              quality={100}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

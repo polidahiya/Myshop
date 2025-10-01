@@ -26,6 +26,10 @@ export function Appwrapper({ children, parsedCart }) {
     type: true,
   };
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
+  const [showqr, setshowqr] = useState({
+    show: false,
+    link: "",
+  });
 
   // messages
   const setmessagefn = (message) => {
@@ -62,6 +66,8 @@ export function Appwrapper({ children, parsedCart }) {
         showdialoginitialvalues,
         newaddedimg,
         setnewaddedimg,
+        showqr,
+        setshowqr,
       }}
     >
       {/* <div className={`${isoverlay && "overflow-hidden h-dvh lg:overflow-auto lg:h-auto"}`}> */}
