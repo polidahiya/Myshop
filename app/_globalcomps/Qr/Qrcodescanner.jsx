@@ -24,6 +24,7 @@ export default function Qrcodescanner({ fps = 10, qrbox = 250 }) {
       scanner.render(
         (decodedText) => {
           router.push(decodedText);
+          setscanqr(false);
         },
         (error) => {
           // console.warn(error);
@@ -64,7 +65,7 @@ export default function Qrcodescanner({ fps = 10, qrbox = 250 }) {
                 X
               </button>
             </div>
-            <div id="reader" style={{ width: "300px" }} className="mt-5"/>
+            <div id="reader" style={{ width: "300px" }} className="mt-5" />
           </motion.div>
         </motion.div>
       )}
