@@ -7,6 +7,7 @@ import Productcard from "../collections/_comps/Productcard/Productcard";
 import Ads from "../collections/_comps/Ads";
 import dynamic from "next/dynamic";
 const Nextimage = dynamic(() => import("@/app/_globalcomps/Nextimage"));
+import { FaAngleLeft } from "react-icons/fa6";
 
 export default function Clientpage({ storeid, isadmin }) {
   const { setmessagefn } = AppContextfn();
@@ -15,7 +16,13 @@ export default function Clientpage({ storeid, isadmin }) {
 
   return (
     <div className="px-2 md:px-10">
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center gap-1 mt-5">
+        <button
+          className="w-12 aspect-square rounded-xl border border-slate-200 bg-white flex items-center justify-center shadow-sm"
+          onClick={() => window.history.back()}
+        >
+          <FaAngleLeft />
+        </button>
         <Searchbar
           Api={async (query) => {
             const res = await Searchproducts(query, storeid);

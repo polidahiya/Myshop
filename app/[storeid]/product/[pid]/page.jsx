@@ -4,21 +4,12 @@ import Imagescomp from "./_comps/Imagescomp";
 import Productsslide from "../../_globalcomps/Productsslide";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/[storeid]/Cachedproducts";
-import Faqs from "../../_globalcomps/Faqs";
 import { notFound } from "next/navigation";
 import { MdModeEditOutline } from "react-icons/md";
 import { Productctxwrapper } from "./Productcontext";
 import { Authfn } from "@/lib/auth";
 import { getStoreData } from "../../Storedata";
-
-const faqlist = [
-  {
-    question: "Can I return or exchange my order?",
-    answer: [
-      "Yes, you can return or exchange your order within 7 days of receipt. Please contact our customer support team for instructions on how to initiate a return or exchange.",
-    ],
-  },
-];
+import Googleads from "@/app/_globalcomps/ads/Googleads";
 
 async function page({ params }) {
   const { storeid, pid: productid } = await params;
@@ -65,10 +56,7 @@ async function page({ params }) {
             <Productsslide heading="Related Products" data={similarproducts} />
           )}
         </div>
-        {/* faq */}
-        <div>
-          <Faqs faqlist={faqlist} />
-        </div>
+        <Googleads type={2} />
         {/* edit button */}
         {isadmin && (
           <Link

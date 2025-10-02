@@ -26,6 +26,7 @@ export function Appwrapper({ children, parsedCart }) {
     type: true,
   };
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
+  const [scanqr, setscanqr] = useState(false);
   const [showqr, setshowqr] = useState({
     show: false,
     link: "",
@@ -66,6 +67,8 @@ export function Appwrapper({ children, parsedCart }) {
         showdialoginitialvalues,
         newaddedimg,
         setnewaddedimg,
+        scanqr,
+        setscanqr,
         showqr,
         setshowqr,
       }}

@@ -11,10 +11,13 @@ function LoginPage({ redirectLink = "/" }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
     const res = await login({ email, password });
+    setloading(false);
     setmessagefn(res.message);
     if (res.status === 200) router.replace(redirectLink);
   };
@@ -67,8 +70,11 @@ function LoginPage({ redirectLink = "/" }) {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
           >
+            {loading && (
+              <span className="inline-block h-5 aspect-square rounded-full border-t-2 border-b-2 border-white animate-spin"></span>
+            )}
             Login
           </button>
         </form>

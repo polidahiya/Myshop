@@ -10,7 +10,7 @@ async function Showcase1({ storeid, title = "", products = [] }) {
       <div className="flex items-center gap-2 overflow-x-scroll hidescroll mt-2 px-2 md:px-10">
         {products.map((product, i) => {
           return (
-            <div key={i} className="max-w-96 w-full shrink-0 ">
+            <div key={i} className="max-w-56 md:max-w-72 lg:max-w-80 w-full shrink-0">
               <Productcard
                 storeid={storeid}
                 product={product}

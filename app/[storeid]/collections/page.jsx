@@ -8,6 +8,7 @@ import { getStoreData } from "../Storedata";
 import { Cachedproducts } from "../Cachedproducts";
 import { Authfn } from "@/lib/auth";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import Googleads from "@/app/_globalcomps/ads/Googleads";
 
 async function page({ params, searchParams }) {
   const { storeid } = await params;
@@ -50,7 +51,7 @@ async function page({ params, searchParams }) {
                   product={product}
                   isadmin={isadmin}
                 />
-                <Ads i={i} />
+                {<Ads i={i} />}
               </React.Fragment>
             ))}
           </div>
@@ -66,6 +67,7 @@ async function page({ params, searchParams }) {
           </div>
         )}
       </div>
+      <Googleads type={2} />
     </div>
   );
 }

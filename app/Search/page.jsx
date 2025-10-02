@@ -8,15 +8,16 @@ import dynamic from "next/dynamic";
 const Nextimage = dynamic(() => import("@/app/_globalcomps/Nextimage"));
 import { testimage } from "@/lib/data";
 import Link from "next/link";
+import { RiQrScan2Line } from "react-icons/ri";
 
 export default function Clientpage({}) {
-  const { setmessagefn } = AppContextfn();
+  const { setmessagefn, setscanqr } = AppContextfn();
   const [query, setQuery] = useState("");
   const [searchres, setsearchres] = useState([]);
 
   return (
     <div className="px-2 md:px-10">
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center gap-1 mt-5">
         <Searchbar
           Api={async (query) => {
             const res = await Searchproducts(query);
@@ -30,6 +31,14 @@ export default function Clientpage({}) {
             setQuery(res);
           }}
         />
+        <button
+          className="w-12 aspect-square rounded-xl border border-slate-200 bg-white flex items-center justify-center shadow-sm"
+          onClick={() => {
+            setscanqr(true);
+          }}
+        >
+          <RiQrScan2Line />
+        </button>
       </div>
       {searchres.length == 0 && query.length != 0 ? (
         <div className="flex justify-center mt-5">
@@ -46,7 +55,10 @@ export default function Clientpage({}) {
           <div className="mt-5 space-y-2 w-full max-w-2xl mx-auto">
             {searchres.map((store, i) => (
               <React.Fragment key={i}>
-                <Link href={`/${store?._id}`} className="flex items-center gap-2 h-10">
+                <Link
+                  href={`/${store?._id}`}
+                  className="flex items-center gap-2 h-10"
+                >
                   <Nextimage
                     src={store?.logo || testimage}
                     alt="Logo"

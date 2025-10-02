@@ -59,6 +59,7 @@ function Sidemenu({ auth, storedata, storeid }) {
             <div className="flex flex-col py-4">
               <Link
                 href={"/Search"}
+                onClick={() => setshowsidemenu(false)}
                 className="flex items-center gap-3 px-6 py-3 
                 hover:bg-gray-100 dark:hover:bg-zinc-800 
                 transition rounded-md"
@@ -70,6 +71,7 @@ function Sidemenu({ auth, storedata, storeid }) {
                 <div className="relative">
                   <Link
                     href={`/${auth?.storeid}`}
+                    onClick={() => setshowsidemenu(false)}
                     className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
@@ -93,6 +95,7 @@ function Sidemenu({ auth, storedata, storeid }) {
               ) : (
                 <Link
                   href={"/Store"}
+                  onClick={() => setshowsidemenu(false)}
                   className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
@@ -108,6 +111,7 @@ function Sidemenu({ auth, storedata, storeid }) {
             <div className="flex flex-col py-4">
               <Link
                 href={"/Store/Update"}
+                onClick={() => setshowsidemenu(false)}
                 className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
@@ -117,6 +121,7 @@ function Sidemenu({ auth, storedata, storeid }) {
               </Link>
               <Link
                 href={"/"}
+                onClick={() => setshowsidemenu(false)}
                 className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
@@ -126,6 +131,7 @@ function Sidemenu({ auth, storedata, storeid }) {
               </Link>
               <Link
                 href={"/"}
+                onClick={() => setshowsidemenu(false)}
                 className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
@@ -141,6 +147,7 @@ function Sidemenu({ auth, storedata, storeid }) {
             <div className="py-4 px-6 mt-auto">
               <Link
                 href={verified ? "/" : `/account/login?redirect=${path}`}
+                onClick={() => setshowsidemenu(false)}
                 className={`flex items-center justify-center gap-3 py-3 rounded-md transition font-medium
                   ${
                     verified

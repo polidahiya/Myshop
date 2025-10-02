@@ -14,6 +14,7 @@ function Signuppage({ redirectLink = "/" }) {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,7 +22,9 @@ function Signuppage({ redirectLink = "/" }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
     const res = await signup(form);
+    setloading(false);
     setmessagefn(res.message);
     if (res.status === 200) router.replace(redirectLink);
   };
@@ -89,8 +92,11 @@ function Signuppage({ redirectLink = "/" }) {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
+            {loading && (
+              <span className="inline-block h-5 aspect-square rounded-full border-t-2 border-b-2 border-white animate-spin"></span>
+            )}
             Sign Up
           </button>
         </form>

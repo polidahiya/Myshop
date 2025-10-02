@@ -7,6 +7,7 @@ import { Compdatawithoutcompsfn } from "./_comps/Homedata/Compdata";
 import { Compdata } from "./_comps/Homedata/Compdata";
 import dynamic from "next/dynamic";
 import Footer from "./_comps/Footer/Footer";
+import Googleads from "../_globalcomps/ads/Googleads";
 
 const Compwrapper = dynamic(() => import("./_comps/Compwrapper"));
 const Thememenucomp = dynamic(() =>
@@ -53,7 +54,7 @@ export default async function page({ params }) {
         );
 
         return (
-          <div key={i}>
+          <React.Fragment key={i}>
             {isadmin ? (
               <Compwrapper storeid={storeid} i={i} comp={comp}>
                 {element}
@@ -61,13 +62,15 @@ export default async function page({ params }) {
             ) : (
               element
             )}
-          </div>
+            {(i + 1) % 5 == 0 && <Googleads type={2} />}
+          </React.Fragment>
         );
       })}
       {/* footer */}
       {Object.keys(storedata?.social || {}).length > 0 && (
         <Footer social={storedata?.social} />
       )}
+      <Googleads type={2} />
       {isadmin && (
         <>
           <Addcompmenu Compdata={Compdatawithoutcomps} storeid={storeid} />

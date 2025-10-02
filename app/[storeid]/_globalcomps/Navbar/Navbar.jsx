@@ -34,7 +34,7 @@ function Navbar({ auth, logo, storename, storeid }) {
           <span className="hidden md:inline-block pr-40 pl-6">Search...</span>
           <IoIosSearch className="text-3xl md:text-2xl w-auto md:w-10 aspect-auto md:aspect-square md:mr-1" />
         </Link>
-        {auth?.isadmin && <Editbutton />}
+        {auth?.isadmin && <Editbutton storeid={storeid}/>}
       </div>
     </nav>
   );
