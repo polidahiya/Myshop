@@ -4,7 +4,7 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20">
+      <section className="bg-gradient-to-r from-theme to-purple-600 text-white py-20">
         <div className="max-w-5xl mx-auto text-center px-6">
           <h1 className="text-4xl md:text-6xl font-bold">About A2Z</h1>
           <p className="mt-4 text-lg md:text-xl text-gray-200">
@@ -62,7 +62,7 @@ export default function AboutUs() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-indigo-600 text-white py-20 text-center">
+      <section className="bg-theme text-white py-20 text-center">
         <h2 className="text-3xl md:text-4xl font-bold">
           Start Your Store with A2Z Today
         </h2>
@@ -73,7 +73,7 @@ export default function AboutUs() {
         <div className="flex justify-center">
           <Link
             href={"/Store"}
-            className="block mt-6 px-8 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-md hover:bg-gray-100 transition mx-auto"
+            className="block mt-6 px-8 py-3 bg-white text-theme font-semibold rounded-xl shadow-md hover:bg-gray-100 transition mx-auto"
           >
             Create Your Store
           </Link>

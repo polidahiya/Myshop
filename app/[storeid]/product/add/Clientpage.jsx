@@ -232,7 +232,7 @@ function Clientpage({ productdata, collections }) {
         <div className="flex items-center justify-center gap-5 sticky bottom-5">
           <button
             type="submit"
-            className="flex items-center justify-center gap-2  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="flex items-center justify-center gap-2  px-4 py-2 bg-theme text-white rounded-md hover:bg-theme"
           >
             {loading && (
               <span

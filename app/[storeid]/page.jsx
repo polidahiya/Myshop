@@ -34,7 +34,7 @@ export default async function page({ params }) {
   const Compdatawithoutcomps = Compdatawithoutcompsfn();
 
   return (
-    <div className="space-y-5 md:space-y-10">
+    <div className="w-full overflow-hidden">
       {data.length == 0 && isadmin && <Addnewbutton i={0} />}
       {data.map((comp, i) => {
         const definition = Compdata[comp?.category].find(
@@ -62,7 +62,11 @@ export default async function page({ params }) {
             ) : (
               element
             )}
-            {(i + 1) % 5 == 0 && <Googleads type={2} />}
+            {(i + 1) % 5 == 0 && (
+              <div className="w-full">
+                <Googleads type={2} />
+              </div>
+            )}
           </React.Fragment>
         );
       })}
@@ -70,7 +74,9 @@ export default async function page({ params }) {
       {Object.keys(storedata?.social || {}).length > 0 && (
         <Footer social={storedata?.social} />
       )}
-      <Googleads type={2} />
+      <div className="w-full">
+        <Googleads type={2} />
+      </div>
       {isadmin && (
         <>
           <Addcompmenu Compdata={Compdatawithoutcomps} storeid={storeid} />

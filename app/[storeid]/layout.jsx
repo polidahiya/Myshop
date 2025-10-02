@@ -29,7 +29,7 @@ async function layout({ children, params }) {
     <Storehomectxwrapper>
       <div
         style={{
-          "--theme": storedata?.color?.theme,
+          "--usertheme": storedata?.color?.theme,
           "--secondary": storedata?.color?.secondary,
           "--text": storedata?.color?.text,
         }}

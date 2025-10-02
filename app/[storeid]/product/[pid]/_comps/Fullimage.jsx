@@ -90,14 +90,14 @@ function Fullimage({ images, name, showfullimage, setshowfullimage }) {
       </button>
       {/* Left and Right scroll buttons */}
       <button
-        className={`absolute left-2 md:left-10 top-1/2 transform -translate-y-1/2 p-5 lg:hover:-translate-x-1 duration-300 text-[var(--theme)] text-3xl z-10
+        className={`absolute left-2 md:left-10 top-1/2 transform -translate-y-1/2 p-5 lg:hover:-translate-x-1 duration-300 text-[var(--usertheme)] text-3xl z-10
             ${currentIndex === 0 && "hidden"}`}
         onClick={scrollLeft}
       >
         &lt; {/* Left Arrow */}
       </button>
       <button
-        className={`absolute right-2 md:right-10 top-1/2 transform -translate-y-1/2 p-5 lg:hover:translate-x-1 duration-300 text-[var(--theme)] text-3xl z-10
+        className={`absolute right-2 md:right-10 top-1/2 transform -translate-y-1/2 p-5 lg:hover:translate-x-1 duration-300 text-[var(--usertheme)] text-3xl z-10
             ${currentIndex === images.length - 1 && "hidden"}`}
         onClick={scrollRight}
       >

@@ -143,8 +143,8 @@ function Linkselector({ products, selected = [], callback = () => {} }) {
                       <div
                         className={`flex items-center justify-center absolute top-0 right-0 w-5 aspect-square text-white ${
                           selectedoption
-                            ? "bg-blue-700"
-                            : "bg-white border border-blue-700"
+                            ? "bg-theme"
+                            : "bg-white border border-theme"
                         }`}
                       >
                         {selectedoption && "✓"}
@@ -169,7 +169,7 @@ function Linkselector({ products, selected = [], callback = () => {} }) {
               <div className="flex justify-center">
                 <button
                   type="button"
-                  className="border rounded-md py-2 px-5 bg-blue-700 text-white mt-5"
+                  className="border rounded-md py-2 px-5 bg-theme text-white mt-5"
                   onClick={() => {
                     callback(items);
                     setshow(false);

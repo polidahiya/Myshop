@@ -7,7 +7,7 @@ async function Showcase({ storeid, device, Component, compProps }) {
   const products = allproducts.filter((p) => items.includes(p._id));
 
   return (
-    <div>
+    <div className="py-2 md:py-5">
       <Component
         storeid={storeid}
         device={device}

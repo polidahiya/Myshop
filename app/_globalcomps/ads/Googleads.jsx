@@ -20,7 +20,7 @@ export default function Googleads({ type = 1 }) {
     <>
       <ins
         className="adsbygoogle"
-        style={{ display: "block", width: "100%", height: "600px" }}
+        style={{ display: "block", width: "100%", height: "auto" }}
         data-ad-client={Googleadsid}
         data-ad-slot={adstypes[type]}
         data-ad-format="auto"

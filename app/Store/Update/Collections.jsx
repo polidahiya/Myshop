@@ -267,7 +267,7 @@ const Optionform = ({
           <button
             type="button"
             onClick={() => setshowform(false)}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
+            className="px-4 py-2 rounded-lg bg-theme hover:bg-theme text-white shadow"
           >
             Save
           </button>

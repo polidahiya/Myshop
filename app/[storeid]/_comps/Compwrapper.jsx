@@ -24,7 +24,7 @@ export default function Compwrapper({ children, storeid, i, comp }) {
           <div className="absolute top-2 right-2 flex gap-2 p-1 bg-slate-100 rounded-full shadow-sm z-10">
             <Link
               href={`/${storeid}/Edithome?add=false&at=${i}`}
-              className="flex items-center justify-center bg-white text-blue-500 w-10 aspect-square z-10 rounded-full"
+              className="flex items-center justify-center bg-white text-theme w-10 aspect-square z-10 rounded-full"
             >
               <MdModeEditOutline />
             </Link>
@@ -70,7 +70,7 @@ export function Addnewbutton({ i }) {
   const { setaddmenu } = Storehomectxfn();
   return (
     <button
-      className="flex items-center justify-center h-20 w-full rounded-xl border-2 border-dashed border-gray-400 hover:border-blue-500 hover:text-blue-500 transition-all duration-300 text-3xl font-bold text-gray-500"
+      className="flex items-center justify-center h-20 w-full rounded-xl border-2 border-dashed border-gray-400 hover:border-theme hover:text-theme transition-all duration-300 text-3xl font-bold text-gray-500"
       onClick={() => {
         setaddmenu((pre) => ({ ...pre, show: true, addat: i }));
       }}

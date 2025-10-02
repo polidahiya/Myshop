@@ -2,6 +2,7 @@
 @theme {
   --font-mulish: var(--font-mulish), sans-serif;
   --font-tenor: var(--font-tenor), sans-serif;
+  --color-theme: #000;
 }
 
 * {
@@ -14,7 +15,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--theme);
+  background-color: var(--usertheme);
 }
 
 .hidescroll::-webkit-scrollbar {

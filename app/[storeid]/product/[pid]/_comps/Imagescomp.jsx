@@ -52,7 +52,7 @@ function Imagescomp({ images, name }) {
 
           {/* Custom Navigation Buttons */}
           <button
-            className="hidden  absolute left-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square md:flex items-center justify-center bg-white text-[var(--theme)] opacity-30 lg:group-hover:opacity-100 duration-300 rounded-full z-10"
+            className="hidden  absolute left-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square md:flex items-center justify-center bg-white text-[var(--usertheme)] opacity-30 lg:group-hover:opacity-100 duration-300 rounded-full z-10"
             onClick={() => swiperRef.current.swiper.slidePrev()}
             aria-label="Scroll Left"
             title="Scroll Left"
@@ -60,7 +60,7 @@ function Imagescomp({ images, name }) {
             <FaAngleLeft />
           </button>
           <button
-            className="hidden  absolute right-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square md:flex items-center justify-center bg-white text-[var(--theme)] opacity-30 lg:group-hover:opacity-100 duration-300 rounded-full  rotate-180 z-10"
+            className="hidden  absolute right-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square md:flex items-center justify-center bg-white text-[var(--usertheme)] opacity-30 lg:group-hover:opacity-100 duration-300 rounded-full  rotate-180 z-10"
             onClick={() => swiperRef.current.swiper.slideNext()}
             aria-label="Scroll Right"
             title="Scroll Right"
@@ -98,7 +98,7 @@ function Imagescomp({ images, name }) {
             height={100}
             width={100}
             className={`w-full aspect-square object-cover border cursor-pointer ${
-              activeIndex === i && "border-[var(--theme)]"
+              activeIndex === i && "border-[var(--usertheme)]"
             }`}
             onClick={() => swiperRef.current.swiper.slideToLoop(i)}
           />

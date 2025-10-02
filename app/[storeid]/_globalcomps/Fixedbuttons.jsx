@@ -24,14 +24,14 @@ const Whatsappbutton = ({ whatsapp }) => (
     )}`}
     target="_blank"
     rel="noopener noreferrer"
-    className={`group  flex items-center justify-center p-1 rounded-full overflow-hidden bg-[var(--theme)]`}
+    className={`group  flex items-center justify-center p-1 rounded-full overflow-hidden bg-[var(--usertheme)]`}
     prefetch={false}
   >
     <span className="text-white opacity-0 text-sm  max-w-0 lg:group-hover:opacity-100 lg:group-hover:max-w-60  lg:group-hover:px-5 whitespace-nowrap transition-all duration-300 ease-in-out">
       Chat with us on WhatsApp
     </span>
     <span
-      className={`h-8 aspect-square rounded-full bg-white  grid place-content-center text-[var(--theme)]`}
+      className={`h-8 aspect-square rounded-full bg-white  grid place-content-center text-[var(--usertheme)]`}
     >
       <FaWhatsapp className="text-lg" />
     </span>
@@ -41,14 +41,14 @@ const Whatsappbutton = ({ whatsapp }) => (
 const Helpbutton = () => (
   <Link
     href={"/Contact"}
-    className={`group  flex items-center justify-center p-1 rounded-full overflow-hidden bg-[var(--theme)]`}
+    className={`group  flex items-center justify-center p-1 rounded-full overflow-hidden bg-[var(--usertheme)]`}
     prefetch={false}
   >
     <span className="text-white opacity-0 text-sm  max-w-0 lg:group-hover:opacity-100 lg:group-hover:max-w-32  lg:group-hover:px-5 whitespace-nowrap transition-all duration-300 ease-in-out">
       Need Help
     </span>
     <span
-      className={`h-8 aspect-square rounded-full bg-white  grid place-content-center text-[var(--theme)]`}
+      className={`h-8 aspect-square rounded-full bg-white  grid place-content-center text-[var(--usertheme)]`}
     >
       ?
     </span>
@@ -75,7 +75,7 @@ const Gotopbutton = () => {
           text-white h-10 w-10 lg:hover:h-16 rounded-full
          overflow-hidden duration-300 ${
            !scrolltop && "opacity-0 pointer-events-none"
-         } bg-[var(--theme)]`}
+         } bg-[var(--usertheme)]`}
       onClick={() => {
         window.scrollTo({
           top: 0,

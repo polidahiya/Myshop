@@ -61,7 +61,7 @@ async function page({ params }) {
         {isadmin && (
           <Link
             href={`/${storeid}/product/add?edit=${product?._id}`}
-            className="fixed top-24 right-5  bg-[var(--theme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
+            className="fixed top-24 right-5  bg-[var(--usertheme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
           >
             <MdModeEditOutline />
           </Link>

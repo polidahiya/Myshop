@@ -32,37 +32,37 @@ function Navbar() {
           </button>
           <Link
             href="#features"
-            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+            className="hover:text-theme text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
           >
             Features
           </Link>
           <Link
             href="#templates"
-            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+            className="hover:text-theme text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
           >
             Templates
           </Link>
           <Link
             href="#pricing"
-            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+            className="hover:text-theme text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
           >
             Pricing
           </Link>
           <Link
             href="#contact"
-            className="hover:text-indigo-600 text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
+            className="hover:text-theme text-center border border-gray-200 rounded-md py-3 shadow-sm md:shadow-none md:border-0"
           >
             Contact
           </Link>
           <Link
             href="/account/login"
-            className="px-4 py-3 md:py-2 rounded-md border border-indigo-600 text-indigo-600 hover:bg-indigo-50 text-center mt-auto md:mt-0"
+            className="px-4 py-3 md:py-2 rounded-md border border-theme text-theme hover:bg-indigo-50 text-center mt-auto md:mt-0"
           >
             Login
           </Link>
           <Link
             href="/account/signup"
-            className="px-4 py-3 md:py-2 rounded-md bg-indigo-600 text-white shadow text-center"
+            className="px-4 py-3 md:py-2 rounded-md bg-theme text-white shadow text-center"
           >
             Get Started
           </Link>

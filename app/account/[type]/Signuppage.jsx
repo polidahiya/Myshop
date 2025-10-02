@@ -50,7 +50,7 @@ function Signuppage({ redirectLink = "/" }) {
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-theme"
             />
           </div>
 
@@ -63,7 +63,7 @@ function Signuppage({ redirectLink = "/" }) {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-theme"
             />
           </div>
 
@@ -77,7 +77,7 @@ function Signuppage({ redirectLink = "/" }) {
                 value={form.password}
                 onChange={handleChange}
                 required
-                className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 pr-10"
+                className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-theme pr-10"
               />
               <button
                 type="button"
@@ -92,7 +92,7 @@ function Signuppage({ redirectLink = "/" }) {
           {/* Submit */}
           <button
             type="submit"
-            className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="flex items-center justify-center gap-2 w-full py-2 bg-theme text-white rounded-lg hover:bg-theme"
           >
             {loading && (
               <span className="inline-block h-5 aspect-square rounded-full border-t-2 border-b-2 border-white animate-spin"></span>
@@ -104,7 +104,7 @@ function Signuppage({ redirectLink = "/" }) {
         {/* Already signed up */}
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
-          <Link href="/account/login" className="text-blue-600 hover:underline">
+          <Link href="/account/login" className="text-theme hover:underline">
             Login
           </Link>
         </p>

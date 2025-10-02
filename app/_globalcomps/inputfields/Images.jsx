@@ -108,7 +108,7 @@ const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
                 <BsArrowLeftShort className="inline-block rotate-180" />
               </button>
               {/* Replace Image Button */}
-              <label className="flex-1 aspect-square text-blue-500 border rounded-md flex items-center justify-center cursor-pointer">
+              <label className="flex-1 aspect-square text-theme border rounded-md flex items-center justify-center cursor-pointer">
                 <input
                   type="file"
                   accept="image/*"

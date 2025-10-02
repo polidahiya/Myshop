@@ -23,6 +23,9 @@ export default function Qrcodescanner({ fps = 10, qrbox = 250 }) {
 
       scanner.render(
         (decodedText) => {
+          const decodedUrl = new URL(decodedText);
+          const currentHost = window.location.host;
+          if (decodedUrl.host !== currentHost) return;
           router.push(decodedText);
           setscanqr(false);
         },

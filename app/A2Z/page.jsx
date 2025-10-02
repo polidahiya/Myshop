@@ -9,7 +9,7 @@ export default function HomePage() {
         <img
           src="/homepage/herobackground.png"
           alt=""
-          className="absolute left-0 top-0 w-full h-full object-cover md:object-fill brightness-110"
+          className="absolute left-0 top-0 w-full h-full object-cover md:object-fill brightness-110 blur-3xl"
         />
         <div className="relative flex flex-col md:pl-20 px-5 z-10">
           <h2 className="text-4xl md:text-5xl font-extrabold leading-tight font-tenor">
@@ -23,7 +23,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/account/signup"
-              className="px-6 py-3 rounded-md bg-indigo-600 text-white font-medium"
+              className="px-6 py-3 rounded-md bg-theme text-white font-medium"
             >
               Start free trial
             </Link>
@@ -31,13 +31,13 @@ export default function HomePage() {
 
           <div className="flex items-center gap-6 text-sm text-gray-500 mt-10 md:mt-20 text-center">
             <div className="flex flex-col md:flex-row items-center bg-white px-5 py-2 rounded-full ">
-              <span>✅</span> <p>No credit card required</p>
+              <span>✅</span> <p>Premium Components</p>
             </div>
             <div className="flex flex-col md:flex-row items-center bg-white px-5 py-2 rounded-full ">
               <span>⚡</span> <p>Quick setup</p>
             </div>
             <div className="flex flex-col md:flex-row items-center bg-white px-5 py-2 rounded-full ">
-              <span>🔒</span> <p> Secure payments</p>
+              <span>✅</span> <p>Easy to use</p>
             </div>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
                 <div className="mt-3 flex items-center gap-2">
                   <Link
                     href={"/A2Z"}
-                    className="block w-full px-3 py-2 rounded-md bg-indigo-600 text-white text-sm text-center"
+                    className="block w-full px-3 py-2 rounded-md bg-theme text-white text-sm text-center"
                   >
                     Use template
                   </Link>
@@ -205,7 +205,7 @@ export default function HomePage() {
                 <div className="mt-6">
                   <Link
                     href={p.link}
-                    className="block w-full px-4 py-3 rounded-md bg-indigo-600 text-white text-center"
+                    className="block w-full px-4 py-3 rounded-md bg-theme text-white text-center"
                   >
                     {p.name}
                   </Link>
@@ -255,7 +255,7 @@ export default function HomePage() {
           </div>
         </section>
         {/* CTA */}
-        <section className="mt-16 bg-indigo-600 text-white rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
+        <section className="mt-16 bg-theme text-white rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
           <div>
             <h3 className="text-2xl font-semibold">Ready to start selling?</h3>
             <p className="mt-2 text-indigo-100">
@@ -265,7 +265,7 @@ export default function HomePage() {
           <div className="mt-4 md:mt-0">
             <Link
               href="/account/signup"
-              className="px-6 py-3 rounded-md bg-white text-indigo-600 font-semibold"
+              className="px-6 py-3 rounded-md bg-white text-theme font-semibold"
             >
               Start free trial
             </Link>

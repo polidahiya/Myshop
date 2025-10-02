@@ -29,7 +29,7 @@ const ShareButton = () => {
   return (
     <button
       onClick={handleShare}
-      className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 bg-white rounded-md shadow cursor-pointer lg:hover:text-[var(--theme)]"
+      className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 bg-white rounded-md shadow cursor-pointer lg:hover:text-[var(--usertheme)]"
     >
       <PiShareFatLight />
     </button>

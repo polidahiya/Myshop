@@ -17,7 +17,7 @@ export default function Productsslide({ heading, data }) {
               containerref.current.scrollBy({ left: -300, behavior: "smooth" });
             }}
           >
-            <IoIosArrowBack className="text-[var(--theme)] text-3xl" />
+            <IoIosArrowBack className="text-[var(--usertheme)] text-3xl" />
           </button>
           <button
             className="lg:hover:translate-x-1 duration-300"
@@ -25,7 +25,7 @@ export default function Productsslide({ heading, data }) {
               containerref.current.scrollBy({ left: 300, behavior: "smooth" });
             }}
           >
-            <IoIosArrowBack className="text-[var(--theme)] text-3xl rotate-180" />
+            <IoIosArrowBack className="text-[var(--usertheme)] text-3xl rotate-180" />
           </button>
         </div>
       </div>

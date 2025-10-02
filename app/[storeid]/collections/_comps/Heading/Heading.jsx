@@ -12,7 +12,7 @@ function Heading() {
         <h1 className="text-2xl font-bold">Collection</h1>
         <div className=" flex gap-2">
           <button
-            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 bg-white rounded-md shadow cursor-pointer lg:hover:text-[var(--theme)]"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 bg-white rounded-md shadow cursor-pointer lg:hover:text-[var(--usertheme)]"
             onClick={() => setopenfilter((pre) => !pre)}
           >
             <LuFilter className="w-4 h-4" />

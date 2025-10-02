@@ -50,7 +50,7 @@ function Linkselector({
                     type="button"
                     key={i}
                     className={`border rounded-md py-2 px-5 ${
-                      type == item ? "border-blue-700 text-blue-700" : ""
+                      type == item ? "border-theme text-theme" : ""
                     }`}
                     onClick={() => {
                       settype(item);
@@ -78,7 +78,7 @@ function Linkselector({
                             type="button"
                             className={`px-5 py-1 rounded-full  ${
                               selectedoption
-                                ? "bg-blue-700 text-white"
+                                ? "bg-theme text-white"
                                 : "bg-slate-100"
                             }`}
                             onClick={() => {
@@ -120,8 +120,8 @@ function Linkselector({
                         <div
                           className={`flex items-center justify-center absolute top-0 right-0 w-5 aspect-square text-white ${
                             selectedoption
-                              ? "bg-blue-700"
-                              : "bg-white border border-blue-700"
+                              ? "bg-theme"
+                              : "bg-white border border-theme"
                           }`}
                         >
                           {selectedoption && "✓"}

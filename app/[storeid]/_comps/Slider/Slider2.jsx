@@ -8,13 +8,13 @@ import { Navigation, Controller, Autoplay, Parallax } from "swiper/modules"; // 
 import "swiper/css";
 import Linkgenerator from "./Linkgenerator";
 
-const imageDimensions = {
-  mobile: { width: 390, height: 390 },
-  tablet: { width: 600, height: 600 },
-  desktop: { width: 1000, height: 1000 },
-};
-
-export default function Slider2({ device = "desktop", storeid, items }) {
+export default function Slider2({
+  device = "desktop",
+  storeid,
+  items,
+  imageDimensions,
+}) {
+  const fallbackwidth = imageDimensions?.desktop?.width || 1000;
   const [activeIndex, setActiveIndex] = useState(0);
   const textSwiperRef = useRef(null);
   const imageSwiperRef = useRef(null);
@@ -43,8 +43,16 @@ export default function Slider2({ device = "desktop", storeid, items }) {
           {items.map((item, i) => (
             <SwiperSlide key={i} className="h-full w-full">
               <Nextimage
-                height={imageDimensions[device].height}
-                width={imageDimensions[device].width}
+                width={
+                  imageDimensions[
+                    (device == "desktop" ? device : "mobile") || "desktop"
+                  ].width || fallbackwidth
+                }
+                height={
+                  (imageDimensions[
+                    (device == "desktop" ? device : "mobile") || "desktop"
+                  ].width || fallbackwidth) / 2
+                }
                 quality={100}
                 src={item?.img}
                 alt={item?.title}
@@ -59,7 +67,7 @@ export default function Slider2({ device = "desktop", storeid, items }) {
         </Swiper>
       </div>
       {/* Second Swiper (with controls) */}
-      <div className="relative w-full lg:w-1/2 aspect-[2/1] bg-[var(--theme)]">
+      <div className="relative w-full lg:w-1/2 aspect-[2/1] bg-[var(--usertheme)]">
         <Swiper
           onSwiper={(swiper) => (textSwiperRef.current = swiper)}
           modules={[Navigation, Autoplay, Parallax, Controller]}
@@ -70,7 +78,7 @@ export default function Slider2({ device = "desktop", storeid, items }) {
           speed={1300}
           parallax={true}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          className="w-full h-full bg-theme"
+          className="w-full h-full"
         >
           {items.map((item, index) => {
             const link = Linkgenerator(item, storeid);
@@ -79,7 +87,7 @@ export default function Slider2({ device = "desktop", storeid, items }) {
               <SwiperSlide key={index}>
                 <div
                   key={index}
-                  className="w-full h-full px-14 flex flex-col items-center justify-center bg-theme text-white py-10"
+                  className="w-full h-full px-14 flex flex-col items-center justify-center text-white py-10"
                 >
                   <h2
                     className="text-4xl font-tenor w-full min-w-full text-center line-clamp-1"
@@ -101,7 +109,7 @@ export default function Slider2({ device = "desktop", storeid, items }) {
                   >
                     <Link
                       href={link}
-                      className="bg-white text-[var(--theme)] px-10 py-4 border block w-fit border-white lg:hover:bg-transparent lg:hover:text-white duration-300"
+                      className="bg-white text-[var(--usertheme)] px-10 py-4 border block w-fit border-white lg:hover:bg-transparent lg:hover:text-white duration-300"
                     >
                       Explore
                     </Link>

@@ -19,7 +19,9 @@ function LoginPage({ redirectLink = "/" }) {
     const res = await login({ email, password });
     setloading(false);
     setmessagefn(res.message);
-    if (res.status === 200) router.replace(redirectLink);
+    if (res.status === 200) {
+      router.replace(res?.storeid ? `/${res?.storeid}` : redirectLink);
+    }
   };
 
   return (
@@ -39,7 +41,7 @@ function LoginPage({ redirectLink = "/" }) {
             <label className="block text-sm font-medium">Email</label>
             <input
               type="email"
-              className="mt-1 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+              className="mt-1 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-theme"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -52,7 +54,7 @@ function LoginPage({ redirectLink = "/" }) {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="mt-1 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+                className="mt-1 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-theme"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -70,7 +72,7 @@ function LoginPage({ redirectLink = "/" }) {
           {/* Submit */}
           <button
             type="submit"
-            className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="flex items-center justify-center gap-2 w-full bg-theme text-white py-2 rounded-lg hover:bg-theme transition"
           >
             {loading && (
               <span className="inline-block h-5 aspect-square rounded-full border-t-2 border-b-2 border-white animate-spin"></span>
@@ -83,7 +85,7 @@ function LoginPage({ redirectLink = "/" }) {
           Don’t have an account?{" "}
           <Link
             href="/account/signup"
-            className="text-blue-600 hover:underline"
+            className="text-theme hover:underline"
           >
             Sign up
           </Link>

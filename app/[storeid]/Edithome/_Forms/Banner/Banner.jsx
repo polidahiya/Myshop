@@ -90,7 +90,7 @@ export default function Banner({ collections, products }) {
                     }}
                     className={`h-14 border border-dashed cursor-pointer flex items-center justify-center ${
                       item === data?.props?.items[i]?.aspectratio
-                        ? "bg-blue-700 text-white"
+                        ? "bg-theme text-white"
                         : ""
                     }`}
                     style={{

@@ -8,7 +8,8 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import Linkgenerator from "./Linkgenerator";
 
-export default function Slider1({ items, storeid }) {
+export default function Slider1({ items, storeid, device, imageDimensions }) {
+  const fallbackwidth = imageDimensions?.desktop?.width || 1000;
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
   return (
@@ -27,7 +28,7 @@ export default function Slider1({ items, storeid }) {
         {items.map((item, i) => {
           const link = Linkgenerator(item, storeid);
           return (
-            <SwiperSlide key={i} className="w-full h-full"  >
+            <SwiperSlide key={i} className="w-full h-full">
               <Link
                 href={link}
                 prefetch={false}
@@ -39,8 +40,8 @@ export default function Slider1({ items, storeid }) {
                   }`}
                   src={item?.img}
                   alt={item?.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 70vw"
+                  width={imageDimensions[device].width || fallbackwidth}
+                  height={(imageDimensions[device].width || fallbackwidth) / 2}
                   priority={i == 0 ? true : false}
                   quality={100}
                   loading={i != 0 ? "lazy" : "eager"}

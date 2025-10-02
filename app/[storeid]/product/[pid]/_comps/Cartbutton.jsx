@@ -59,7 +59,7 @@ function Cartbutton({ product, whatsappnum }) {
       {/* add to cart button */}
       <Link
         href={`https://wa.me/${whatsappnum}?text=I%20want%20to%20buy%20this%20product.`}
-        className="flex items-center justify-center h-14 w-full text-white bg-[var(--theme)] text-sm mt-2"
+        className="flex items-center justify-center h-14 w-full text-white bg-[var(--usertheme)] text-sm mt-2"
       >
         {product?.available ? (
           "Contact on Whatsapp"

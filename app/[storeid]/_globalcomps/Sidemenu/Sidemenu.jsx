@@ -14,11 +14,13 @@ import { RxCross2 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoQrCodeOutline } from "react-icons/io5";
 import { usePathname } from "next/navigation";
+import { logout } from "@/app/account/Serveraction";
 
 function Sidemenu({ auth, storedata, storeid }) {
   const path = usePathname();
   const { verified } = auth;
-  const { showsidemenu, setshowsidemenu, setshowqr } = AppContextfn();
+  const { showsidemenu, setshowsidemenu, setshowqr, setmessagefn } =
+    AppContextfn();
 
   return (
     <AnimatePresence>
@@ -147,12 +149,23 @@ function Sidemenu({ auth, storedata, storeid }) {
             <div className="py-4 px-6 mt-auto">
               <Link
                 href={verified ? "/" : `/account/login?redirect=${path}`}
-                onClick={() => setshowsidemenu(false)}
+                onClick={async (e) => {
+                  if (verified) {
+                    e.preventDefault();
+                    const res = await logout();
+                    if (res.status === 200) {
+                      setshowsidemenu(false);
+                      setmessagefn(res?.message);
+                    }
+                  } else {
+                    setshowsidemenu(false);
+                  }
+                }}
                 className={`flex items-center justify-center gap-3 py-3 rounded-md transition font-medium
                   ${
                     verified
                       ? "bg-red-600 hover:bg-red-500 text-white"
-                      : "bg-blue-600 hover:bg-blue-500 text-white"
+                      : "bg-theme hover:bg-theme text-white"
                   }`}
               >
                 <FaSignOutAlt size={18} />

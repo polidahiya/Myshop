@@ -8,7 +8,7 @@ async function Collections({ storeid, device, Component, compProps }) {
     (item) => item?.name == collection
   );
   return (
-    <div>
+    <div className="py-2 md:py-5">
       <Component
         storeid={storeid}
         device={device}

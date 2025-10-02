@@ -161,10 +161,10 @@ function Slider({ collections, products }) {
             });
             setdata((pre) => ({ ...pre, props: updated }));
           }}
-          className="group relative flex flex-col items-center justify-center aspect-square rounded-2xl border-2 border-dashed border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 ease-in-out p-5"
+          className="group relative flex flex-col items-center justify-center aspect-square rounded-2xl border-2 border-dashed border-slate-300 hover:border-theme hover:bg-blue-50 transition-all duration-200 ease-in-out p-5"
         >
-          <AiOutlinePlus className="h-10 w-10 text-slate-400 group-hover:text-blue-500 transition-colors" />
-          <span className="mt-2 text-sm font-medium text-slate-500 group-hover:text-blue-600">
+          <AiOutlinePlus className="h-10 w-10 text-slate-400 group-hover:text-theme transition-colors" />
+          <span className="mt-2 text-sm font-medium text-slate-500 group-hover:text-theme">
             Add Slide
           </span>
         </button>

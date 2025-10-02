@@ -100,7 +100,7 @@ function Clientpage({ storedata }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 px-4 py-20">
           {/* Tile 1 */}
           <button
-            className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl text-white shadow-md bg-gradient-to-r from-blue-500 to-indigo-600 cursor-pointer"
+            className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl text-white shadow-md bg-gradient-to-r from-theme to-theme cursor-pointer"
             onClick={() => setformtype(1)}
           >
             <FaEdit size={32} />
@@ -267,7 +267,7 @@ function Clientpage({ storedata }) {
           <div className="flex flex-col md:flex-row md:items-center justify-center gap-2 md:gap-5 sticky bottom-0 bg-white pb-5">
             <button
               type="submit"
-              className="flex items-center justify-center gap-2  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="flex items-center justify-center gap-2  px-4 py-2 bg-theme text-white rounded-md hover:bg-theme"
             >
               {loading && (
                 <span

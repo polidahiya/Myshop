@@ -22,7 +22,7 @@ function Togglebuttons({
           onClick={positive}
           className={`flex-1 px-4 py-2 text-sm font-medium rounded ${
             value
-              ? "bg-blue-600 text-white"
+              ? "bg-theme text-white"
               : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >
@@ -33,7 +33,7 @@ function Togglebuttons({
           onClick={negative}
           className={`flex-1 px-4 py-2 text-sm font-medium rounded ${
             !value
-              ? "bg-blue-600 text-white"
+              ? "bg-theme text-white"
               : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >

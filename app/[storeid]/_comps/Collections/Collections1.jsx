@@ -7,7 +7,6 @@ async function Category1({
   showheader = true,
   Selectedcollection,
 }) {
-
   return (
     <div className="">
       {showheader && (
@@ -15,7 +14,7 @@ async function Category1({
           <h2 className="text-2xl font-tenor">{collection}</h2>
           <Link
             href={`/${storeid}/collections`}
-            className="text-[var(--secondary)]"
+            className="text-[var(--usertheme)]"
           >
             View all
           </Link>

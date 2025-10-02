@@ -6,9 +6,19 @@ export default async function Slider({
   Component,
   compProps,
 }) {
+  const imageDimensions = {
+    mobile: { width: 375 },
+    tablet: { width: 768 },
+    desktop: { width: 1280 },
+  };
   return (
     <div>
-      <Component storeid={storeid} device={device} {...compProps} />
+      <Component
+        storeid={storeid}
+        device={device}
+        imageDimensions={imageDimensions}
+        {...compProps}
+      />
     </div>
   );
 }

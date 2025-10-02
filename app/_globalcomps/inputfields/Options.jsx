@@ -276,7 +276,7 @@ const Optionform = ({
           <div className="flex justify-center">
             <label
               htmlFor="imageUpload"
-              className="flex flex-col items-center justify-center w-36 aspect-square border border-dashed border-[var(--theme)] cursor-pointer rounded-lg overflow-hidden"
+              className="flex flex-col items-center justify-center w-36 aspect-square border border-dashed border-[var(--usertheme)] cursor-pointer rounded-lg overflow-hidden"
             >
               {option?.image && option.image.length > 0 ? (
                 <div className="relative w-full h-full group hover:bg-black">
@@ -285,7 +285,7 @@ const Optionform = ({
                     alt=""
                     className="w-full h-full lg:group-hover:opacity-30"
                   />
-                  <MdModeEditOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--theme)] text-white text-2xl box-content p-2 lg:hidden lg:group-hover:block" />
+                  <MdModeEditOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--usertheme)] text-white text-2xl box-content p-2 lg:hidden lg:group-hover:block" />
                 </div>
               ) : (
                 <>
@@ -346,7 +346,7 @@ const Optionform = ({
           <button
             type="button"
             onClick={() => setshowform(false)}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
+            className="px-4 py-2 rounded-lg bg-theme hover:bg-theme text-white shadow"
           >
             Save
           </button>

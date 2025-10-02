@@ -56,8 +56,8 @@ function Sidemenu({ allsearchparams, collections }) {
               <div className="pl-5">
                 <Link
                   href={generateHref(name, "All")}
-                  className={`block relative px-5 py-2 lg:hover:text-[var(--theme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md ${
-                    !allsearchparams[name] && "text-[var(--theme)]"
+                  className={`block relative px-5 py-2 lg:hover:text-[var(--usertheme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md ${
+                    !allsearchparams[name] && "text-[var(--usertheme)]"
                   }`}
                   scroll={false}
                   onClick={() => setopenfilter(false)}
@@ -68,9 +68,9 @@ function Sidemenu({ allsearchparams, collections }) {
                   <Link
                     key={j}
                     href={generateHref(name, option?.name)}
-                    className={`block relative px-5 py-2 lg:hover:text-[var(--theme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md cursor-pointer ${
+                    className={`block relative px-5 py-2 lg:hover:text-[var(--usertheme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md cursor-pointer ${
                       allsearchparams[name] === option?.name &&
-                      "text-[var(--theme)]"
+                      "text-[var(--usertheme)]"
                     }`}
                     scroll={false}
                     onClick={() => setopenfilter(false)}

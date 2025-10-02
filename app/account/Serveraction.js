@@ -74,10 +74,10 @@ export const login = async (userdata) => {
     await generateToken({
       email: user?.email,
       usertype: user?.usertype,
-      storeid: user?.storeid,
+      storeid: user?.storeid || null,
     });
 
-    return { status: 200, message: "Login successful" };
+    return { status: 200, message: "Login successful", storeid: user?.storeid };
   } catch (error) {
     console.error("Login Error:", error);
     return { status: 500, message: "Server error!" };

@@ -60,7 +60,7 @@ export function Edithomectxwrapper({
         <div className="flex items-center justify-center gap-2 mt-5">
           <button
             type="submit"
-            className="px-5 py-1 border border-blue-700 rounded-md bg-blue-700 text-white"
+            className="px-5 py-1 border border-theme rounded-md bg-theme text-white"
           >
             Save
           </button>

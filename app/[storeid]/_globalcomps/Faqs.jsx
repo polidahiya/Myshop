@@ -21,7 +21,7 @@ function Faqs({ faqlist }) {
 const Faq = ({ faq, i, open, setopen }) => {
   return (
     <div
-      className={`pt-5 cursor-pointer border-b first:border-t border-[var(--theme)] `}
+      className={`pt-5 cursor-pointer border-b first:border-t border-[var(--usertheme)] `}
       onClick={() => {
         setopen(i);
       }}

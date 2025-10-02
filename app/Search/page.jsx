@@ -1,79 +1,54 @@
-"use client";
-import React, { useState } from "react";
-import Searchbar from "@/app/_globalcomps/Searchbar/Searchbar";
-import { Searchproducts } from "./Serveraction";
-import { AppContextfn } from "@/app/Context";
-import Ads from "../[storeid]/collections/_comps/Ads";
-import dynamic from "next/dynamic";
-const Nextimage = dynamic(() => import("@/app/_globalcomps/Nextimage"));
-import { testimage } from "@/lib/data";
+import React from "react";
+import Clientpage from "./Clientpage";
+import { Authfn } from "@/lib/auth";
 import Link from "next/link";
-import { RiQrScan2Line } from "react-icons/ri";
+import { FaStoreAlt } from "react-icons/fa";
+import { MdLogin } from "react-icons/md";
 
-export default function Clientpage({}) {
-  const { setmessagefn, setscanqr } = AppContextfn();
-  const [query, setQuery] = useState("");
-  const [searchres, setsearchres] = useState([]);
+async function page() {
+  const auth = await Authfn();
+  const islogedin = auth?.verified;
+  const havestore = auth?.storeid;
 
   return (
-    <div className="px-2 md:px-10">
-      <div className="flex justify-center gap-1 mt-5">
-        <Searchbar
-          Api={async (query) => {
-            const res = await Searchproducts(query);
-            if (res.status == 200) {
-              setsearchres(res.data);
-            } else {
-              setmessagefn(res.message);
-            }
-          }}
-          getQuery={(res) => {
-            setQuery(res);
-          }}
-        />
-        <button
-          className="w-12 aspect-square rounded-xl border border-slate-200 bg-white flex items-center justify-center shadow-sm"
-          onClick={() => {
-            setscanqr(true);
-          }}
+    <div className="flex flex-col min-h-screen">
+      <Clientpage />
+      <div className="sticky bottom-0 flex gap-2 mt-auto px-2 md:px-10 py-2 w-full max-w-2xl mx-auto">
+        <Link
+          href={
+            islogedin
+              ? havestore
+                ? `/${havestore}`
+                : "/Store"
+              : "/account/login?redirect=/Search"
+          }
+          className=" w-full h-12 rounded-xl border border-slate-200 bg-theme text-white flex items-center justify-center gap-2 shadow-sm"
         >
-          <RiQrScan2Line />
-        </button>
+          {islogedin ? (
+            havestore ? (
+              <>
+                <FaStoreAlt /> My Store
+              </>
+            ) : (
+              <>
+                <FaStoreAlt /> Create Store
+              </>
+            )
+          ) : (
+            <>
+              <MdLogin /> Login
+            </>
+          )}
+        </Link>
+        {/* <Link
+          href={`/`}
+          className="w-full h-12 rounded-xl border border-slate-200 bg-theme text-white flex items-center justify-center shadow-sm"
+        >
+          test
+        </Link> */}
       </div>
-      {searchres.length == 0 && query.length != 0 ? (
-        <div className="flex justify-center mt-5">
-          <Nextimage
-            src="/productnotfound.png"
-            alt="noresult"
-            width={500}
-            height={500}
-            quality={100}
-          />
-        </div>
-      ) : (
-        <>
-          <div className="mt-5 space-y-2 w-full max-w-2xl mx-auto">
-            {searchres.map((store, i) => (
-              <React.Fragment key={i}>
-                <Link
-                  href={`/${store?._id}`}
-                  className="flex items-center gap-2 h-10"
-                >
-                  <Nextimage
-                    src={store?.logo || testimage}
-                    alt="Logo"
-                    height={40}
-                    width={40}
-                    className=" aspect-square object-cover rounded-full"
-                  />
-                  <p className="text-center line-clamp-1">{store?.storename}</p>
-                </Link>
-                <Ads i={i} />
-              </React.Fragment>
-            ))}
-          </div>
-        </>
-      )}
     </div>
   );
 }
+
+export default page;
