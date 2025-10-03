@@ -49,7 +49,7 @@ export default function Banner({ collections, products }) {
                 setdeletedimages={setdeletedimages}
                 setnewadded={setnewadded}
                 cover={item?.cover}
-                folder={"Mystore/home"}
+                folder={"Mystore"}
                 dimension={1920}
                 size={1}
                 callback={(img) => {

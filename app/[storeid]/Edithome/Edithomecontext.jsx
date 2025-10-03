@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 import { Updatehome } from "./Serveraction";
 import { useRouter } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
+import { Deleteimages } from "@/lib/Addordeleteimages";
 
 const Edithomectx = createContext({});
 
@@ -14,11 +15,11 @@ export function Edithomectxwrapper({
   storeid,
 }) {
   const router = useRouter();
-  const { setmessagefn } = AppContextfn();
+  const { setmessagefn, newadded, setnewadded } = AppContextfn();
+
   const [data, setdata] = useState(initialdata);
   const [loading, setloading] = useState(false);
   const [deletedimages, setdeletedimages] = useState([]);
-  const [newadded, setnewadded] = useState([]);
   const Submitform = async (e) => {
     e.preventDefault();
     setloading(true);
@@ -52,7 +53,7 @@ export function Edithomectxwrapper({
         setnewadded,
       }}
     >
-      <form onSubmit={Submitform}>
+      <form onSubmit={Submitform} className="pb-10">
         <h4 className="font-medium mb-2 text-3xl px-2 md:px-10 mt-5">
           {initialdata?.category}
         </h4>
@@ -64,7 +65,17 @@ export function Edithomectxwrapper({
           >
             Save
           </button>
-          <button type="button" className="px-5 py-1 border rounded-md">
+          <button
+            type="button"
+            className="px-5 py-1 border rounded-md"
+            onClick={async () => {
+              if (newadded.length > 0) {
+                setmessagefn("Cleaning up...");
+                await Deleteimages(newadded, "Mystore");
+              }
+              window.history.back();
+            }}
+          >
             Cancel
           </button>
         </div>

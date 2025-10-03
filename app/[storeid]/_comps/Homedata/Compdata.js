@@ -1,4 +1,3 @@
-import { testimage } from "@/lib/data";
 import dynamic from "next/dynamic";
 
 export const Compdata = {
@@ -7,13 +6,13 @@ export const Compdata = {
       type: 1,
       comp: dynamic(() => import("../Slider/Slider1")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/slider1.png",
     },
     {
       type: 2,
       comp: dynamic(() => import("../Slider/Slider2")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/slider2.png",
     },
   ],
   Collections: [
@@ -21,7 +20,7 @@ export const Compdata = {
       type: 1,
       comp: dynamic(() => import("../Collections/Collections1")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/collection1.png",
     },
   ],
   About: [
@@ -29,7 +28,7 @@ export const Compdata = {
       type: 1,
       comp: dynamic(() => import("../About/About1")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/about1.png",
     },
   ],
   Showcase: [
@@ -37,7 +36,7 @@ export const Compdata = {
       type: 1,
       comp: dynamic(() => import("../Showcase/Showcase1")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/showcase1.png",
     },
   ],
   Banner: [
@@ -45,7 +44,7 @@ export const Compdata = {
       type: 1,
       comp: dynamic(() => import("../Banner/Banner1")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/banner1.png",
     },
   ],
   Faq: [
@@ -53,7 +52,7 @@ export const Compdata = {
       type: 1,
       comp: dynamic(() => import("../Faq/Faq1")),
       paid: false,
-      img: testimage,
+      img: "/Homecomps/faq1.png",
     },
   ],
 };

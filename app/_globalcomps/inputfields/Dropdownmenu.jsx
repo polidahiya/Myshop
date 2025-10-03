@@ -6,7 +6,7 @@ function Dropdownmenu({ title, state, onchange, options }) {
       <label className="block text-sm font-medium text-gray-600">{title}</label>
       <div className="mt-1 block w-full px-2 border rounded-md">
         <select
-          value={state}
+          value={options.includes(state) ? state : ""}
           onChange={(e) => {
             onchange(e.target.value);
             e.target.value = "";

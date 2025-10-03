@@ -16,8 +16,8 @@ export default function Clientpage({}) {
   const [searchres, setsearchres] = useState([]);
 
   return (
-    <div className="px-2 md:px-10">
-      <div className="sticky top-0 flex justify-center gap-1 mt-5 py-2">
+    <>
+      <div className="sticky top-20 flex justify-center gap-1 mt-5">
         <Searchbar
           Api={async (query) => {
             const res = await Searchproducts(query);
@@ -74,6 +74,6 @@ export default function Clientpage({}) {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }

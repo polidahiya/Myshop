@@ -34,8 +34,8 @@ const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
       }
       //
       const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 1920,
+        maxSizeMB: 0.7,
+        maxWidthOrHeight: 1000,
         useWebWorker: true,
       };
 
@@ -43,7 +43,7 @@ const Images = ({ data, setdata, setdeletedimages, setnewadded }) => {
 
       const formdata = new FormData();
       formdata.append("image", file);
-      const res = await Addimages(formdata, "Mystore/Products");
+      const res = await Addimages(formdata, "Mystore");
       if (res.status == 200) {
         const imageurl = res?.imageurl;
         const updateddata = { ...data };

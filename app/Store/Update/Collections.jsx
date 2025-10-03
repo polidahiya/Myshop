@@ -3,11 +3,8 @@ import React, { useState } from "react";
 import Standardinputfield from "@/app/_globalcomps/inputfields/Standardinputfield";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { MdDeleteOutline } from "react-icons/md";
-import { MdModeEditOutline } from "react-icons/md";
-import { LuCloudUpload } from "react-icons/lu";
-import { AppContextfn } from "@/app/Context";
-// import { Addimages } from "@/app/[storeid]/addproduct/Serveraction";
 import Imageuploader from "@/app/_globalcomps/inputfields/Imageuploader";
+import { MdOutlineEdit } from "react-icons/md";
 
 export default function Collecions({
   data,
@@ -80,14 +77,14 @@ export default function Collecions({
                       </button>
                       {/* Replace Image Button */}
                       <button
-                        className="flex-1 aspect-square text-sm border rounded-md"
+                        className="flex-1 aspect-square text-sm border rounded-md flex items-center justify-center"
                         onClick={() => {
                           setshowform(true);
                           seteditindex([i, j]);
                         }}
                         type="button"
                       >
-                        ↺
+                        <MdOutlineEdit />
                       </button>
                       <button
                         type="button"
@@ -246,7 +243,7 @@ const Optionform = ({
                 }
                 size={0.2}
                 dimension={200}
-                folder="Mystore/others"
+                folder="Mystore"
                 setdeletedimages={setdeletedimages}
                 setnewadded={setnewadded}
                 cover={false}

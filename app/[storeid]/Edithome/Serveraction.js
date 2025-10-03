@@ -13,7 +13,7 @@ export const Updatehome = async (data, add, at, deletedimages) => {
     }
 
     if (deletedimages && deletedimages.length > 0)
-      await Deleteimages(deletedimages, "Mystore/home");
+      await Deleteimages(deletedimages, "Mystore");
 
     const storeid = tokenres.storeid;
 
@@ -72,7 +72,7 @@ export const Deletehomecomp = async (id) => {
         images.push(item.img);
       });
 
-      await Deleteimages(images, "Mystore/home");
+      await Deleteimages(images, "Mystore");
     }
 
     homedata.splice(id, 1);

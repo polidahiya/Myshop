@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import Standardinputfield from "./Standardinputfield";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { MdDeleteOutline } from "react-icons/md";
-import { MdModeEditOutline } from "react-icons/md";
-import { LuCloudUpload } from "react-icons/lu";
-import { AppContextfn } from "@/app/Context";
-import { Addimages } from "@/lib/Addordeleteimages";
+import { MdOutlineEdit } from "react-icons/md";
+import Imageuploader from "./Imageuploader";
 
 function Options({ data, setdata, setdeletedimages, setnewadded }) {
   const [showform, setshowform] = useState(false);
@@ -46,9 +44,9 @@ function Options({ data, setdata, setdeletedimages, setnewadded }) {
                         className="relative flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 p-3"
                       >
                         {/* Image (optional) */}
-                        {image.length > 0 && (
+                        {image && (
                           <img
-                            src={image[0]}
+                            src={image}
                             alt={name}
                             className="h-16 w-16 rounded-lg object-cover border"
                           />
@@ -83,14 +81,14 @@ function Options({ data, setdata, setdeletedimages, setnewadded }) {
                         </button>
                         {/* Replace Image Button */}
                         <button
-                          className="flex-1 aspect-square text-sm border rounded-md"
+                          className="flex-1 aspect-square text-sm border rounded-md flex items-center justify-center"
                           onClick={() => {
                             setshowform(true);
                             seteditindex([i, j]);
                           }}
                           type="button"
                         >
-                          ↺
+                          <MdOutlineEdit />
                         </button>
                         <button
                           type="button"
@@ -117,7 +115,7 @@ function Options({ data, setdata, setdeletedimages, setnewadded }) {
                     const updateddata = { ...data };
                     updateddata.options[i].options.push({
                       name: "",
-                      image: [],
+                      image: "",
                       imageindex: 0,
                       price: "",
                       mrp: "",
@@ -158,7 +156,7 @@ function Options({ data, setdata, setdeletedimages, setnewadded }) {
             updatedata.options.push({
               name: "Option Name",
               options: [
-                { name: "", image: [], imageindex: 0, price: "", mrp: "" },
+                { name: "", image: "", imageindex: 0, price: "", mrp: "" },
               ],
             });
             setdata(updatedata);
@@ -190,9 +188,6 @@ const Optionform = ({
   setdeletedimages,
   setnewadded,
 }) => {
-  const { setmessagefn } = AppContextfn();
-  const [imageloading, setimageloading] = useState(false);
-
   const option = data?.options[editindex[0]]?.options[editindex[1]];
 
   // helper to update deep values safely
@@ -210,44 +205,6 @@ const Optionform = ({
       updated.options[editindex[0]].name = value;
       return updated;
     });
-  };
-
-  const MAX_FILE_SIZE = 0.2 * 1024 * 1024;
-  const handleaddimage = async (file, i, j) => {
-    try {
-      setimageloading(true);
-      if (!file) {
-        setmessagefn(`Please select an image`);
-        return;
-      }
-      if (file.size > MAX_FILE_SIZE) {
-        setmessagefn(`Image exceeds 200 Kb of size`);
-        return;
-      }
-      const formdata = new FormData();
-      formdata.append("image", file);
-      const res = await Addimages(formdata, "Altorganizer/products");
-      const selectedimage = data.options[i].options[j].image;
-      if (res.status == 200) {
-        const imageurl = res?.imageurl;
-        if (selectedimage.length > 0) {
-          setdeletedimages((pre) => [...pre, selectedimage[0]]);
-        }
-        setdata((pre) => {
-          const updateddata = { ...pre };
-          updateddata.options[i].options[j].image[0] = imageurl;
-          return updateddata;
-        });
-        setnewadded((pre) => [...pre, imageurl]);
-      } else {
-        setmessagefn(`Unable to update image`);
-      }
-      setimageloading(false);
-    } catch (error) {
-      console.log(error);
-      setmessagefn(`Unable to update image`);
-      setimageloading(false);
-    }
   };
 
   return (
@@ -274,39 +231,26 @@ const Optionform = ({
           />
           <hr />
           <div className="flex justify-center">
-            <label
-              htmlFor="imageUpload"
-              className="flex flex-col items-center justify-center w-36 aspect-square border border-dashed border-[var(--usertheme)] cursor-pointer rounded-lg overflow-hidden"
-            >
-              {option?.image && option.image.length > 0 ? (
-                <div className="relative w-full h-full group hover:bg-black">
-                  <img
-                    src={option.image[0]}
-                    alt=""
-                    className="w-full h-full lg:group-hover:opacity-30"
-                  />
-                  <MdModeEditOutline className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--usertheme)] text-white text-2xl box-content p-2 lg:hidden lg:group-hover:block" />
-                </div>
-              ) : (
-                <>
-                  <LuCloudUpload className="text-3xl" />
-                  <p className="text-center">
-                    {imageloading ? "Uploading..." : "Upload Thumbnail"}
-                  </p>
-                </>
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                id="imageUpload"
-                disabled={imageloading}
-                onChange={(e) => {
-                  handleaddimage(e.target.files[0], editindex[0], editindex[1]);
-                  e.target.value = null;
-                }}
-                className="hidden"
+            <div className="w-52 h-52">
+              <Imageuploader
+                img={option?.image}
+                callback={(imageurl) =>
+                  setdata((pre) => {
+                    const updateddata = { ...pre };
+                    updateddata.options[editindex[0]].options[
+                      editindex[1]
+                    ].image = imageurl;
+                    return updateddata;
+                  })
+                }
+                size={0.2}
+                dimension={200}
+                folder="Mystore"
+                setdeletedimages={setdeletedimages}
+                setnewadded={setnewadded}
+                cover={false}
               />
-            </label>
+            </div>
           </div>
 
           <Standardinputfield

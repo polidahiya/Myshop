@@ -45,6 +45,29 @@ function Sharebutton({ sku, description, image }) {
     });
   };
 
+  const Moreshare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          text: "Check out this amazing page!",
+          url: window.location.href,
+        });
+        console.log("Shared successfully");
+      } catch (err) {
+        console.error("Share failed:", err);
+      }
+    } else {
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Link copied to clipboard!");
+      } catch {
+        alert("Cannot share this page.");
+      }
+    }
+  };
+
   return (
     <div className="group relative flex items-center gap-2 text-[var(--usertheme)] lg:hover:text-black cursor-pointer mt-4 w-fit">
       <GoShareAndroid className="text-2xl" />
@@ -63,12 +86,17 @@ function Sharebutton({ sku, description, image }) {
               <span className="text-black">{item.title}</span>
             </Link>
           ))}
-          <div className="py-2 flex items-center gap-3">
+          <button
+            className="py-2 flex items-center gap-3 "
+            onClick={handleSharePage}
+          >
             <TbLink className="text-lg" />
-            <button className="text-black w-full" onClick={handleSharePage}>
-              Copy Link
-            </button>
-          </div>
+            <span className="text-black">Copy Link</span>
+          </button>
+          <button className="py-2 flex items-center gap-3 " onClick={Moreshare}>
+            <GoShareAndroid className="text-lg" />
+            <span className="text-black">More</span>
+          </button>
         </div>
       </div>
     </div>

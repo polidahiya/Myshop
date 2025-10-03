@@ -10,7 +10,7 @@ async function page() {
     notFound();
   }
   const storedata = await getStoreData(tokenres?.storeid);
-  return <Clientpage storedata={storedata} />;
+  return <Clientpage storedata={storedata} storeid={tokenres?.storeid} />;
 }
 
 export default page;

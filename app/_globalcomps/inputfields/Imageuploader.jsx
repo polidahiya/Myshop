@@ -10,7 +10,7 @@ function Imageuploader({
   callback = () => {},
   size = 1,
   dimension = 1920,
-  folder = "Mystore/Products",
+  folder = "Mystore",
   setdeletedimages,
   setnewadded,
   cover = true,

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Standardinputfield from "@/app/_globalcomps/inputfields/Standardinputfield";
 import Multiplevaluesfield from "@/app/_globalcomps/inputfields/Multiplevaluesfield";
 import Images from "@/app/_globalcomps/inputfields/Images";
@@ -24,7 +24,7 @@ const initialState = {
   options: [
     // {
     //   name: "test",
-    //   options: [{ name: "", image: "[], imageindex: 0, price: "", mrp: "" }],
+    //   options: [{ name: "", image: """, imageindex: 0, price: "", mrp: "" }],
     // },
   ],
   seotitle: "",
@@ -37,13 +37,16 @@ const initialState = {
 function Clientpage({ productdata, collections }) {
   const router = useRouter();
 
-  const { setmessagefn } = AppContextfn();
-  const [data, setdata] = useState(
-    productdata ? { ...initialState, ...productdata } : initialState
-  );
+  const { setmessagefn, newadded, setnewadded } = AppContextfn();
+
+  const mergedstate = productdata
+    ? { ...initialState, ...productdata }
+    : initialState;
+
+  const initialstateref = useRef(JSON.parse(JSON.stringify(mergedstate)));
+  const [data, setdata] = useState(mergedstate);
 
   const [deletedimages, setdeletedimages] = useState([]);
-  const [newadded, setnewadded] = useState([]);
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -72,7 +75,7 @@ function Clientpage({ productdata, collections }) {
           e.preventDefault();
           if (newadded.length > 0) {
             setmessagefn("Cleaning up...");
-            await Deleteimages(newadded, "Mystore/Products");
+            await Deleteimages(newadded, "Mystore");
           }
           router.push("/admin/products");
         }}
@@ -247,9 +250,9 @@ function Clientpage({ productdata, collections }) {
             onClick={async () => {
               if (newadded.length > 0) {
                 setmessagefn("Cleaning up...");
-                await Deleteimages(newadded, "Mystore/Products");
+                await Deleteimages(newadded, "Mystore");
               }
-              setdata(initialState);
+              setdata(initialstateref.current);
               setdeletedimages([]);
             }}
           >
@@ -262,7 +265,7 @@ function Clientpage({ productdata, collections }) {
                 e.preventDefault();
                 if (newadded.length > 0) {
                   setmessagefn("Cleaning up...");
-                  await Deleteimages(newadded, "Mystore/Products");
+                  await Deleteimages(newadded, "Mystore");
                 }
                 router.push("/admin/products");
               }}

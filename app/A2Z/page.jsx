@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Nextimage from "../_globalcomps/Nextimage";
+import { IoSearchOutline } from "react-icons/io5";
 
 export default function HomePage() {
   return (
@@ -20,23 +21,30 @@ export default function HomePage() {
             sell online — simple pricing and zero setup hassles.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex gap-1">
             <Link
-              href="/account/signup"
-              className="px-6 py-3 rounded-md bg-theme text-white font-medium"
+              href="/Store"
+              className="w-full md:w-fit px-2 md:px-6 py-3 rounded-md bg-theme text-white font-medium flex items-center justify-center gap-3"
             >
-              Start free trial
+              <span>+</span> Create your Store
+            </Link>
+            <Link
+              href="/Search"
+              className="w-full md:w-fit px-2 md:px-6 py-3 rounded-md bg-theme text-white font-medium flex items-center justify-center gap-3"
+            >
+              <IoSearchOutline />
+              Search a Store
             </Link>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-gray-500 mt-10 md:mt-20 text-center">
-            <div className="flex flex-col md:flex-row items-center bg-white px-5 py-2 rounded-full ">
-              <span>✅</span> <p>Premium Components</p>
+          <div className="flex items-center gap-0 md:gap-6 text-sm text-gray-500 mt-10 md:mt-20 text-center">
+            <div className="flex flex-col md:flex-row items-center lg:bg-white px-5 py-2 rounded-full ">
+              <span>💎</span> <p>Premium Components</p>
             </div>
-            <div className="flex flex-col md:flex-row items-center bg-white px-5 py-2 rounded-full ">
+            <div className="flex flex-col md:flex-row items-center lg:bg-white px-5 py-2 rounded-full ">
               <span>⚡</span> <p>Quick setup</p>
             </div>
-            <div className="flex flex-col md:flex-row items-center bg-white px-5 py-2 rounded-full ">
+            <div className="flex flex-col md:flex-row items-center lg:bg-white px-5 py-2 rounded-full ">
               <span>✅</span> <p>Easy to use</p>
             </div>
           </div>

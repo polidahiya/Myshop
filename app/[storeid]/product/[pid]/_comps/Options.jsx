@@ -17,7 +17,7 @@ function Options({ options }) {
               <button
                 key={j}
                 className={`flex items-center gap-2 flex-shrink-0 rounded-full  border border-gray-200 whitespace-nowrap cursor-pointer ${
-                  option?.image[0] ? "py-2 pl-[10px] pr-6" : "py-4 px-10"
+                  option?.image ? "py-2 pl-[10px] pr-6" : "py-4 px-10"
                 } ${(selectedoptions[i] || 0) == j && "bg-gray-100"}`}
                 onClick={() => {
                   setSelectedImageIndex(option?.imageindex);
@@ -28,9 +28,9 @@ function Options({ options }) {
                   });
                 }}
               >
-                {option?.image[0] && (
+                {option?.image && (
                   <Nextimage
-                    src={option?.image[0]}
+                    src={option?.image}
                     alt={option?.name}
                     height={40}
                     width={40}

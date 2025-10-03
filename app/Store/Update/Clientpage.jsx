@@ -28,11 +28,7 @@ const initialState = {
     secondary: "#118ab2",
     text: "#073b4c",
   },
-  social: {
-    Facebook: "",
-    Instagram: "",
-    YouTube: "",
-  },
+  social: {},
   collections: [
     {
       name: "Category",
@@ -47,9 +43,10 @@ const initialState = {
   ],
   storetype: "furniture",
 };
-function Clientpage({ storedata }) {
+function Clientpage({ storedata, storeid }) {
   const router = useRouter();
-  const { setmessagefn } = AppContextfn();
+  const { setmessagefn, newadded, setnewadded } = AppContextfn();
+
   const mergedstate = storedata
     ? { ...initialState, ...storedata }
     : initialState;
@@ -59,7 +56,6 @@ function Clientpage({ storedata }) {
   const [formtype, setformtype] = useState(0);
 
   const [deletedimages, setdeletedimages] = useState([]);
-  const [newaddedimg, setnewaddedimg] = useState([]);
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -72,7 +68,10 @@ function Clientpage({ storedata }) {
       setmessagefn(res?.message);
       setloading(false);
       setdeletedimages([]);
-      setnewaddedimg([]);
+      setnewadded([]);
+      if (res.status == 200) {
+        router.push(`/${storeid}`);
+      }
     } catch (error) {
       setdata(initialState);
       setloading(false);
@@ -85,9 +84,9 @@ function Clientpage({ storedata }) {
     <>
       <button
         onClick={async (e) => {
-          if (newaddedimg.length > 0) {
+          if (newadded.length > 0) {
             setmessagefn("Cleaning up...");
-            await Deleteimages(newaddedimg);
+            await Deleteimages(newadded, "Mystore");
           }
           window.history.back();
         }}
@@ -152,9 +151,9 @@ function Clientpage({ storedata }) {
                   cover={false}
                   size={0.2}
                   dimension={100}
-                  folder={"Mystore/others"}
+                  folder={"Mystore"}
                   setdeletedimages={setdeletedimages}
-                  setnewadded={setnewaddedimg}
+                  setnewadded={setnewadded}
                 />
               </div>
               {/* store Name */}
@@ -260,7 +259,7 @@ function Clientpage({ storedata }) {
             data={data}
             setdata={setdata}
             setdeletedimages={setdeletedimages}
-            setnewadded={setnewaddedimg}
+            setnewadded={setnewadded}
           />
         )}
         {formtype != 0 && (
@@ -280,9 +279,9 @@ function Clientpage({ storedata }) {
               className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
               type="button"
               onClick={async () => {
-                if (newaddedimg.length > 0) {
+                if (newadded.length > 0) {
                   setmessagefn("Cleaning up...");
-                  await Deleteimages(newaddedimg);
+                  await Deleteimages(newadded, "Mystore");
                 }
                 setdata(initialstateref.current);
                 setdeletedimages([]);
@@ -295,9 +294,9 @@ function Clientpage({ storedata }) {
                 href={"/admin/products"}
                 onClick={async (e) => {
                   e.preventDefault();
-                  if (newaddedimg.length > 0) {
+                  if (newadded.length > 0) {
                     setmessagefn("Cleaning up...");
-                    await Deleteimages(newaddedimg);
+                    await Deleteimages(newadded, "Mystore");
                   }
                   router.push("/admin/products");
                 }}

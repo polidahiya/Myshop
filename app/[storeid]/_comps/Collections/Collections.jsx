@@ -7,6 +7,7 @@ async function Collections({ storeid, device, Component, compProps }) {
   const Selectedcollection = storedata?.collections.find(
     (item) => item?.name == collection
   );
+  if (!Selectedcollection) return null;
   return (
     <div className="py-2 md:py-5">
       <Component

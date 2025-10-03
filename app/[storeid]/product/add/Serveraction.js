@@ -15,7 +15,7 @@ export const Addproduct = async (data, deletedimages) => {
 
     // delete previous images
     deletedimages.forEach(async (image) => {
-      await Deleteiamgefromurl(image, "Mystore/Products");
+      await Deleteiamgefromurl(image, "Mystore");
     });
 
     const date = new Date().getTime();
@@ -82,7 +82,7 @@ export const Deleteproduct = async (pid) => {
     // Delete images in parallel
     if (imageUrls.length > 0) {
       await Promise.all(
-        imageUrls.map((url) => Deleteiamgefromurl(url, "Mystore/Products"))
+        imageUrls.map((url) => Deleteiamgefromurl(url, "Mystore"))
       );
     }
 

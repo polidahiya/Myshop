@@ -10,14 +10,14 @@ export function Appwrapper({ children, parsedCart }) {
   const [showsidemenu, setshowsidemenu] = useState(false);
   const [openfilter, setopenfilter] = useState(false);
 
-  const [newaddedimg, setnewaddedimg] = useState([]);
+  const [newadded, setnewadded] = useState([]);
   useEffect(() => {
-    const storedNewAddedImg = localStorage.getItem("newaddedimg");
-    if (storedNewAddedImg) setnewaddedimg(JSON.parse(storedNewAddedImg));
+    const storednewadded = localStorage.getItem("newadded");
+    if (storednewadded) setnewadded(JSON.parse(storednewadded));
   }, []);
   useEffect(() => {
-    localStorage.setItem("newaddedimg", JSON.stringify(newaddedimg));
-  }, [newaddedimg]);
+    localStorage.setItem("newadded", JSON.stringify(newadded));
+  }, [newadded]);
 
   const showdialoginitialvalues = {
     show: false,
@@ -65,8 +65,8 @@ export function Appwrapper({ children, parsedCart }) {
         showdialog,
         setshowdialog,
         showdialoginitialvalues,
-        newaddedimg,
-        setnewaddedimg,
+        newadded,
+        setnewadded,
         scanqr,
         setscanqr,
         showqr,
