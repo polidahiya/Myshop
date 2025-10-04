@@ -43,7 +43,7 @@ function Imagescomp({ images, name }) {
                   alt={name.replace(/-/g, " ") + i}
                   height={500}
                   width={500}
-                  className={`w-full aspect-square object-cover  border cursor-zoom-in`}
+                  className={`w-full aspect-square object-cover  cursor-zoom-in`}
                   onClick={() => setshowfullimage({ show: true, index: i })}
                 />
               </SwiperSlide>
@@ -97,8 +97,8 @@ function Imagescomp({ images, name }) {
             alt={name.replace(/-/g, " ") + i}
             height={100}
             width={100}
-            className={`w-full aspect-square object-cover border cursor-pointer ${
-              activeIndex === i && "border-[var(--usertheme)]"
+            className={`w-full aspect-square object-cover cursor-pointer ${
+              activeIndex === i && "border border-[var(--usertheme)]"
             }`}
             onClick={() => swiperRef.current.swiper.slideToLoop(i)}
           />

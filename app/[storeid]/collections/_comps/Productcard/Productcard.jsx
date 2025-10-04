@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Editbuttons from "./Editbuttons";
+import { testimage } from "@/lib/data";
 
 function Productcard({ storeid = null, product, isadmin = false }) {
   return (
@@ -11,7 +12,7 @@ function Productcard({ storeid = null, product, isadmin = false }) {
         className="w-full"
       >
         <Nextimage
-          src={product?.images[0]}
+          src={product?.images[0] || testimage}
           alt={product?.name}
           height={500}
           width={500}

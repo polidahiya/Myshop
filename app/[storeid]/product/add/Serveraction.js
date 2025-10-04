@@ -1,8 +1,8 @@
 "use server";
-import { Deleteiamgefromurl } from "@/lib/Cloudinary";
 import Verification from "@/lib/verification";
 import { getcollection } from "@/lib/db";
 import { revalidateTag } from "next/cache";
+import { Deleteimages } from "@/lib/Addordeleteimages";
 
 export const Addproduct = async (data, deletedimages) => {
   try {
@@ -14,9 +14,9 @@ export const Addproduct = async (data, deletedimages) => {
     const { Productscollection, ObjectId } = await getcollection();
 
     // delete previous images
-    deletedimages.forEach(async (image) => {
-      await Deleteiamgefromurl(image, "Mystore");
-    });
+    if (deletedimages.length > 0) {
+      await Deleteimages(deletedimages, "Mystore");
+    }
 
     const date = new Date().getTime();
     const storeid = tokenres.storeid;
@@ -76,14 +76,14 @@ export const Deleteproduct = async (pid) => {
     // Collect all image URLs (main + option images)
     const imageUrls = [
       ...(product.images || []),
-      ...(product.options?.flatMap((opt) => opt?.options?.images || []) || []),
+      ...(product.options?.flatMap((opt) =>
+        opt?.options?.map((item) => item?.image).filter(Boolean)
+      ) || []),
     ];
 
     // Delete images in parallel
     if (imageUrls.length > 0) {
-      await Promise.all(
-        imageUrls.map((url) => Deleteiamgefromurl(url, "Mystore"))
-      );
+      await Deleteimages(imageUrls, "Mystore");
     }
 
     // Delete from MongoDB

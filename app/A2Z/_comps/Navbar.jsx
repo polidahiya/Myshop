@@ -69,8 +69,11 @@ function Navbar() {
             Get Started
           </Link>
         </nav>
-        <div className="flex items-center justify-center gap-1">
-          <Link href={"/Search"} className="w-10 aspect-square flex items-center justify-center border border-gray-300 rounded-md">
+        <div className="flex items-center justify-center gap-1 ml-auto md:ml-0">
+          <Link
+            href={"/Search"}
+            className="w-10 aspect-square flex items-center justify-center border border-gray-300 rounded-md"
+          >
             <FiSearch />
           </Link>
           <button

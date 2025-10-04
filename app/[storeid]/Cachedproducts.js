@@ -12,7 +12,6 @@ export async function Cachedproducts(storeid) {
       productsList.forEach((item) => {
         item._id = item._id.toString();
       });
-      console.log("1");
       return productsList;
     },
     [`products-${storeid}`],

@@ -6,6 +6,7 @@ import { Googleadsid } from "@/lib/data";
 import Dialoguebox from "./_globalcomps/Dialoguebox";
 import Showqrcode from "./_globalcomps/Qr/Createqrcode";
 import Qrcodescanner from "./_globalcomps/Qr/Qrcodescanner";
+import Googleanayltics from "./_globalcomps/Googleanalytics";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -29,6 +30,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* google analytics */}
+        <Googleanayltics />
         {/* google adsense */}
         <script
           async

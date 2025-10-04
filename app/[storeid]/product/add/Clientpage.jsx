@@ -54,7 +54,14 @@ function Clientpage({ productdata, collections }) {
     setloading(true);
     try {
       const res = await Addproduct(data, deletedimages);
-      setdata(initialState);
+      setdata({
+        ...initialState,
+        keyfeatures: [""],
+        descriptions: [""],
+        collections: [],
+        images: [],
+        options: [],
+      });
       setmessagefn(res?.message);
       setloading(false);
       setdeletedimages([]);
@@ -69,20 +76,19 @@ function Clientpage({ productdata, collections }) {
 
   return (
     <>
-      <Link
-        href={"/admin/products"}
+      <button
         onClick={async (e) => {
-          e.preventDefault();
           if (newadded.length > 0) {
             setmessagefn("Cleaning up...");
             await Deleteimages(newadded, "Mystore");
           }
-          router.push("/admin/products");
+          window.history.back();
         }}
-        className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300 z-10"
+        className="fixed top-20 right-2 md:right-5 w-10 aspect-square rounded-full bg-gray-200 z-10 flex items-center justify-center"
       >
-        x
-      </Link>
+        X
+      </button>
+
       <form
         onSubmit={handleSubmit}
         method="post"
