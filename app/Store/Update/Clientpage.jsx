@@ -148,6 +148,9 @@ function Clientpage({ storedata, storeid }) {
                   callback={(img) => {
                     setdata((pre) => ({ ...pre, logo: img }));
                   }}
+                  remove={() => {
+                    setdata((pre) => ({ ...pre, logo: "" }));
+                  }}
                   cover={false}
                   size={0.2}
                   dimension={100}

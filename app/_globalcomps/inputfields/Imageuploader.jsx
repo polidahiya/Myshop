@@ -8,6 +8,7 @@ import { Addimages } from "@/lib/Addordeleteimages";
 function Imageuploader({
   img = "",
   callback = () => {},
+  remove = () => {},
   size = 1,
   dimension = 1920,
   folder = "Mystore",
@@ -87,6 +88,18 @@ function Imageuploader({
         <div className="absolute top-0 left-0 h-full w-full bg-black/20 flex items-center justify-center ">
           <div className="w-10 aspect-square border-t-4 border-b-4 border-white rounded-full animate-spin"></div>
         </div>
+      )}
+      {img && (
+        <button
+          type="button"
+          className="absolute top-0 right-0 w-10 aspect-square text-red-500 bg-gray-200 rounded-full z-20"
+          onClick={() => {
+            setdeletedimages((pre) => [...pre, img]);
+            remove();
+          }}
+        >
+          X
+        </button>
       )}
     </div>
   );

@@ -79,10 +79,6 @@ export default function AboutUs() {
           </Link>
         </div>
       </section>
-      {/* 
-      <footer className="bg-gray-900 text-gray-400 py-8 text-center">
-        <p>© {new Date().getFullYear()} A2Z. All rights reserved.</p>
-      </footer> */}
     </div>
   );
 }

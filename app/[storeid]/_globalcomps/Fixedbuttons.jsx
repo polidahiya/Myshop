@@ -3,13 +3,21 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaArrowUpLong } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 
 function FIxedbuttons({ whatsapp }) {
+  const path = usePathname();
+  const isproductpage = path.includes("product");
+
   return (
-    <div className="fixed bottom-20 lg:bottom-5 right-5 md:right-10 flex flex-col items-end gap-2 z-30 print:hidden">
+    <div
+      className={`fixed  ${
+        isproductpage ? "bottom-36" : "bottom-5"
+      } right-5 md:right-10 flex flex-col items-end gap-2 z-30 print:hidden`}
+    >
       <Gotopbutton />
       <Whatsappbutton whatsapp={whatsapp} />
-      <Helpbutton />
+      {/* <Helpbutton /> */}
     </div>
   );
 }

@@ -241,6 +241,15 @@ const Optionform = ({
                     return updated;
                   })
                 }
+                remove={() =>
+                  setdata((pre) => {
+                    const updated = { ...pre };
+                    updated.collections[editindex[0]].subcat[
+                      editindex[1]
+                    ].image = "";
+                    return updated;
+                  })
+                }
                 size={0.2}
                 dimension={200}
                 folder="Mystore"

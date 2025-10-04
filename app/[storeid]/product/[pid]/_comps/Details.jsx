@@ -10,11 +10,7 @@ function Details({ product, whatsappnum }) {
     <div className="min-h-28 px-5 md:px-0">
       {/* name */}
       <h1 className="text-3xl font-tenor ">{product?.name}</h1>
-      <Sharebutton
-        sku={product?.sku}
-        description={product?.keyfeatures.join("________")}
-        image={product?.images[0]}
-      />
+      <Sharebutton />
       <Pricedisplay />
       <Options options={product?.options} />
       {/* descriptions */}
@@ -34,7 +30,7 @@ function Details({ product, whatsappnum }) {
           />
         )}
       </div>
-      <Cartbutton product={product} whatsappnum={whatsappnum}/>
+      <Cartbutton product={product} whatsappnum={whatsappnum} />
     </div>
   );
 }

@@ -79,7 +79,7 @@ function Imagescomp({ images, name }) {
                 title="Index"
               >
                 <span
-                  className={`block h-1 rounded-full bg-white duration-150 ${
+                  className={`block h-1 rounded-full bg-[var(--usertheme)] duration-150 ${
                     i === activeIndex ? "w-8" : "w-1"
                   }`}
                 ></span>

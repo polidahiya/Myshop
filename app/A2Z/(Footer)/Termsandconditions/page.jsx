@@ -1,12 +1,12 @@
 import React from "react";
 
 export default function TermsAndConditions({
-  platformName = "Your Platform Name",
-  lastUpdated = "August 31, 2025",
+  platformName = "A2Z",
+  lastUpdated = "October 4, 2025",
   jurisdiction = "India",
   courtLocation = "Gurugram, Haryana",
-  supportEmail = "support@example.com",
-  companyAddress = "123, Example Street, City, State, ZIP",
+  supportEmail = "polidahiya830@gmail.com",
+  companyAddress = "M-1, Hayatpur, Sector 93, Manesar, Gurugram, Haryana 122505",
 }) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 text-slate-800">
@@ -240,15 +240,6 @@ export default function TermsAndConditions({
             📍 {companyAddress}
           </address>
         </section>
-
-        <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-          <p className="leading-relaxed">
-            <span className="font-semibold">Note:</span> This document is a
-            general template. For complete legal compliance — especially
-            regarding payments, taxes, and consumer protection — please seek
-            advice from a qualified attorney in your jurisdiction.
-          </p>
-        </div>
       </section>
     </main>
   );

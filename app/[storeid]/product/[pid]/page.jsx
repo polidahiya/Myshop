@@ -56,7 +56,9 @@ async function page({ params }) {
             <Productsslide heading="Related Products" data={similarproducts} />
           )}
         </div>
-        <Googleads type={2} />
+        <div className="w-full overflow-hidden">
+          <Googleads type={2} />
+        </div>
         {/* edit button */}
         {isadmin && (
           <Link

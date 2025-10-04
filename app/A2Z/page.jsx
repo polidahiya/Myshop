@@ -164,62 +164,22 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-        {/* Pricing */}
-        <section id="pricing" className="mt-16">
-          <h3 className="text-2xl font-semibold">Simple pricing</h3>
-          <p className="text-gray-600 mt-1">
-            Choose a plan that fits your business.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Choose Starter",
-                price: "Free",
-                perks: ["Single store", "Limited themes", "Basic support"],
-                link: "/account/signup",
-              },
-              {
-                name: "Comming soon!",
-                //   name: "Choose Grow",
-                price: "₹499/mo",
-                perks: [
-                  "Multiple stores",
-                  "Premium themes",
-                  "Payments & shipping",
-                ],
-                link: "/A2Z",
-              },
-              {
-                name: "Comming soon!",
-                //   name: "Choose Scale",
-                price: "Custom",
-                perks: [
-                  "Dedicated support",
-                  "Enterprise features",
-                  "SLAs & onboarding",
-                ],
-                link: "/A2Z",
-              },
-            ].map((p, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 shadow-sm">
-                <h4 className="text-lg font-semibold">{p.name}</h4>
-                <div className="mt-4 text-3xl font-extrabold">{p.price}</div>
-                <ul className="mt-4 text-sm text-gray-600 space-y-2">
-                  {p.perks.map((x) => (
-                    <li key={x}>• {x}</li>
-                  ))}
-                </ul>
-                <div className="mt-6">
-                  <Link
-                    href={p.link}
-                    className="block w-full px-4 py-3 rounded-md bg-theme text-white text-center"
-                  >
-                    {p.name}
-                  </Link>
-                </div>
-              </div>
-            ))}
+        <section className="mt-16">
+          <div>
+            <h3 className="text-2xl font-semibold">Popular Stores</h3>
+          </div>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link
+              href={"/68dfd5fd5c999e143dc8ef01"}
+              className="rounded-xl shadow"
+            >
+              <Nextimage
+                src="/delhimarketplace.png"
+                alt="Delhi marketplace"
+                width={500}
+                height={300}
+              />
+            </Link>
           </div>
         </section>
         {/* Testimonials */}
@@ -230,7 +190,7 @@ export default function HomePage() {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                name: "Rajbir Dahiya",
+                name: "Golu",
                 comment:
                   "A2Z made it so easy to create my own store. I listed my products in minutes and started getting orders right away. Perfect for anyone starting out!",
               },
@@ -240,7 +200,7 @@ export default function HomePage() {
                   "I love how simple the platform is. No coding, no hassle — just upload my designs, set prices, and share my store. The clean design makes my brand look professional.",
               },
               {
-                name: "Ravi",
+                name: "Rahul",
                 comment:
                   "I started a small store to sell handmade crafts. A2Z gave me a professional storefront that looks amazing on both desktop and mobile. Highly recommended!",
               },
@@ -272,10 +232,10 @@ export default function HomePage() {
           </div>
           <div className="mt-4 md:mt-0">
             <Link
-              href="/account/signup"
+              href="/Store"
               className="px-6 py-3 rounded-md bg-white text-theme font-semibold"
             >
-              Start free trial
+              Create Your Store Now!
             </Link>
           </div>
         </section>

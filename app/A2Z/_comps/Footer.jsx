@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 function Footer() {
   return (
@@ -13,27 +14,22 @@ function Footer() {
 
         <div className="flex gap-10">
           <div>
-            <div className="font-semibold">Product</div>
-            <ul className="mt-2 space-y-2">
-              <li>Features</li>
-              <li>Templates</li>
-              <li>Pricing</li>
-            </ul>
-          </div>
-
-          <div>
             <div className="font-semibold">Company</div>
             <ul className="mt-2 space-y-2">
-              <li>About</li>
-              <li>Careers</li>
-              <li>Blog</li>
+              <Link className="block" href="/A2Z/Aboutus">
+                About
+              </Link>
+              <Link className="block" href="/A2Z/Privacypolicy">
+                Privacy Policy
+              </Link>
+              <Link className="block" href="/A2Z/Termsandconditions">
+                Terms and Conditions
+              </Link>
             </ul>
           </div>
         </div>
 
         <div>
-          {/* <div className="font-semibold">Contact</div> */}
-          {/* <div className="mt-2">hello@A2Z.example</div> */}
           <div className="text-xs text-gray-400 mt-2">
             © {new Date().getFullYear()} A2Z — Made with ♥
           </div>

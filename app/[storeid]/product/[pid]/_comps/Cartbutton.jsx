@@ -1,12 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PiSmileySad } from "react-icons/pi";
 import { Productctxfn } from "../Productcontext";
 import Link from "next/link";
 
 function Cartbutton({ product, whatsappnum }) {
   const MAX_QUANTITY = 10; // Define the maximum quantity
-  const { quantity, setquantity, finalprice, finalmrp } = Productctxfn();
+  const { selectedoptions, quantity, setquantity, finalprice, finalmrp } =
+    Productctxfn();
+
+  const [url, seturl] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      seturl(window.location.href);
+    }
+  }, []);
 
   const handleIncrement = () => {
     if (quantity < MAX_QUANTITY) setquantity((pre) => pre + 1);
@@ -15,6 +23,28 @@ function Cartbutton({ product, whatsappnum }) {
   const handleDecrement = () => {
     if (quantity > 1) setquantity((pre) => pre - 1);
   };
+
+  const selectedOptionsText = product?.options
+    ?.map(
+      (opt, i) =>
+        `${opt?.name}: ${
+          opt?.options?.[selectedoptions[i] || 0]?.name || "N/A"
+        }`
+    )
+    .join("\n");
+
+  const message =
+    `🛒 *I want to buy this product!*\n\n` +
+    `🔗 *Product:* ${url}\n` +
+    `📦 *Quantity:* ${quantity}\n` +
+    (selectedOptionsText
+      ? `✨ *Selected Options:*\n${selectedOptionsText}\n\n`
+      : "") +
+    `Please share more details.`;
+
+  const whatsappLink = `https://wa.me/91${whatsappnum}?text=${encodeURIComponent(
+    message
+  )}`;
 
   return (
     <div className="sticky bottom-0 bg-white py-1">
@@ -58,7 +88,10 @@ function Cartbutton({ product, whatsappnum }) {
       </div>
       {/* add to cart button */}
       <Link
-        href={`https://wa.me/${whatsappnum}?text=I%20want%20to%20buy%20this%20product.`}
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        prefetch={false}
         className="flex items-center justify-center h-14 w-full text-white bg-[var(--usertheme)] text-sm mt-2"
       >
         {product?.available ? (

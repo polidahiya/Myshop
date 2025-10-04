@@ -54,6 +54,11 @@ function Slider({ collections, products }) {
                   updated.items[i].img = img;
                   setdata((pre) => ({ ...pre, props: updated }));
                 }}
+                remove={() => {
+                  const updated = { ...data.props };
+                  updated.items[i].img = "";
+                  setdata((pre) => ({ ...pre, props: updated }));
+                }}
               />
             </div>
             <Togglebuttons
