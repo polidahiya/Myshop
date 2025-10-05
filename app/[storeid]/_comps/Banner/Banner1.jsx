@@ -4,9 +4,9 @@ import Linkgenerator from "../Slider/Linkgenerator";
 import Link from "next/link";
 
 const imagewidths = {
-  mobile: { width: 390 },
-  tablet: { width: 600 },
-  desktop: { width: 1000 },
+  mobile: { width: 500 },
+  tablet: { width: 1000 },
+  desktop: { width: 1920 },
 };
 
 function Banner1({ storeid, device, items }) {

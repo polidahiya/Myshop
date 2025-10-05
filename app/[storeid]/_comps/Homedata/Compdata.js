@@ -22,6 +22,12 @@ export const Compdata = {
       paid: false,
       img: "/Homecomps/collection1.png",
     },
+    {
+      type: 2,
+      comp: dynamic(() => import("../Collections/Collections2")),
+      paid: false,
+      img: "/Homecomps/collection2.png",
+    },
   ],
   About: [
     {

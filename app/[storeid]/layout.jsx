@@ -48,7 +48,10 @@ async function layout({ children, params }) {
           storeid={storeid}
         />
         {children}
-        <FIxedbuttons whatsapp={storedata?.contact?.whatsapp} />
+        <FIxedbuttons
+          whatsapp={storedata?.contact?.whatsapp}
+          storename={storedata?.storename}
+        />
       </div>
     </Storehomectxwrapper>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
 import { RxCross2 } from "react-icons/rx";
+import { FaCog } from "react-icons/fa";
 
 function Sidemenu({ allsearchparams, collections }) {
   const { openfilter, setopenfilter } = AppContextfn();
@@ -81,6 +82,14 @@ function Sidemenu({ allsearchparams, collections }) {
               </div>
             </div>
           ))}
+          <Link
+            href={"/Store/Update"}
+            onClick={() => setshowsidemenu(false)}
+            className="flex items-center gap-3 px-6 py-3"
+          >
+            <FaCog size={18} />
+            <span>Update Collections</span>
+          </Link>
         </div>
       </div>
       {/* close screen */}

@@ -20,10 +20,7 @@ function Productcard({ storeid = null, product, isadmin = false }) {
           className="w-full aspect-square object-cover"
         />
         <div className="px-4 pt-4">
-          <p className="text-sm text-[var(--usertheme)] mt-[6px] hidden lg:block">
-            {product?.theme}
-          </p>
-          <p className="flex items-center justify-between flex-wrap mt-[6px]">
+          <p className="flex items-center justify-between flex-wrap">
             <span className="line-clamp-2">{product?.name}</span>
             <span className="">
               Rs {parseInt(product?.price, 10).toLocaleString("en-IN")}

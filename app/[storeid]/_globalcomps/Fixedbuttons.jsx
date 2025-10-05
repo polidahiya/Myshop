@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { FaArrowUpLong } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 
-function FIxedbuttons({ whatsapp }) {
+function FIxedbuttons({ whatsapp, storename }) {
   const path = usePathname();
   const isproductpage = path.includes("product");
 
@@ -16,19 +16,21 @@ function FIxedbuttons({ whatsapp }) {
       } right-5 md:right-10 flex flex-col items-end gap-2 z-30 print:hidden`}
     >
       <Gotopbutton />
-      <Whatsappbutton whatsapp={whatsapp} />
+      <Whatsappbutton whatsapp={whatsapp} storename={storename} />
       {/* <Helpbutton /> */}
     </div>
   );
 }
 
-const Whatsappbutton = ({ whatsapp }) => (
+const Whatsappbutton = ({ whatsapp, storename }) => (
   <Link
-    href={`https://wa.me/${whatsapp?.replace(
+    href={`https://wa.me/+91${whatsapp?.replace(
       / /g,
       ""
     )}?text=${encodeURIComponent(
-      "Hi Rentbean, I found your products interesting, and I would like to know more!"
+      "Hi " +
+        storename +
+        ", I found your products interesting, and I would like to know more!"
     )}`}
     target="_blank"
     rel="noopener noreferrer"

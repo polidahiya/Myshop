@@ -20,16 +20,16 @@ function Navbar() {
 
         <div className="flex items-center justify-center gap-1 lg:gap-2">
           <Link
-            href="/account/signup"
-            className="px-4 py-3 md:py-2 rounded-md bg-theme text-white shadow text-center"
-          >
-            Get Started
-          </Link>
-          <Link
             href={"/Search"}
             className="w-10 aspect-square flex items-center justify-center border border-gray-300 rounded-md"
           >
             <FiSearch />
+          </Link>
+          <Link
+            href="/account/signup"
+            className="h-10 px-4 flex items-center justify-center rounded-md bg-theme text-white shadow text-center"
+          >
+            Get Started
           </Link>
         </div>
       </div>

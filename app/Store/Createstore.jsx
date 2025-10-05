@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { AppContextfn } from "@/app/Context";
 import { saveStore } from "./Serveraction";
 import { useRouter } from "next/navigation";
+import { prestorescollections } from "@/lib/data";
 
 export default function Createstore() {
   const router = useRouter();
@@ -23,7 +24,20 @@ export default function Createstore() {
       text: "#525252",
     },
     social: {},
+    collections: [],
   });
+
+  const categories = [
+    "Furniture",
+    "Shoes",
+    "Electronics",
+    "Laptops",
+    "Mobiles",
+    "Clothes",
+    "Food",
+    "Glasses",
+    "Others",
+  ];
 
   const handleChange = (e, section, field) => {
     if (section) {
@@ -93,18 +107,22 @@ export default function Createstore() {
           />
           <select
             value={formData.storetype}
-            onChange={(e) => handleChange(e, null, "storetype")}
+            onChange={(e) => {
+              const value = e.target.value;
+              setFormData({
+                ...formData,
+                storetype: value,
+                collections: prestorescollections[value],
+              });
+            }}
             className="w-full p-3 border border-gray-300 rounded-lg outline-none"
           >
             <option value="">Select Store Type *</option>
-            <option value="furniture">Furniture</option>
-            <option value="electronics">Electronics</option>
-            <option value="Laptops">Laptops</option>
-            <option value="Mobiles">Mobiles</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Food">Food</option>
-            <option value="Glasses">Glasses</option>
-            <option value="Others">Others</option>
+            {categories.map((cat, i) => (
+              <option key={i} value={cat}>
+                {cat}
+              </option>
+            ))}
           </select>
           <input
             type="text"
