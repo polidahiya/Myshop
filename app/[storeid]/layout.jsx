@@ -8,31 +8,23 @@ import { Storehomectxwrapper } from "./Storecontext";
 import { notFound } from "next/navigation";
 import { Getuserdata } from "@/app/_globalcomps/Getuserdata";
 
-export const metadata = {
-  title: "",
-  description: "",
-  keywords: "",
-  //   openGraph: {
-  //     images: `/logo&ui/minlogo.png`,
-  //   },
-  // manifest: "/manifest.json",
-  robots: "index, follow",
-};
-
 async function layout({ children, params }) {
   const { storeid } = await params;
   const auth = await Authfn(storeid);
+
   const storedata = await getStoreData(storeid);
   if (!storedata) notFound();
   const storedatawithoutcollections = { ...storedata };
   delete storedatawithoutcollections.collections;
 
   let issavedstore = false;
+  let userdata = null;
 
   if (auth?.verified) {
-    const userdata = await Getuserdata();
+    userdata = await Getuserdata();
     issavedstore = userdata?.savedstores?.includes(storeid);
   }
+
   return (
     <Storehomectxwrapper>
       <div
@@ -44,13 +36,20 @@ async function layout({ children, params }) {
         className={`text-[var(--text)]`}
       >
         <Navbar
-          auth={auth}
           logo={storedata?.logo}
           storename={storedata?.storename}
           storeid={storeid}
+          isadmin={auth?.isadmin}
         />
 
-        <Sidemenu auth={auth} storeid={storeid} issavedstore={issavedstore} />
+        <Sidemenu
+          verified={auth?.verified}
+          storeid={storeid}
+          userstoreid={auth?.storeid}
+          useremail={auth?.email}
+          username={userdata?.name}
+          issavedstore={issavedstore}
+        />
         {children}
         <FIxedbuttons
           whatsapp={storedata?.contact?.whatsapp}
@@ -60,5 +59,17 @@ async function layout({ children, params }) {
     </Storehomectxwrapper>
   );
 }
+export const generateMetadata = async ({ params }) => {
+  const { storeid } = await params;
+  const storedata = await getStoreData(storeid);
+  const image = storedata?.logo || "";
+
+  return {
+    icons: {
+      icon: image || "/favicon.ico",
+    },
+    manifest: `/api/manifest?storeid=${storeid}`,
+  };
+};
 
 export default layout;

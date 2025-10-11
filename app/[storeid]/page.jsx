@@ -86,3 +86,42 @@ export default async function page({ params }) {
     </div>
   );
 }
+
+export const generateMetadata = async ({ params }) => {
+  const { storeid } = await params;
+  const storedata = await getStoreData(storeid);
+  const title = storedata?.storename || "A2Z Stores - Explore Amazing Products";
+  const description = "Hey there! Checkout my Amazing collections";
+  const keywords = "";
+  const image = storedata?.logo || ""; // Default image if no variant image is found
+  const url = `https://a2z-zeta.vercel.app/${storeid}`;
+
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: image }],
+      url, // URL of the page
+      site_name: title,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+    additionalMetaTags: [
+      { property: "og:type", content: "product" }, // Facebook Open Graph type
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:url", content: url },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
+  };
+};

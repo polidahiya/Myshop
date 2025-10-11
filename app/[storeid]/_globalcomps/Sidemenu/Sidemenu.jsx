@@ -13,9 +13,15 @@ import { IoBookmark } from "react-icons/io5";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { Saveitems } from "@/app/_globalcomps/Saveitems";
 
-function Sidemenu({ auth, storeid, issavedstore = false }) {
+function Sidemenu({
+  verified = false,
+  storeid,
+  userstoreid,
+  useremail,
+  username = "Username",
+  issavedstore = false,
+}) {
   const path = usePathname();
-  const { verified } = auth;
   const { showsidemenu, setshowsidemenu, setshowqr, setmessagefn } =
     AppContextfn();
   const [localissavedstore, setlocalissavedstore] = useState(issavedstore);
@@ -49,9 +55,9 @@ function Sidemenu({ auth, storeid, issavedstore = false }) {
               >
                 <FaUser size={40} />
               </div>
-              <p className="font-medium">Username</p>
+              <p className="font-medium">{username}</p>
               <p className="text-sm text-gray-500 dark:text-zinc-400">
-                {auth?.email}
+                {useremail}
               </p>
             </div>
 
@@ -67,10 +73,10 @@ function Sidemenu({ auth, storeid, issavedstore = false }) {
                 <FaSearch size={18} />
                 <span>Search a Store</span>
               </Link>
-              {auth?.storeid ? (
+              {userstoreid ? (
                 <div className="relative">
                   <Link
-                    href={`/${auth?.storeid}`}
+                    href={`/${userstoreid}`}
                     onClick={() => setshowsidemenu(false)}
                     className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
@@ -85,7 +91,7 @@ function Sidemenu({ auth, storeid, issavedstore = false }) {
                     onClick={() => {
                       setshowqr({
                         show: true,
-                        link: `${window.location.origin}/${auth?.storeid}`,
+                        link: `${window.location.origin}/${userstoreid}`,
                       });
                     }}
                   >
@@ -122,7 +128,13 @@ function Sidemenu({ auth, storeid, issavedstore = false }) {
 
               <div className="relative">
                 <Link
-                  href={`/Mysaves?type=savedstores`}
+                  href={
+                    verified
+                      ? `/Mysaves?type=savedstores`
+                      : `/account/login?redirect=${encodeURIComponent(
+                          "/Mysaves?type=savedstores"
+                        )}`
+                  }
                   onClick={() => setshowsidemenu(false)}
                   className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
@@ -138,6 +150,10 @@ function Sidemenu({ auth, storeid, issavedstore = false }) {
                     localissavedstore ? "Remove this store" : "Saved this store"
                   }
                   onClick={async () => {
+                    if (!verified) {
+                      setmessagefn("Login to save");
+                      return;
+                    }
                     setlocalissavedstore((pre) => !pre);
                     const res = await Saveitems("Store", storeid);
                     if (res.status != 200) setlocalissavedstore((pre) => !pre);
