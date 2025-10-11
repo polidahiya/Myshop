@@ -6,6 +6,7 @@ import Sidemenu from "./_globalcomps/Sidemenu/Sidemenu";
 import { Authfn } from "@/lib/auth";
 import { Storehomectxwrapper } from "./Storecontext";
 import { notFound } from "next/navigation";
+import { Getuserdata } from "@/app/_globalcomps/Getuserdata";
 
 export const metadata = {
   title: "",
@@ -25,6 +26,13 @@ async function layout({ children, params }) {
   if (!storedata) notFound();
   const storedatawithoutcollections = { ...storedata };
   delete storedatawithoutcollections.collections;
+
+  let issavedstore = false;
+
+  if (auth?.verified) {
+    const userdata = await Getuserdata();
+    issavedstore = userdata?.savedstores?.includes(storeid);
+  }
   return (
     <Storehomectxwrapper>
       <div
@@ -42,11 +50,7 @@ async function layout({ children, params }) {
           storeid={storeid}
         />
 
-        <Sidemenu
-          auth={auth}
-          storedata={storedatawithoutcollections}
-          storeid={storeid}
-        />
+        <Sidemenu auth={auth} storeid={storeid} issavedstore={issavedstore} />
         {children}
         <FIxedbuttons
           whatsapp={storedata?.contact?.whatsapp}

@@ -10,10 +10,18 @@ import { Productctxwrapper } from "./Productcontext";
 import { Authfn } from "@/lib/auth";
 import { getStoreData } from "../../Storedata";
 import Googleads from "@/app/_globalcomps/ads/Googleads";
+import { Getuserdata } from "@/app/_globalcomps/Getuserdata";
 
 async function page({ params }) {
   const { storeid, pid: productid } = await params;
-  const { isadmin } = await Authfn(storeid);
+  const { verified, isadmin } = await Authfn(storeid);
+  let issavedproduct = false;
+
+  if (verified) {
+    const userdata = await Getuserdata();
+    issavedproduct = userdata?.savedproducts?.includes(productid);
+  }
+
   const storedata = await getStoreData(storeid);
 
   const products = await Cachedproducts(storeid);
@@ -47,6 +55,7 @@ async function page({ params }) {
             <Details
               product={product}
               whatsappnum={storedata?.contact?.whatsapp}
+              issavedproduct={issavedproduct}
             />
           </div>
         </div>

@@ -30,6 +30,9 @@ body {
   @apply font-mulish;
 }
 
+button {
+  cursor: pointer;
+}
 .test {
   border: 1px solid red;
 }

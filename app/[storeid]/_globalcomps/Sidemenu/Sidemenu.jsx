@@ -1,26 +1,24 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { AppContextfn } from "@/app/Context";
-import {
-  FaUser,
-  FaSignOutAlt,
-  FaBookmark,
-  FaCog,
-  FaStore,
-  FaSearch,
-} from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaCog, FaStore, FaSearch } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoQrCodeOutline } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/account/Serveraction";
+import { IoBookmarks } from "react-icons/io5";
+import { IoBookmark } from "react-icons/io5";
+import { IoBookmarkOutline } from "react-icons/io5";
+import { Saveitems } from "@/app/_globalcomps/Saveitems";
 
-function Sidemenu({ auth, storedata, storeid }) {
+function Sidemenu({ auth, storeid, issavedstore = false }) {
   const path = usePathname();
   const { verified } = auth;
   const { showsidemenu, setshowsidemenu, setshowqr, setmessagefn } =
     AppContextfn();
+  const [localissavedstore, setlocalissavedstore] = useState(issavedstore);
 
   return (
     <AnimatePresence>
@@ -121,26 +119,39 @@ function Sidemenu({ auth, storedata, storeid }) {
                 <FaCog size={18} />
                 <span>Update Store Details</span>
               </Link>
-              <Link
-                href={"/"}
-                onClick={() => setshowsidemenu(false)}
-                className="flex items-center gap-3 px-6 py-3 
+
+              <div className="relative">
+                <Link
+                  href={`/Mysaves?type=savedstores`}
+                  onClick={() => setshowsidemenu(false)}
+                  className="flex items-center gap-3 px-6 py-3 
                   hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
-              >
-                <FaBookmark size={18} />
-                <span>Bookmarked Stores</span>
-              </Link>
-              <Link
-                href={"/"}
-                onClick={() => setshowsidemenu(false)}
-                className="flex items-center gap-3 px-6 py-3 
-                  hover:bg-gray-100 dark:hover:bg-zinc-800 
+                >
+                  <IoBookmarks size={18} />
+                  <span>Saved Items</span>
+                </Link>
+                <button
+                  className="absolute right-6 top-0 h-full aspect-square flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 
                   transition rounded-md"
-              >
-                <FaBookmark size={18} />
-                <span>Saved Items</span>
-              </Link>
+                  title={
+                    localissavedstore ? "Remove this store" : "Saved this store"
+                  }
+                  onClick={async () => {
+                    setlocalissavedstore((pre) => !pre);
+                    const res = await Saveitems("Store", storeid);
+                    if (res.status != 200) setlocalissavedstore((pre) => !pre);
+
+                    setshowsidemenu(false);
+                  }}
+                >
+                  {localissavedstore ? (
+                    <IoBookmark size={18} />
+                  ) : (
+                    <IoBookmarkOutline size={18} />
+                  )}
+                </button>
+              </div>
             </div>
 
             <hr className="border-gray-200 dark:border-zinc-700" />

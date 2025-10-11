@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Searchbar from "@/app/_globalcomps/Searchbar/Searchbar";
 import { Searchproducts } from "./Serveraction";
 import { AppContextfn } from "@/app/Context";
-import Ads from "../[storeid]/collections/_comps/Ads";
+import Ads from "../../[storeid]/collections/_comps/Ads";
 import dynamic from "next/dynamic";
 const Nextimage = dynamic(() => import("@/app/_globalcomps/Nextimage"));
 import { testimage } from "@/lib/data";
@@ -48,6 +48,7 @@ export default function Clientpage({}) {
             width={500}
             height={500}
             quality={100}
+            loading="eager"
           />
         </div>
       ) : (
@@ -65,6 +66,7 @@ export default function Clientpage({}) {
                     height={40}
                     width={40}
                     className=" aspect-square object-cover rounded-full"
+                    loading="lazy"
                   />
                   <p className="text-center line-clamp-1">{store?.storename}</p>
                 </Link>

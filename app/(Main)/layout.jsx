@@ -1,21 +1,15 @@
 import React from "react";
-import Clientpage from "./Clientpage";
 import { Authfn } from "@/lib/auth";
 import Link from "next/link";
 import { FaStoreAlt } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
-import DeviceDetector from "../_globalcomps/Devicedetector";
-import dynamic from "next/dynamic";
-const Googleads = dynamic(() => import("../_globalcomps/ads/Googleads"));
 
-async function page() {
-  const device = await DeviceDetector();
+async function layout({ children }) {
   const auth = await Authfn();
   const islogedin = auth?.verified;
   const havestore = auth?.storeid;
-
   return (
-    <div className="w-full flex flex-col min-h-screen">
+    <div>
       <header className="w-full flex items-center justify-between bg-white shadow-sm sticky top-0 z-30">
         <div className="px-6 py-4 flex items-center">
           <Link href="/A2Z" className="flex items-center gap-3">
@@ -65,23 +59,9 @@ async function page() {
         </Link> */}
         </div>
       </header>
-      <div className="relative flex gap-2 px-2 md:px-10">
-        {device != "mobile" && (
-          <div className="flex-1 h-fit sticky top-20 min-h-screen max-w-96 hidden md:block w-full">
-            <Googleads type={3} />
-          </div>
-        )}
-        <div className="flex-1">
-          <Clientpage />
-        </div>
-        {device != "mobile" && (
-          <div className="flex-1 h-fit sticky top-20 min-h-screen max-w-96 hidden md:block w-full">
-            <Googleads type={3} />
-          </div>
-        )}
-      </div>
+      {children}
     </div>
   );
 }
 
-export default page;
+export default layout;

@@ -10,11 +10,12 @@ export function Appwrapper({ children, parsedCart }) {
   const [showsidemenu, setshowsidemenu] = useState(false);
   const [openfilter, setopenfilter] = useState(false);
 
-  const [newadded, setnewadded] = useState([]);
-  useEffect(() => {
-    const storednewadded = localStorage.getItem("newadded");
-    if (storednewadded) setnewadded(JSON.parse(storednewadded));
-  }, []);
+  const [newadded, setnewadded] = useState(() => {
+    if (typeof window == "undefined") return null;
+    const stored = localStorage.getItem("newadded");
+    return stored ? JSON.parse(stored) : [];
+  });
+
   useEffect(() => {
     localStorage.setItem("newadded", JSON.stringify(newadded));
   }, [newadded]);
@@ -31,6 +32,7 @@ export function Appwrapper({ children, parsedCart }) {
     show: false,
     link: "",
   });
+
 
   // messages
   const setmessagefn = (message) => {

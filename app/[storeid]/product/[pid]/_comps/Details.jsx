@@ -5,7 +5,7 @@ import Descriptionitem from "./Descriptionitem";
 import Sharebutton from "./Sharebutton";
 import Pricedisplay from "./Pricedisplay";
 
-function Details({ product, whatsappnum }) {
+function Details({ product, whatsappnum, issavedproduct }) {
   return (
     <div className="min-h-28 px-5 md:px-0">
       {/* name */}
@@ -30,7 +30,11 @@ function Details({ product, whatsappnum }) {
           />
         )}
       </div>
-      <Cartbutton product={product} whatsappnum={whatsappnum} />
+      <Cartbutton
+        product={product}
+        whatsappnum={whatsappnum}
+        issavedproduct={issavedproduct}
+      />
     </div>
   );
 }

@@ -39,6 +39,11 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         ></script>
         <meta name="google-adsense-account" content={Googleadsid} />
+        {/* search console url verification */}
+        <meta
+          name="google-site-verification"
+          content="Rvp7Y-_9q60aAlayucwyJhaYlYv0aTw-UOWMbTqa4Xs"
+        />
       </head>
       {/* ✅ Mulish applied globally, Tenor available via class */}
       <body

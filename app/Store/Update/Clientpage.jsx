@@ -2,7 +2,6 @@
 import React, { useRef, useState } from "react";
 import Standardinputfield from "@/app/_globalcomps/inputfields/Standardinputfield";
 import Togglebuttons from "@/app/_globalcomps/inputfields/Togglebuttons";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
 import SocialLinks from "../_comps/Socialselect";
@@ -90,30 +89,35 @@ function Clientpage({ storedata, storeid }) {
           }
           window.history.back();
         }}
-        className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300 z-10"
+        className="fixed top-2 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-gray-300 rounded-full z-10"
       >
         X
       </button>
       {/* Navigations */}
       {formtype == 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 px-4 py-20">
-          {/* Tile 1 */}
-          <button
-            className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl text-white shadow-md bg-gradient-to-r from-theme to-theme cursor-pointer"
-            onClick={() => setformtype(1)}
-          >
-            <FaEdit size={32} />
-            <span className="text-lg font-semibold">Update Basic Details</span>
-          </button>
+        <div className="px-4 py-20">
+          <h1 className="text-2xl font-bold font-tenor text-center">
+            Update Your Details
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+            {/* Tile 1 */}
+            <button
+              className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl text-white shadow-md bg-gradient-to-r from-theme to-theme cursor-pointer"
+              onClick={() => setformtype(1)}
+            >
+              <FaEdit size={32} />
+              <span className="text-lg font-semibold">Basic Store Details</span>
+            </button>
 
-          {/* Tile 2 */}
-          <button
-            className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl text-white shadow-md bg-gradient-to-r from-green-400 to-emerald-600 cursor-pointer"
-            onClick={() => setformtype(2)}
-          >
-            <FaFolderOpen size={32} />
-            <span className="text-lg font-semibold">Update Collections</span>
-          </button>
+            {/* Tile 2 */}
+            <button
+              className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl text-white shadow-md bg-gradient-to-r from-green-400 to-emerald-600 cursor-pointer"
+              onClick={() => setformtype(2)}
+            >
+              <FaFolderOpen size={32} />
+              <span className="text-lg font-semibold">Collections</span>
+            </button>
+          </div>
         </div>
       )}
       {/* form */}
@@ -292,22 +296,6 @@ function Clientpage({ storedata, storeid }) {
             >
               Reset
             </button>
-            {data?._id && (
-              <Link
-                href={"/admin/products"}
-                onClick={async (e) => {
-                  e.preventDefault();
-                  if (newadded.length > 0) {
-                    setmessagefn("Cleaning up...");
-                    await Deleteimages(newadded, "Mystore");
-                  }
-                  router.push("/admin/products");
-                }}
-                className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
-              >
-                Cancel Update
-              </Link>
-            )}
           </div>
         )}
       </form>
