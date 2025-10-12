@@ -26,7 +26,7 @@ export async function GET(req) {
       icons: [
         {
           src:
-            store?.logo.replace(
+            store?.logo?.replace(
               "/upload/",
               `/upload/w_${192},h_${192},c_fill/`
             ) || "/favicon.ico",
@@ -35,7 +35,7 @@ export async function GET(req) {
         },
         {
           src:
-            store?.logo.replace(
+            store?.logo?.replace(
               "/upload/",
               `/upload/w_${512},h_${512},c_fill/`
             ) || "/favicon.ico",
