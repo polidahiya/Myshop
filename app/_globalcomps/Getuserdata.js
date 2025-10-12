@@ -20,8 +20,10 @@ export async function Getuserdata() {
           { projection: { password: 0 } }
         );
         user._id = user._id.toString();
-        user.savedproducts = user.savedproducts.map((id) => id.toString());
-        user.savedstores = user.savedstores.map((id) => id.toString());
+        if (user.savedproducts)
+          user.savedproducts = user.savedproducts.map((id) => id.toString());
+        if (user.savedstores)
+          user.savedstores = user.savedstores.map((id) => id.toString());
         return user;
       },
       [`userdata-${tokenres.email}`],
