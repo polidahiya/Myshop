@@ -42,6 +42,7 @@ async function page({ searchParams }) {
               className={`px-4 py-2 border border-theme rounded-md ${
                 item.type == type && "bg-theme text-white"
               }`}
+              replace
             >
               {item.title}
             </Link>

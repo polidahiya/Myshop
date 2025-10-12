@@ -12,6 +12,8 @@ import { IoBookmarks } from "react-icons/io5";
 import { IoBookmark } from "react-icons/io5";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { Saveitems } from "@/app/_globalcomps/Saveitems";
+import Sharebutton from "./Sharebutton";
+import Installbutton from "./Installbutton";
 
 function Sidemenu({
   verified = false,
@@ -171,6 +173,11 @@ function Sidemenu({
             </div>
 
             <hr className="border-gray-200 dark:border-zinc-700" />
+
+            <div className="flex flex-col py-4">
+              <Installbutton />
+              <Sharebutton />
+            </div>
 
             {/* Logout / Login */}
             <div className="py-4 px-6 mt-auto">
