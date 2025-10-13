@@ -16,13 +16,13 @@ function Footer() {
           <div>
             <div className="font-semibold">Company</div>
             <ul className="mt-2 space-y-2">
-              <Link className="block" href="/A2Z/Aboutus">
+              <Link prefetch={false} className="block" href="/A2Z/Aboutus">
                 About
               </Link>
-              <Link className="block" href="/A2Z/Privacypolicy">
+              <Link prefetch={false} className="block" href="/A2Z/Privacypolicy">
                 Privacy Policy
               </Link>
-              <Link className="block" href="/A2Z/Termsandconditions">
+              <Link prefetch={false} className="block" href="/A2Z/Termsandconditions">
                 Terms and Conditions
               </Link>
             </ul>

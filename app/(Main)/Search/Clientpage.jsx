@@ -56,7 +56,7 @@ export default function Clientpage({}) {
           <div className="mt-5 space-y-5 w-full max-w-2xl mx-auto">
             {searchres.map((store, i) => (
               <React.Fragment key={i}>
-                <Link
+                <Link prefetch={false}
                   href={`/${store?._id}`}
                   className="flex items-center gap-2 h-10"
                 >

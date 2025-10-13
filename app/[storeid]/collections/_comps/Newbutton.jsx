@@ -4,7 +4,7 @@ import { TbNewSection } from "react-icons/tb";
 
 function Newbutton({ storeid }) {
   return (
-    <Link
+    <Link prefetch={false}
       href={`/${storeid}/product/add`}
       className="w-full min-w-48 aspect-square flex flex-col items-center justify-center shrink-0"
     >

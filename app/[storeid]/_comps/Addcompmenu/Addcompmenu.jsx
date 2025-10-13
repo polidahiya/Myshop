@@ -31,7 +31,7 @@ export default function Addcompmenu({ Compdata, storeid }) {
                   <div className="text-xl font-bold">{key}</div>
                   <div className="flex overflow-x-scroll gap-4 ">
                     {value.map((item, j) => (
-                      <Link
+                      <Link prefetch={false}
                         key={j}
                         href={`/${storeid}/Edithome?add=true&at=${addmenu?.addat}&category=${key}&type=${item?.type}`}
                         className="w-44 aspect-square rounded cursor-pointer overflow-hidden shrink-0"

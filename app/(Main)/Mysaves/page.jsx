@@ -36,7 +36,7 @@ async function page({ searchParams }) {
               type: "savedproducts",
             },
           ].map((item, i) => (
-            <Link
+            <Link prefetch={false}
               key={i}
               href={`/Mysaves?type=${item.type}`}
               className={`px-4 py-2 border border-theme rounded-md ${
@@ -48,7 +48,7 @@ async function page({ searchParams }) {
             </Link>
           ))}
         </div>
-        <Link
+        <Link prefetch={false}
           href="/Search"
           className="px-4 py-2 border border-theme rounded-md bg-theme text-white"
         >
@@ -77,7 +77,7 @@ async function page({ searchParams }) {
             {saveditems[type].map((item, i) => (
               <React.Fragment key={saveditems[type] + i}>
                 <div className="relative">
-                  <Link
+                  <Link prefetch={false}
                     href={
                       istoretype
                         ? `/${item?._id}`

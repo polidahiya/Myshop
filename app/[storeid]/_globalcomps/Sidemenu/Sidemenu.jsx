@@ -66,6 +66,7 @@ function Sidemenu({
             {/* Menu */}
             <div className="flex flex-col py-4">
               <Link
+                prefetch={false}
                 href={"/Search"}
                 onClick={() => setshowsidemenu(false)}
                 className="flex items-center gap-3 px-6 py-3 
@@ -78,6 +79,7 @@ function Sidemenu({
               {userstoreid ? (
                 <div className="relative">
                   <Link
+                    prefetch={false}
                     href={`/${userstoreid}`}
                     onClick={() => setshowsidemenu(false)}
                     className="flex items-center gap-3 px-6 py-3 
@@ -102,6 +104,7 @@ function Sidemenu({
                 </div>
               ) : (
                 <Link
+                  prefetch={false}
                   href={"/Store"}
                   onClick={() => setshowsidemenu(false)}
                   className="flex items-center gap-3 px-6 py-3 
@@ -118,6 +121,7 @@ function Sidemenu({
 
             <div className="flex flex-col py-4">
               <Link
+                prefetch={false}
                 href={"/Store/Update"}
                 onClick={() => setshowsidemenu(false)}
                 className="flex items-center gap-3 px-6 py-3 
@@ -130,6 +134,7 @@ function Sidemenu({
 
               <div className="relative">
                 <Link
+                  prefetch={false}
                   href={
                     verified
                       ? `/Mysaves?type=savedstores`
@@ -175,13 +180,16 @@ function Sidemenu({
             <hr className="border-gray-200 dark:border-zinc-700" />
 
             <div className="flex flex-col py-4">
-              <Installbutton />
-              <Sharebutton />
+              <div className="flex items-center justify-center">
+                <Installbutton />
+                <Sharebutton />
+              </div>
             </div>
 
             {/* Logout / Login */}
             <div className="py-4 px-6 mt-auto">
               <Link
+                prefetch={false}
                 href={verified ? "/" : `/account/login?redirect=${path}`}
                 onClick={async (e) => {
                   if (verified) {

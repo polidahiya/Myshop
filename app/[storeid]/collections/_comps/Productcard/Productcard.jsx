@@ -7,7 +7,7 @@ import { testimage } from "@/lib/data";
 function Productcard({ storeid = null, product, isadmin = false }) {
   return (
     <div className="relative">
-      <Link
+      <Link prefetch={false}
         href={`/${storeid || product?.storeid}/product/${product?._id}`}
         className="w-full"
       >

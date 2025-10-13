@@ -22,13 +22,13 @@ export default function HomePage() {
           </p>
 
           <div className="mt-8 flex gap-1">
-            <Link
+            <Link prefetch={false}
               href="/Store"
               className="w-full md:w-fit px-2 md:px-6 py-3 rounded-md bg-theme text-white font-medium flex items-center justify-center gap-3"
             >
               <span>+</span> Create your Store
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/Search"
               className="w-full md:w-fit px-2 md:px-6 py-3 rounded-md bg-theme text-white font-medium flex items-center justify-center gap-3"
             >
@@ -147,13 +147,13 @@ export default function HomePage() {
                 <h4 className="mt-3 font-semibold">Modern store</h4>
                 <p className="text-sm text-gray-600 mt-1">{item?.desc}</p>
                 <div className="mt-3 flex items-center gap-2">
-                  <Link
+                  <Link prefetch={false}
                     href={"/A2Z"}
                     className="block w-full px-3 py-2 rounded-md bg-theme text-white text-sm text-center"
                   >
                     Use template
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href={"/A2Z"}
                     className="block w-full px-3 py-2 rounded-md border text-sm text-center"
                   >
@@ -169,7 +169,7 @@ export default function HomePage() {
             <h3 className="text-2xl font-semibold">Popular Stores</h3>
           </div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link
+            <Link prefetch={false}
               href={"/68dfd5fd5c999e143dc8ef01"}
               className="rounded-xl shadow"
             >
@@ -231,7 +231,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="mt-4 md:mt-0">
-            <Link
+            <Link prefetch={false}
               href="/Store"
               className="px-6 py-3 rounded-md bg-white text-theme font-semibold"
             >

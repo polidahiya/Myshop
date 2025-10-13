@@ -265,7 +265,7 @@ function Clientpage({ productdata, collections }) {
             Reset
           </button>
           {data?._id && (
-            <Link
+            <Link prefetch={false}
               href={"/admin/products"}
               onClick={async (e) => {
                 e.preventDefault();

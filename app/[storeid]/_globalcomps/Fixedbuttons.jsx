@@ -23,7 +23,7 @@ function FIxedbuttons({ whatsapp, storename }) {
 }
 
 const Whatsappbutton = ({ whatsapp, storename }) => (
-  <Link
+  <Link prefetch={false}
     href={`https://wa.me/+91${whatsapp?.replace(
       / /g,
       ""
@@ -49,7 +49,7 @@ const Whatsappbutton = ({ whatsapp, storename }) => (
 );
 
 const Helpbutton = () => (
-  <Link
+  <Link prefetch={false}
     href={"/Contact"}
     className={`group  flex items-center justify-center p-1 rounded-full overflow-hidden bg-[var(--usertheme)]`}
     prefetch={false}

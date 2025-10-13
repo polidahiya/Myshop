@@ -22,7 +22,7 @@ export default function Compwrapper({ children, storeid, i, comp }) {
       <div className="relative">
         {edit && (
           <div className="absolute top-2 right-2 flex gap-2 p-1 bg-slate-100 rounded-full shadow-sm z-10">
-            <Link
+            <Link prefetch={false}
               href={`/${storeid}/Edithome?add=false&at=${i}`}
               className="flex items-center justify-center bg-white text-theme w-10 aspect-square z-10 rounded-full"
             >

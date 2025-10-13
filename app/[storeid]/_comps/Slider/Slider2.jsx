@@ -107,7 +107,7 @@ export default function Slider2({
                     className="w-full min-w-full mt-3 flex items-center justify-center"
                     data-swiper-parallax="-450"
                   >
-                    <Link
+                    <Link prefetch={false}
                       href={link}
                       className="bg-white text-[var(--usertheme)] px-10 py-4 border block w-fit border-white lg:hover:bg-transparent lg:hover:text-white duration-300"
                     >

@@ -14,7 +14,7 @@ async function Category1({
       {showheader && (
         <div className="flex items-center justify-between px-2 md:px-10">
           <h2 className="text-2xl font-tenor">{collection}</h2>
-          <Link
+          <Link prefetch={false}
             href={`/${storeid}/collections`}
             className="text-[var(--usertheme)]"
           >
@@ -25,7 +25,7 @@ async function Category1({
 
       <div className="grid grid-cols-3 gap-2 md:grid-cols-9 mt-2 px-2 md:px-10">
         {Selectedcollection?.subcat?.slice(0, 9)?.map((item, i) => (
-          <Link
+          <Link prefetch={false}
             key={i}
             href={`/${storeid}/collections?${encodeURIComponent(
               collection

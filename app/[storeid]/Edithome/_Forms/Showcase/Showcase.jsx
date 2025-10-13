@@ -79,7 +79,7 @@ export default function Showcase({ products }) {
           </div>
         ))}
       </div>
-      <Linkselector
+      <Link prefetch={false}selector
         products={products}
         selected={selectedlist}
         callback={(list) => {

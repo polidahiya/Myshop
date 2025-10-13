@@ -29,7 +29,7 @@ export default function Slider1({ items, storeid, device, imageDimensions }) {
           const link = Linkgenerator(item, storeid);
           return (
             <SwiperSlide key={i} className="w-full h-full">
-              <Link
+              <Link prefetch={false}
                 href={link}
                 prefetch={false}
                 className="relative h-full w-full block"

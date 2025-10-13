@@ -71,7 +71,7 @@ export default function AboutUs() {
           on A2Z.
         </p>
         <div className="flex justify-center">
-          <Link
+          <Link prefetch={false}
             href={"/Store"}
             className="block mt-6 px-8 py-3 bg-white text-theme font-semibold rounded-xl shadow-md hover:bg-gray-100 transition mx-auto"
           >

@@ -8,7 +8,7 @@ function Footer({ social }) {
       {Object.entries(social).map(([key, link], i) => {
         const Icon = socialPlatforms[key].icon;
         return (
-          <Link
+          <Link prefetch={false}
             key={i}
             href={link || "#"}
             target="_blank"

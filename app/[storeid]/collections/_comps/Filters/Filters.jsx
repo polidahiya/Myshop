@@ -55,7 +55,7 @@ function Sidemenu({ allsearchparams, collections }) {
                 {name}
               </div>
               <div className="pl-5">
-                <Link
+                <Link prefetch={false}
                   href={generateHref(name, "All")}
                   className={`block relative px-5 py-2 lg:hover:text-[var(--usertheme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md ${
                     !allsearchparams[name] && "text-[var(--usertheme)]"
@@ -66,7 +66,7 @@ function Sidemenu({ allsearchparams, collections }) {
                   All
                 </Link>
                 {subcat.map((option, j) => (
-                  <Link
+                  <Link prefetch={false}
                     key={j}
                     href={generateHref(name, option?.name)}
                     className={`block relative px-5 py-2 lg:hover:text-[var(--usertheme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md cursor-pointer ${
@@ -82,7 +82,7 @@ function Sidemenu({ allsearchparams, collections }) {
               </div>
             </div>
           ))}
-          <Link
+          <Link prefetch={false}
             href={"/Store/Update"}
             onClick={() => setshowsidemenu(false)}
             className="flex items-center gap-3 px-6 py-3"

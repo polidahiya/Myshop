@@ -34,7 +34,6 @@ function Sharebutton({}) {
       onClick={Moreshare}
     >
       <PiShareNetworkFill size={18} />
-      <span>Share</span>
     </button>
   );
 }

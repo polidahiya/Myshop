@@ -15,7 +15,7 @@ function Banner1({ storeid, device, items }) {
   const imagewidth = imagewidths[device]?.width;
   return (
     <div className="">
-      <Link href={Linkgenerator(slide, storeid)}>
+      <Link prefetch={false} href={Linkgenerator(slide, storeid)}>
         <Nextimage
           src={slide?.img}
           alt={slide?.title}

@@ -10,7 +10,7 @@ function Editbutton({ storeid }) {
   const { setedit } = Storehomectxfn();
   const homelink = `/${storeid}`;
   return (
-    <Link
+    <Link prefetch={false}
       href={homelink}
       onClick={(e) => {
         if (path == homelink) {

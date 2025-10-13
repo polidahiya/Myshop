@@ -12,7 +12,11 @@ async function layout({ children }) {
     <div>
       <header className="w-full flex items-center justify-between bg-white shadow-sm sticky top-0 z-30">
         <div className="px-6 py-4 flex items-center">
-          <Link href="/A2Z" className="flex items-center gap-3">
+          <Link
+            prefetch={false}
+            href="/A2Z"
+            className="flex items-center gap-3"
+          >
             <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-md flex items-center justify-center text-white font-bold">
               A2Z
             </div>
@@ -26,6 +30,7 @@ async function layout({ children }) {
         </div>
         <div className="flex gap-2 px-2 md:px-10 py-2 ">
           <Link
+            prefetch={false}
             href={
               islogedin
                 ? havestore
@@ -51,7 +56,7 @@ async function layout({ children }) {
               </>
             )}
           </Link>
-          {/* <Link
+          {/* <Link prefetch={false}
           href={`/`}
           className="w-full h-12 rounded-xl border border-slate-200 bg-theme text-white px-5 flex items-center justify-center shadow-sm"
         >

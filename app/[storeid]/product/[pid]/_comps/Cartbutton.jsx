@@ -108,7 +108,7 @@ function Cartbutton({ product, whatsappnum, issavedproduct }) {
         </div>
       </div>
       {/* add to cart button */}
-      <Link
+      <Link prefetch={false}
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"

@@ -12,7 +12,7 @@ function Navbar({ isadmin, logo, storename, storeid }) {
   return (
     <nav className="sticky top-0 z-20 shadow-sm h-16 bg-white px-2 md:px-10 flex items-center">
       <Menubutton />
-      <Link href={`/${storeid}`} className="flex items-center gap-3 ml-3">
+      <Link prefetch={false} href={`/${storeid}`} className="flex items-center gap-3 ml-3">
         {logo && (
           <Nextimage
             className="h-10"
@@ -27,7 +27,7 @@ function Navbar({ isadmin, logo, storename, storeid }) {
         </span>
       </Link>
       <div className="ml-auto  mr-2 flex items-center gap-2">
-        <Link
+        <Link prefetch={false}
           href={`/${storeid}/Search`}
           className="w-10 md:w-auto md:h-10 aspect-square md:aspect-auto flex items-center justify-center md:bg-gray-100 md:rounded-full md:cursor-text"
         >

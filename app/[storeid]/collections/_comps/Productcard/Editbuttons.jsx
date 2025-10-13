@@ -12,7 +12,7 @@ function Editbuttons({ storeid, product }) {
   return (
     <div className="absolute top-2 left-2 flex flex-col gap-2">
       {/* Edit Button */}
-      <Link
+      <Link prefetch={false}
         href={`/${storeid}/product/add?edit=${product?._id}`}
         className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition"
       >
