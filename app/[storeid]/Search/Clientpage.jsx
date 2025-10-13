@@ -40,7 +40,7 @@ export default function Clientpage({ storeid, isadmin }) {
       {searchres.length == 0 && query.length != 0 ? (
         <div className="flex justify-center mt-5">
           <Nextimage
-            src="/productnotfound.png"
+            src="/notfoundimages/search.jpg"
             alt="noresult"
             width={500}
             height={500}

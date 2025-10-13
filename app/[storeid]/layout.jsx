@@ -66,7 +66,7 @@ export const generateMetadata = async ({ params }) => {
 
   return {
     icons: {
-      icon: image || "/favicon.ico",
+      icon: image || "/favicon.png",
     },
     manifest: `/api/manifest?storeid=${storeid}`,
   };

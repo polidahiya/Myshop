@@ -58,7 +58,7 @@ async function page({ params, searchParams }) {
         ) : (
           <div className="sticky top-20 flex justify-center mt-5 h-fit w-full">
             <Nextimage
-              src="/productnotfound.png"
+              src="/notfoundimages/products.jpg"
               alt="noresult"
               width={500}
               height={500}

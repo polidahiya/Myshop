@@ -29,7 +29,7 @@ export async function GET(req) {
             store?.logo?.replace(
               "/upload/",
               `/upload/w_${192},h_${192},c_fill/`
-            ) || "/favicon.ico",
+            ) || "/favicon.png",
           sizes: "192x192",
           type: "image/png",
         },
@@ -38,7 +38,7 @@ export async function GET(req) {
             store?.logo?.replace(
               "/upload/",
               `/upload/w_${512},h_${512},c_fill/`
-            ) || "/favicon.ico",
+            ) || "/favicon.png",
           sizes: "512x512",
           type: "image/png",
         },

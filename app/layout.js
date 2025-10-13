@@ -24,6 +24,9 @@ const tenor = Tenor_Sans({
 export const metadata = {
   title: "A2Z Stores",
   description: "Create your own store in minutes",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -59,7 +59,7 @@ async function page({ searchParams }) {
         {saveditems[type].length == 0 ? (
           <div className="flex justify-center mt-5">
             <Nextimage
-              src="/productnotfound.png"
+              src="/notfoundimages/saved.jpg"
               alt="noresult"
               width={500}
               height={500}
