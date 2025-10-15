@@ -42,9 +42,13 @@ async function page({ params }) {
             <Imagescomp images={product?.images} name={product?.name} />
             {/* routes */}
             <div className="text-sm mt-10 px-5">
-              <Link prefetch={false} href={`/${storeid}`}>Home</Link>
+              <Link prefetch={false} href={`/${storeid}`}>
+                Home
+              </Link>
               <span className="select-none pointer-events-none"> / </span>
-              <Link prefetch={false} href={`/${storeid}/collections`}>Collections</Link>
+              <Link prefetch={false} href={`/${storeid}/collections`}>
+                Collections
+              </Link>
               <span className="select-none pointer-events-none"> / </span>
               <span className="capitalize text-[var(--secondary)]">
                 {product?.name}
@@ -70,7 +74,8 @@ async function page({ params }) {
         </div>
         {/* edit button */}
         {isadmin && (
-          <Link prefetch={false}
+          <Link
+            prefetch={false}
             href={`/${storeid}/product/add?edit=${product?._id}`}
             className="fixed top-24 right-5  bg-[var(--usertheme)] text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
           >

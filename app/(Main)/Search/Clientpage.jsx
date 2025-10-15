@@ -53,7 +53,7 @@ export default function Clientpage({}) {
         </div>
       ) : (
         <>
-          <div className="mt-5 space-y-5 w-full max-w-2xl mx-auto">
+          <div className="mt-5 space-y-5 w-full max-w-2xl mx-auto min-h-screen">
             {searchres.map((store, i) => (
               <React.Fragment key={i}>
                 <Link prefetch={false}

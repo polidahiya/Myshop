@@ -17,7 +17,7 @@ async function layout({ children }) {
             href="/A2Z"
             className="flex items-center gap-3"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-md flex items-center justify-center text-white font-bold">
+            <div className="min-w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-md flex items-center justify-center text-white font-bold">
               A2Z
             </div>
             <div>
@@ -38,7 +38,7 @@ async function layout({ children }) {
                   : "/Store"
                 : "/account/login?redirect=/Search"
             }
-            className="w-full h-12 rounded-xl border border-slate-200 bg-theme text-white px-5 flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"
+            className="w-full h-12 rounded-md border border-slate-200 bg-theme text-white px-5 flex items-center justify-center gap-2 whitespace-nowrap"
           >
             {islogedin ? (
               havestore ? (
@@ -56,12 +56,6 @@ async function layout({ children }) {
               </>
             )}
           </Link>
-          {/* <Link prefetch={false}
-          href={`/`}
-          className="w-full h-12 rounded-xl border border-slate-200 bg-theme text-white px-5 flex items-center justify-center shadow-sm"
-        >
-          test
-        </Link> */}
         </div>
       </header>
       {children}

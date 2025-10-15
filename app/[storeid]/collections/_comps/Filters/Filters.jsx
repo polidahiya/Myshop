@@ -6,7 +6,7 @@ import { AppContextfn } from "@/app/Context";
 import { RxCross2 } from "react-icons/rx";
 import { FaCog } from "react-icons/fa";
 
-function Sidemenu({ allsearchparams, collections }) {
+function Sidemenu({ isadmin, allsearchparams, collections }) {
   const { openfilter, setopenfilter } = AppContextfn();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -49,13 +49,25 @@ function Sidemenu({ allsearchparams, collections }) {
           </div>
         </div>
         <div className="h-full space-y-2 overflow-y-scroll hidescroll lg:overflow-y-visible p-2 lg:p-0">
+          {isadmin && (
+            <Link
+              prefetch={false}
+              href={"/Store/Update"}
+              onClick={() => setshowsidemenu(false)}
+              className="flex items-center gap-3 px-6 py-3"
+            >
+              <FaCog size={18} />
+              <span>Update Collections</span>
+            </Link>
+          )}
           {collections.map(({ name, image, subcat }, i) => (
             <div key={i} className="text-sm bg-white rounded-2xl shadow-sm p-2">
               <div className="relative px-5 py-2 font-semibold rounded-xl bg-gray-100 z-10">
                 {name}
               </div>
               <div className="pl-5">
-                <Link prefetch={false}
+                <Link
+                  prefetch={false}
                   href={generateHref(name, "All")}
                   className={`block relative px-5 py-2 lg:hover:text-[var(--usertheme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md ${
                     !allsearchparams[name] && "text-[var(--usertheme)]"
@@ -66,7 +78,8 @@ function Sidemenu({ allsearchparams, collections }) {
                   All
                 </Link>
                 {subcat.map((option, j) => (
-                  <Link prefetch={false}
+                  <Link
+                    prefetch={false}
                     key={j}
                     href={generateHref(name, option?.name)}
                     className={`block relative px-5 py-2 lg:hover:text-[var(--usertheme)] last:pb-4 before:absolute before:h-16 first:before:h-10 before:w-4 before:border-l before:border-b before:border-gray-300 before:left-0 left-0 before:bottom-1/2 before:rounded-bl-md cursor-pointer ${
@@ -82,14 +95,6 @@ function Sidemenu({ allsearchparams, collections }) {
               </div>
             </div>
           ))}
-          <Link prefetch={false}
-            href={"/Store/Update"}
-            onClick={() => setshowsidemenu(false)}
-            className="flex items-center gap-3 px-6 py-3"
-          >
-            <FaCog size={18} />
-            <span>Update Collections</span>
-          </Link>
         </div>
       </div>
       {/* close screen */}

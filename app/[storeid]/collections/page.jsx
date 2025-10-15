@@ -35,9 +35,10 @@ async function page({ params, searchParams }) {
   //
   return (
     <div className="px-2 md:px-10 pb-10">
-      <Heading />
+      <Heading storeid={storeid}/>
       <div className="flex gap-5">
         <Filters
+          isadmin={isadmin}
           allsearchparams={allsearchparams}
           collections={storedata?.collections}
         />

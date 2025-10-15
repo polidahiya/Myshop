@@ -3,8 +3,9 @@ import React from "react";
 import { LuFilter } from "react-icons/lu";
 import { AppContextfn } from "@/app/Context";
 import ShareButton from "./Sharebutton";
+import Link from "next/link";
 
-function Heading() {
+function Heading({ storeid }) {
   const { setopenfilter } = AppContextfn();
   return (
     <div className="py-10 px-2">
@@ -21,7 +22,9 @@ function Heading() {
           <ShareButton />
         </div>
       </div>
-      <p>Home / collections</p>
+      <p>
+        <Link href={`/${storeid}`}>Home</Link> / collections
+      </p>
     </div>
   );
 }
