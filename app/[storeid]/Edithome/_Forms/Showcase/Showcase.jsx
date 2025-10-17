@@ -28,7 +28,6 @@ export default function Showcase({ products }) {
     }
   };
 
-
   return (
     <div className="mt-5 p-4 border rounded-md space-y-2">
       <Standardinputfield
@@ -79,7 +78,7 @@ export default function Showcase({ products }) {
           </div>
         ))}
       </div>
-      <Link prefetch={false}selector
+      <Linkselector
         products={products}
         selected={selectedlist}
         callback={(list) => {

@@ -107,7 +107,7 @@ function Slider({ collections, products }) {
                 setdata((pre) => ({ ...pre, props: updated }));
               }}
             />
-            <Link prefetch={false}selector
+            <Linkselector
               collections={collections}
               products={products}
               selected={{
