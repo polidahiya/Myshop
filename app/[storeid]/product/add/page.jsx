@@ -12,7 +12,7 @@ async function page({ params, searchParams }) {
   const { edit, copy } = await searchParams;
   if (!isadmin) notFound();
   let productdata = null;
-  
+
   if (edit || copy) {
     const res = await Getproduct(edit || copy);
     if (res?.status == 200) {
@@ -35,6 +35,7 @@ async function page({ params, searchParams }) {
   }
   return (
     <Clientpage
+      storeid={storeid}
       productdata={productdata}
       collections={storedata?.collections.flatMap((cat) =>
         cat.subcat.map((subcat) => subcat.name)

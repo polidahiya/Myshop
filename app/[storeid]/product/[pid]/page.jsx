@@ -87,50 +87,53 @@ async function page({ params }) {
   );
 }
 
-// export const generateMetadata = async ({ params }) => {
-//   const props = (await params).props;
-//   const sku = props[0];
-//   const color = props[1] || 0;
+export const generateMetadata = async ({ params }) => {
+  const { storeid, pid: productid } = await params;
+  const storedata = await getStoreData(storeid);
 
-//   const products = await Cachedproducts();
-//   const product = products.filter((product) => product?.sku === sku)[0];
+  const products = await Cachedproducts(storeid);
+  const product = products.find((product) => product?._id == productid);
 
-//   const title = product?.seotitle || "AltOrganisers - Explore Amazing Products";
-//   const description =
-//     product?.seodescription ||
-//     "Check out this amazing product at AltOrganisers!";
-//   const keywords = product?.seokeywords || "";
-//   const image = product?.variants[color]?.images[0] || "/default-image.jpg"; // Default image if no variant image is found
-//   const url = `https://altorganisers.com/product/${sku}/${color}`;
+  const title = product?.seotitle || "A2Z Stores - Explore Amazing Products";
+  const description =
+    product?.seodescription || "Hey there! Checkout my Amazing collections";
+  const keywords = product?.seokeywords || "";
+  const image = product?.images[0] || "";
+  const url = `https://a2z-zeta.vercel.app/${storeid}/product/${product?._id}`;
 
-//   return {
-//     title,
-//     description,
-//     keywords,
-//     openGraph: {
-//       title,
-//       description,
-//       images: [{ url: image }],
-//       url, // URL of the page
-//       site_name: "AltOrganisers",
-//     },
-//     twitter: {
-//       card: "summary_large_image",
-//       title,
-//       description,
-//       images: [image],
-//     },
-//     additionalMetaTags: [
-//       { property: "og:type", content: "product" }, // Facebook Open Graph type
-//       { property: "og:title", content: title },
-//       { property: "og:description", content: description },
-//       { property: "og:image", content: image },
-//       { property: "og:url", content: url },
-//       { name: "twitter:title", content: title },
-//       { name: "twitter:description", content: description },
-//       { name: "twitter:image", content: image },
-//     ],
-//   };
-// };
+  return {
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      images: product?.images.map((image) => {
+        return { url: image };
+      }),
+      url,
+      site_name: storedata?.storename,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+    additionalMetaTags: [
+      { property: "og:type", content: "product" }, // Facebook Open Graph type
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:url", content: url },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
+  };
+};
 
 export default page;

@@ -12,32 +12,32 @@ import { Deleteimages } from "@/lib/Addordeleteimages";
 import { useRouter } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
 
-const initialState = {
-  name: "",
-  mrp: "",
-  price: "",
-  keyfeatures: [""],
-  descriptions: [""],
-  collections: [],
-  stocks: 0,
-  images: [],
-  options: [
-    // {
-    //   name: "test",
-    //   options: [{ name: "", image: """, imageindex: 0, price: "", mrp: "" }],
-    // },
-  ],
-  seotitle: "",
-  seodescription: "",
-  seokeywords: "",
-  available: true,
-  trash: false,
-};
-
-function Clientpage({ productdata, collections }) {
+function Clientpage({ storeid, productdata, collections }) {
   const router = useRouter();
 
   const { setmessagefn, newadded, setnewadded } = AppContextfn();
+
+  const initialState = {
+    name: "",
+    mrp: "",
+    price: "",
+    keyfeatures: [""],
+    descriptions: [""],
+    collections: [],
+    stocks: 0,
+    images: [],
+    options: [
+      // {
+      //   name: "test",
+      //   options: [{ name: "", image: "", imageindex: 0, price: "", mrp: "" }],
+      // },
+    ],
+    seotitle: "",
+    seodescription: "",
+    seokeywords: "",
+    available: true,
+    trash: false,
+  };
 
   const mergedstate = productdata
     ? { ...initialState, ...productdata }
@@ -54,6 +54,22 @@ function Clientpage({ productdata, collections }) {
     setloading(true);
     try {
       const res = await Addproduct(data, deletedimages);
+      setmessagefn(res?.message);
+      if (res.status == 200) {
+        setdata({
+          ...initialState,
+          keyfeatures: [""],
+          descriptions: [""],
+          collections: [],
+          images: [],
+          options: [],
+        });
+        setloading(false);
+        setdeletedimages([]);
+        setnewadded([]);
+        router.replace(`/${storeid}/product/add`);
+      }
+    } catch (error) {
       setdata({
         ...initialState,
         keyfeatures: [""],
@@ -62,21 +78,17 @@ function Clientpage({ productdata, collections }) {
         images: [],
         options: [],
       });
-      setmessagefn(res?.message);
-      setloading(false);
-      setdeletedimages([]);
-      setnewadded([]);
-    } catch (error) {
-      setdata(initialState);
       setloading(false);
       setmessagefn("Error!");
       console.error("Error:", error);
+      router.replace(`/${storeid}/product/add`);
     }
   };
 
   return (
     <>
       <button
+        type="button"
         onClick={async (e) => {
           if (newadded.length > 0) {
             setmessagefn("Cleaning up...");
@@ -265,7 +277,8 @@ function Clientpage({ productdata, collections }) {
             Reset
           </button>
           {data?._id && (
-            <Link prefetch={false}
+            <Link
+              prefetch={false}
               href={"/admin/products"}
               onClick={async (e) => {
                 e.preventDefault();

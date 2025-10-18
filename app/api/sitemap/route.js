@@ -23,7 +23,7 @@ export const getAllStoresData = unstable_cache(
     const stores = await storescollection.find({}).toArray();
 
     return stores.map((store) => ({
-      loc: `${domain}/${store.slug || store._id}`,
+      loc: `${domain}/${store._id}`,
       lastmod: today,
       changefreq: "daily",
       priority: "1.0",
@@ -38,10 +38,32 @@ export const getAllStoresData = unstable_cache(
   }
 );
 
+export const allproductsdata = unstable_cache(
+  async () => {
+    const { Productscollection } = await getcollection();
+    const products = await Productscollection.find({}).toArray();
+
+    return products.map((product) => ({
+      loc: `${domain}/${product?.storeid}/product/${product?._id}`,
+      lastmod: today,
+      changefreq: "daily",
+      priority: "1.0",
+      image: product?.images[0] || "",
+      name: product?.name || "",
+    }));
+  },
+  ["allproducts"],
+  {
+    revalidate: CACHE_TIME,
+    tags: ["allproducts"],
+  }
+);
+
 // --- Sitemap Route Handler ---
 export async function GET() {
   try {
     const storeUrls = await getAllStoresData();
+    const productsurl = await allproductsdata();
 
     // Generate all URLs
     const allUrls = [
@@ -52,6 +74,7 @@ export async function GET() {
         priority: "1.0",
       },
       ...storeUrls,
+      ...productsurl,
     ];
 
     // Generate sitemap XML

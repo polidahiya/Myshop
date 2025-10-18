@@ -27,6 +27,7 @@ function Multiselectmenu({ state, setState, statename, options, title }) {
           >
             {item}
             <button
+              type="button"
               onClick={() => Handleremove(item)}
               className="bg-white h-full aspect-square rounded-sm"
             >
