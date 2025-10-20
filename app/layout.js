@@ -7,6 +7,7 @@ import Dialoguebox from "./_globalcomps/Dialoguebox";
 import Showqrcode from "./_globalcomps/Qr/Createqrcode";
 import Qrcodescanner from "./_globalcomps/Qr/Qrcodescanner";
 import Googleanayltics from "./_globalcomps/Googleanalytics";
+import Msclarity from "./_globalcomps/Msclarity";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <Msclarity />
         {/* google analytics */}
         <Googleanayltics />
         {/* google adsense */}

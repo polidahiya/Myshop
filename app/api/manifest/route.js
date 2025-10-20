@@ -16,6 +16,7 @@ export async function GET(req) {
     const store = await getStoreData(storeid);
 
     const manifest = {
+      id: `/${storeid}`,
       name: store?.storename || "A2Z Store",
       short_name: store?.storename?.slice(0, 12) || "A2Z",
       description: "Check out amazing collections on A2Z Stores.",

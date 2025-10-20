@@ -43,7 +43,7 @@ async function page({ params, searchParams }) {
           collections={storedata?.collections}
         />
         {isadmin || products.length > 0 ? (
-          <div className="sticky top-20 h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10">
+          <div className="h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10">
             {isadmin && <Newbutton storeid={storeid} />}
             {products.map((product, i) => (
               <React.Fragment key={i}>
