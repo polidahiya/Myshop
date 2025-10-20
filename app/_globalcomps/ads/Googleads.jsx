@@ -16,6 +16,7 @@ export default function Googleads({ type = 1 }) {
     2: "9477178929", //16:9
     3: "2033803177", //9:16
   };
+  return null;
   return (
     <>
       <ins

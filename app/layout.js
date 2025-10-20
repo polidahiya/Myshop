@@ -8,6 +8,7 @@ import Showqrcode from "./_globalcomps/Qr/Createqrcode";
 import Qrcodescanner from "./_globalcomps/Qr/Qrcodescanner";
 import Googleanayltics from "./_globalcomps/Googleanalytics";
 import Msclarity from "./_globalcomps/Msclarity";
+import Monetag from "./_globalcomps/ads/Monetag";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <Msclarity />
+        <Monetag />
         {/* google analytics */}
         <Googleanayltics />
         {/* google adsense */}
