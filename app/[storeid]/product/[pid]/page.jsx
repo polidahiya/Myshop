@@ -34,6 +34,40 @@ async function page({ params }) {
     )
     .slice(0, 15);
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product?.name,
+    image: product.images,
+
+    description: product.descriptions.join("____") || "",
+
+    sku: product?._id,
+    productID: product?._id,
+    category: product?.collections.join(", ") || "",
+
+    brand: {
+      "@type": "Brand",
+      name: storedata?.storename,
+    },
+
+    offers: {
+      "@type": "Offer",
+      url: `https://a2z-zeta.vercel.app/${storeid}/product/${productid}`,
+      priceCurrency: "INR",
+      price: parseInt(product?.price, 10),
+      availability:
+        product.available && (Number(product?.stocks) || 0) > 0
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name: storedata?.storename,
+      },
+    },
+  };
+
   return (
     <Productctxwrapper product={product}>
       <div className="min-h-screen">
@@ -83,6 +117,13 @@ async function page({ params }) {
           </Link>
         )}
       </div>
+      {/* ld json */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema),
+        }}
+      />
     </Productctxwrapper>
   );
 }

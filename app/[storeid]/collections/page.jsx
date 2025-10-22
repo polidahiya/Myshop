@@ -9,6 +9,7 @@ import { Cachedproducts } from "../Cachedproducts";
 import { Authfn } from "@/lib/auth";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Googleads from "@/app/_globalcomps/ads/Googleads";
+import Appliedfilterscomp from "./_comps/Appliedfilters";
 
 async function page({ params, searchParams }) {
   const { storeid } = await params;
@@ -32,10 +33,17 @@ async function page({ params, searchParams }) {
 
   const products = appliedfilters.length > 0 ? filteredproducts : rawproducts;
 
+  // sort
+  const sort = allsearchparams.sort || "0";
+  if (sort == "1") {
+    products.sort((a, b) => a.price - b.price);
+  } else if (sort == "2") {
+    products.sort((a, b) => b.price - a.price);
+  }
   //
   return (
     <div className="px-2 md:px-10 pb-10">
-      <Heading storeid={storeid}/>
+      <Heading storeid={storeid} sort={sort} />
       <div className="flex gap-5">
         <Filters
           isadmin={isadmin}
@@ -43,18 +51,21 @@ async function page({ params, searchParams }) {
           collections={storedata?.collections}
         />
         {isadmin || products.length > 0 ? (
-          <div className="h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10">
-            {isadmin && <Newbutton storeid={storeid} />}
-            {products.map((product, i) => (
-              <React.Fragment key={i}>
-                <Productcard
-                  storeid={storeid}
-                  product={product}
-                  isadmin={isadmin}
-                />
-                {<Ads i={i} />}
-              </React.Fragment>
-            ))}
+          <div>
+            <Appliedfilterscomp appliedfilters={appliedfilters} />
+            <div className={`h-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10 ${appliedfilters.length > 0 && "mt-5"}`}>
+              {isadmin && <Newbutton storeid={storeid} />}
+              {products.map((product, i) => (
+                <React.Fragment key={i}>
+                  <Productcard
+                    storeid={storeid}
+                    product={product}
+                    isadmin={isadmin}
+                  />
+                  {<Ads i={i} />}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         ) : (
           <div className="sticky top-20 flex justify-center mt-5 h-fit w-full">
