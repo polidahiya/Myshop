@@ -31,13 +31,13 @@ export const generateToken = async (userdata) => {
       storeid: userdata?.storeid || null,
     },
     JWT_SECRET,
-    { expiresIn: logintime }
+    { expiresIn: logintime[1] }
   );
 
   const cookieStore = await cookies();
 
   cookieStore.set("token", token, {
-    maxAge: logintime,
+    maxAge: logintime[0],
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",

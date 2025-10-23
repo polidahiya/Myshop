@@ -22,14 +22,33 @@ export const getAllStoresData = unstable_cache(
     const { storescollection } = await getcollection();
     const stores = await storescollection.find({}).toArray();
 
-    return stores.map((store) => ({
-      loc: `${domain}/${store._id}`,
-      lastmod: today,
-      changefreq: "daily",
-      priority: "1.0",
-      image: store.logo || "",
-      name: store.storename || "",
-    }));
+    const allLinks = [];
+
+    for (const store of stores) {
+      const storeId = store._id?.toString();
+      const baseUrl = `${domain}/${storeId}`;
+
+      allLinks.push(
+        {
+          loc: baseUrl,
+          lastmod: today,
+          changefreq: "daily",
+          priority: "1.0",
+          image: store.logo || "",
+          name: store.storename || "",
+        },
+        {
+          loc: `${baseUrl}/collections`, // ✅ new link
+          lastmod: today,
+          changefreq: "daily",
+          priority: "0.8",
+          image: store.logo || "",
+          name: `${store.storename || ""} Collections`,
+        }
+      );
+    }
+
+    return allLinks;
   },
   ["allstores"],
   {
@@ -47,7 +66,7 @@ export const allproductsdata = unstable_cache(
       loc: `${domain}/${product?.storeid}/product/${product?._id}`,
       lastmod: today,
       changefreq: "daily",
-      priority: "1.0",
+      priority: "0.8",
       image: product?.images[0] || "",
       name: product?.name || "",
     }));

@@ -78,9 +78,11 @@ export async function saveStore(formData, deletedimages) {
         { _id: new ObjectId(tokenres.storeid) },
         { $set: { ...updateFields, lastupdated: new Date() } }
       );
+
       revalidateTag(`store-${tokenres.storeid}`);
       revalidateTag(`userdata-${tokenres.email}`);
       revalidateTag(`allstores`);
+
       return {
         status: 200,
         message: "Update successfully",
@@ -109,6 +111,7 @@ export async function saveStore(formData, deletedimages) {
         storeid,
       });
       revalidateTag(`store-${storeid}`);
+      revalidateTag(`allstores`);
 
       return {
         status: 200,

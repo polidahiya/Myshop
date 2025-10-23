@@ -28,6 +28,7 @@ const initialState = {
     text: "#073b4c",
   },
   social: {},
+  available: true,
   collections: [
     {
       name: "Category",
